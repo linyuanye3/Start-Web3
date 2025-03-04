@@ -223,8 +223,9 @@ How to DeFi [How to DeFi 简介 | How to DeFi: Advanced（中文版） ](https:/
 | [PavelTsao](https://github.com/IntensiveCoLearning/Start-Web3/blob/main/PavelTsao.md) |  ⭕️ | ⭕️ | ⭕️ | ⭕️ | ⭕️ | ⭕️ | ⭕️ | ⭕️ | ⭕️ | ⭕️ | ⭕️ | ⭕️ | ⭕️ | ⭕️ | ⭕️ | ⭕️ | ⭕️ | ⭕️ | ⭕️ | ⭕️ | ⭕️ |
 | [DaiNastyWeb3](https://github.com/IntensiveCoLearning/Start-Web3/blob/main/DaiNastyWeb3.md) | ⭕️ |   | | | | | | | | | | | | | | | | | | | |
 | [gopractitioner](https://github.com/IntensiveCoLearning/Start-Web3/blob/main/gopractitioner.md) | ⭕️ | ⭕️ |   | | | | | | | | | | | | | | | | | | |
-| [L-sage](https://github.com/IntensiveCoLearning/Start-Web3/blob/main/L-sage.md) | ✅ |   | | | | | | | | | | | | | | | | | | | |
+| [L-sage](https://github.com/IntensiveCoLearning/Start-Web3/blob/main/L-sage.md) | ✅ | ✅ | | | | | | | | | | | | | | | | | | | |
 <!-- END_COMMIT_TABLE -->
+
 
 
 
