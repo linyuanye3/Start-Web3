@@ -1,24 +1,26 @@
 ---
-timezone: UTC+8
+timezone: UTC+13
 ---
 
 > 请在上边的 timezone 添加你的当地时区(UTC)，这会有助于你的打卡状态的自动化更新，如果没有添加，默认为北京时间 UTC+8 时区
 
 
 # 你的名字
-
-1. 自我介绍 初始学习者
-2. 你认为你会完成本次残酷学习吗？ 会
-3. 你的联系方式（推荐 Telegram） rowena78778@gmail.com
-
+Jasper
+1. 自我介绍
+A full-stack developer interested in both algorithm and project development...
+Now I'm studying in Web3/Blockchain...
+2. 你认为你会完成本次残酷学习吗？
+会
+3. 你的联系方式（推荐 Telegram）
+@jasperz999
 ## Notes
 
 <!-- Content_START -->
 
 ### 2025.03.03
 
-Web3:去中心化，加密技术，数字化生态
-拥有属于自己的数字身份
+笔记内容
 
 ### 2025.07.12
 
