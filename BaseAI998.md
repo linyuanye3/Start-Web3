@@ -114,6 +114,55 @@ Wallet
     硬件钱包：
     纸钱包：
 
+### 2025.03.05
+
+私钥
+    what？
+        比特币私钥本质上就是一个随机数，就跟你扔骰子扔出一个数字来是一个东西。
+            具象一点，是一个256位，由0和1组成的数字。
+            0100101…01010100  (共256位)
+
+
+    to easy backup
+        transfer 256 0/1 -> english&number
+            example
+                KwYHFL7WfhJPkfQkp1LsUwHvy1Pd9KynuxjjVDMZvRSV5D9VJq3v
+
+            tips
+                (私钥一般为5、K、L开头)
+
+
+
+    How use ?
+        points
+            收币地址是怎么诞生？
+                是私钥计算的。
+
+            交易怎样授权发出去？
+                是私钥签名的。
+
+            资产怎样在钱包恢复？
+                是私钥帮忙的。
+
+
+        summary
+            私钥就是你区块链世界的资产的唯一凭证，拥有了私钥的，便拥有了对应地址上的资产。
+
+
+    Safe？
+        私钥生成的总数为2的256次方
+
+
+助记词
+    what？
+        其实助记词和私钥在功能上是一致的。
+        助记词本质也是一串随机数（128—256位），不过因为随机数形式和私钥形式都不方便使用，所以比特币社区通过了BIP39协议，来允许将随机数通过特定编码转化为词库中的单词。
+
+    官方词库
+        官方英文词库地址：https://github.com/bitcoin/bips/blob/master/bip-0039/english.txt
+        官方中文词库地址：https://github.com/bitcoin/bips/blob/master/bip-0039/chinese_simplified.txt
+
+
 
 
 ### 2025.07.12
