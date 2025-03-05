@@ -201,7 +201,7 @@ How to DeFi [How to DeFi 简介 | How to DeFi: Advanced（中文版） ](https:/
 | [007Windy](https://github.com/IntensiveCoLearning/Start-Web3/blob/main/007Windy.md) | ✅ | ✅ | ✅ | | | | | | | | | | | | | | | | | | |
 | [leticiawu-web3](https://github.com/IntensiveCoLearning/Start-Web3/blob/main/leticiawu-web3.md) | ✅ | ✅ | ✅ | | | | | | | | | | | | | | | | | | |
 | [HappinessTime](https://github.com/IntensiveCoLearning/Start-Web3/blob/main/HappinessTime.md) | ✅ | ✅ | ✅ | | | | | | | | | | | | | | | | | | |
-| [lupin36079](https://github.com/IntensiveCoLearning/Start-Web3/blob/main/lupin36079.md) | ✅ | ✅ |   | | | | | | | | | | | | | | | | | | |
+| [lupin36079](https://github.com/IntensiveCoLearning/Start-Web3/blob/main/lupin36079.md) | ✅ | ✅ | ✅ | | | | | | | | | | | | | | | | | | |
 | [Wonder0918](https://github.com/IntensiveCoLearning/Start-Web3/blob/main/Wonder0918.md) | ⭕️ | ⭕️ |   | | | | | | | | | | | | | | | | | | |
 | [joycexingji-web](https://github.com/IntensiveCoLearning/Start-Web3/blob/main/joycexingji-web.md) | ⭕️ | ⭕️ |   | | | | | | | | | | | | | | | | | | |
 | [felix-Hex](https://github.com/IntensiveCoLearning/Start-Web3/blob/main/felix-Hex.md) | ✅ | ✅ | ✅ | | | | | | | | | | | | | | | | | | |
@@ -226,6 +226,7 @@ How to DeFi [How to DeFi 简介 | How to DeFi: Advanced（中文版） ](https:/
 | [L-sage](https://github.com/IntensiveCoLearning/Start-Web3/blob/main/L-sage.md) | ✅ | ✅ |   | | | | | | | | | | | | | | | | | | |
 | [Ullllllla](https://github.com/IntensiveCoLearning/Start-Web3/blob/main/Ullllllla.md) | ⭕️ | ⭕️ |   | | | | | | | | | | | | | | | | | | |
 <!-- END_COMMIT_TABLE -->
+
 
 
 
