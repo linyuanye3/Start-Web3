@@ -16,7 +16,7 @@ Now I'm studying in Web3/Blockchain...
 ## Notes
 
 <!-- Content_START -->
-
+ L
 ### 2025.03.04
 
 1. Unspending transaction output: maintain a set of all UTXOs, easy to implement CoinJoin or Zero-Knowledge-Proof
@@ -30,6 +30,8 @@ Hybrid Models: Combining the advantages of UTXO and account models (such as Card
 Advanced Data Structures: Using more efficient data structures and compression techniques to store UTXOs
 Sharding Techniques: Distributing the UTXO set across different nodes or shards
 
-### 2025.07.12
+### 2025.03.05
+PoW / BFT
+Layer1 / Layer2
 
 <!-- Content_END -->
