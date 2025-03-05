@@ -217,7 +217,7 @@ How to DeFi [How to DeFi 简介 | How to DeFi: Advanced（中文版） ](https:/
 | [hboolean](https://github.com/IntensiveCoLearning/Start-Web3/blob/main/hboolean.md) | ✅ | ✅ |   | | | | | | | | | | | | | | | | | | |
 | [Nazca532](https://github.com/IntensiveCoLearning/Start-Web3/blob/main/Nazca532.md) | ✅ | ✅ |   | | | | | | | | | | | | | | | | | | |
 | [ricarduuu](https://github.com/IntensiveCoLearning/Start-Web3/blob/main/ricarduuu.md) | ✅ | ✅ |   | | | | | | | | | | | | | | | | | | |
-| [rowena78778](https://github.com/IntensiveCoLearning/Start-Web3/blob/main/rowena78778.md) | ✅ | ✅ |   | | | | | | | | | | | | | | | | | | |
+| [rowena78778](https://github.com/IntensiveCoLearning/Start-Web3/blob/main/rowena78778.md) | ✅ | ✅ | ✅ | | | | | | | | | | | | | | | | | | |
 | [pillowtalk-Qy](https://github.com/IntensiveCoLearning/Start-Web3/blob/main/pillowtalk-Qy.md) | ⭕️ | ⭕️ |   | | | | | | | | | | | | | | | | | | |
 | [Moizwmoi](https://github.com/IntensiveCoLearning/Start-Web3/blob/main/Moizwmoi.md) | ✅ | ⭕️ |   | | | | | | | | | | | | | | | | | | |
 | [PavelTsao](https://github.com/IntensiveCoLearning/Start-Web3/blob/main/PavelTsao.md) |  ⭕️ | ⭕️ | ⭕️ | ⭕️ | ⭕️ | ⭕️ | ⭕️ | ⭕️ | ⭕️ | ⭕️ | ⭕️ | ⭕️ | ⭕️ | ⭕️ | ⭕️ | ⭕️ | ⭕️ | ⭕️ | ⭕️ | ⭕️ | ⭕️ |
@@ -225,6 +225,7 @@ How to DeFi [How to DeFi 简介 | How to DeFi: Advanced（中文版） ](https:/
 | [gopractitioner](https://github.com/IntensiveCoLearning/Start-Web3/blob/main/gopractitioner.md) | ⭕️ | ✅ |   | | | | | | | | | | | | | | | | | | |
 | [L-sage](https://github.com/IntensiveCoLearning/Start-Web3/blob/main/L-sage.md) | ✅ | ✅ |   | | | | | | | | | | | | | | | | | | |
 <!-- END_COMMIT_TABLE -->
+
 
 
 
