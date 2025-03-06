@@ -13,6 +13,22 @@ timezone: UTC+8
 
 <!-- Content_START -->
 
+
+### 2025.03.06
+
+#### 多样化数字资产
+Meme币：狗狗币（Dogecoin），Trump；
+公链原生代币：ETH、TRX（波场币）
+项目代币：去中心化应用（DApp）激励，如 morph，avax
+稳定币：USDT
+
+#### 助记词和私钥
+私钥：0100101…01010100  (共256位) bitcion 通过 base58 编码转化成 KwYHFL7WfhJPkfQkp1LsUwHvy1Pd9KynuxjjVDMZvRSV5D9VJq3v 类似形态
+作用：通过计算产生地址；授权签名交易；恢复钱包资产；
+与助记词的关系：功能一致，使用方便
+助记词生成：依靠了比特币的BIP32、39、44协议
+
+
 ### 2025.03.05
 
 #### 数字资产
