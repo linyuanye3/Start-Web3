@@ -211,6 +211,12 @@ A：首先，理论上来说，如果一个数字货币的白皮书 明确声明
 主流Layer2方案：<img width="531" alt="image" src="https://github.com/user-attachments/assets/793becfa-1245-445e-96fb-3d28bc19131f" />Arbitrum One, zkSync Lite, Polygon zkEVM, Optimism, 和 StarkNet
 
 
+### 2025.03.06
+今日学习Defi,了解到Zapper，正在探索中……
+
+
+
+
 
 
 
