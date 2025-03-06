@@ -103,7 +103,6 @@ timezone: UTC+8
 1. 助记词是什么？
 一组12或24个英文单词（如 health, fine, profit...），本质也是一串随机数，但通过 BIP39协议 转换为易记的单词形式。
 中文助记词也存在，但因生僻字较多，推荐使用英文。
-
 2.助记词的作用
 与私钥功能一致：生成地址、签名交易、恢复资产。
 其中优势是易备份（单词比字符串好记）。一组助记词可派生多个私钥，管理多币种资产（如BTC、ETH、EOS等）。
@@ -113,7 +112,7 @@ timezone: UTC+8
 1. 有可能单词抄错：拼写错误或记混（比如把“apple”写成“appel”）。
 2. 顺序不对：单词顺序和生成时不一致。
 3. 词库不匹配：用了非标准单词
-官方英文词库地址：https://github.com/bitcoin/bips/blob/master/bip-0039/english.txt
-官方中文词库地址：https://github.com/bitcoin/bips/blob/master/bip-0039/chinese_simplified.txt
+ 官方英文词库地址：https://github.com/bitcoin/bips/blob/master/bip-0039/english.txt
+ 官方中文词库地址：https://github.com/bitcoin/bips/blob/master/bip-0039/chinese_simplified.txt
 
 <!-- Content_END -->
