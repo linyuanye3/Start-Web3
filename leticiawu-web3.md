@@ -241,5 +241,15 @@ timezone: UTC+8
 5. 游戏 & 元宇宙代币（GameFi & Metaverse Tokens）
 6. 稳定币（Stablecoins）
 7. AI & 物联网代币（AI & IoT Tokens）
+   
+
+### 2025.03.07
+
+### 2025.03.08
+
+### 2025.03.09
+
+### 2025.03.10
+
 
 <!-- Content_END -->
