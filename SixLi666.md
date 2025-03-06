@@ -61,6 +61,16 @@ P2P-实现去中心化
 ![image](https://github.com/user-attachments/assets/5b8e4401-43e0-4eb8-bbcc-f3b5183538a8)
 怎么在这里加表格啊
 
+### 2025.03.06
 
+智能合约
+契约最适合的实现者是程序。用程序代替法律强制部门，
+这是尼克·萨博（Nick Szabo），他是一位计算机科学家、密码学家和法律学者，在1995年发表了一篇名为《智能合约：数字化市场的构建模块》（Smart Contracts: Building Blocks for Digital Markets）
+
+Layer 1 是区块链的基础设施
+具体包括
+- 共识机制，协调的艺术，就包括PoW & PoS权益证明，通过持币量和持币时间选出验证者的更节能的机制
+- 网络结构，数字交通系统
+- 公链与私链（公链，类似联盟 / 私链（企业 / 个人
          
 <!-- Content_END -->
