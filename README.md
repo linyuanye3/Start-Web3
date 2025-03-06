@@ -206,7 +206,7 @@ How to DeFi [How to DeFi 简介 | How to DeFi: Advanced（中文版） ](https:/
 | [sysy-sysy](https://github.com/IntensiveCoLearning/Start-Web3/blob/main/sysy-sysy.md) | ⭕️ | ⭕️ | ❌ | | | | | | | | | | | | | | | | | | |
 | [joycexingji-web3](https://github.com/IntensiveCoLearning/Start-Web3/blob/main/joycexingji-web3.md) | ✅ | ✅ | ✅ |   | | | | | | | | | | | | | | | | | |
 | [Pearl1978](https://github.com/IntensiveCoLearning/Start-Web3/blob/main/Pearl1978.md) | ✅ | ✅ | ✅ | ✅ | | | | | | | | | | | | | | | | | |
-| [AdamLeeeee](https://github.com/IntensiveCoLearning/Start-Web3/blob/main/AdamLeeeee.md) | ✅ | ✅ | ✅ |   | | | | | | | | | | | | | | | | | |
+| [AdamLeeeee](https://github.com/IntensiveCoLearning/Start-Web3/blob/main/AdamLeeeee.md) | ✅ | ✅ | ✅ | ✅ | | | | | | | | | | | | | | | | | |
 | [StarryDeserts](https://github.com/IntensiveCoLearning/Start-Web3/blob/main/StarryDeserts.md) | ✅ | ✅ | ✅ |   | | | | | | | | | | | | | | | | | |
 | [YunaQuinn](https://github.com/IntensiveCoLearning/Start-Web3/blob/main/YunaQuinn.md) | ⭕️ | ⭕️ | ❌ | | | | | | | | | | | | | | | | | | |
 | [mangossyang](https://github.com/IntensiveCoLearning/Start-Web3/blob/main/mangossyang.md) | ✅ | ✅ | ✅ |   | | | | | | | | | | | | | | | | | |
@@ -222,6 +222,7 @@ How to DeFi [How to DeFi 简介 | How to DeFi: Advanced（中文版） ](https:/
 | [L-sage](https://github.com/IntensiveCoLearning/Start-Web3/blob/main/L-sage.md) | ✅ | ✅ | ⭕️ |   | | | | | | | | | | | | | | | | | |
 | [Ullllllla](https://github.com/IntensiveCoLearning/Start-Web3/blob/main/Ullllllla.md) | ⭕️ | ⭕️ | ✅ |   | | | | | | | | | | | | | | | | | |
 <!-- END_COMMIT_TABLE -->
+
 
 
 
