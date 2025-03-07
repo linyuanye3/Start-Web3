@@ -214,15 +214,26 @@ A：首先，理论上来说，如果一个数字货币的白皮书 明确声明
 ### 2025.03.06
 今日学习Defi,了解到Zapper，正在探索中……
 
+### 2025.03.07
+同质化代币（FT，全称 Fungible Token）是可以被任意交换的代币，就像钱一样。
+非同质化代币（NFT，全称 Non-fungible Token）则是独一无二、完全不同，难以用来平等交换的代币。
+·独一无二，不可分割
+·不可篡改，公开透明（基于区块链技术）
+·万物皆可 NFT
+·完全控制权
+·确权成本低
+·无限想象空间
+
+ DYOR：Do your own research，意思是你要自己做研究来决定是否购买，是一个免责声明。
+why buy？——·invest？/culture？/collect？
+You need to know as much as you can about this project.——sneak-peaks/background&members/future planning and implementation/your friends‘views
+Price——this project‘s value？/How much are you willing to pay ?
 
 
+FOMO，全称 Fear of missing out，意思是害怕失去机会。在这种情绪下，往往会高价接盘，容易被套牢。
+FUD，全称 Fear, uncertainty, and doubt，意思是害怕猜疑不确定。在这种情绪下，往往会低价出货，容易卖飞了。
 
-
-
-
-
-
-
+NFT这节课很有意思，赞！
 
 
 ### 2025.07.12
