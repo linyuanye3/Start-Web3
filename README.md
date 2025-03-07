@@ -170,7 +170,7 @@ How to DeFi [How to DeFi 简介 | How to DeFi: Advanced（中文版） ](https:/
 | [yihaowang](https://github.com/IntensiveCoLearning/Start-Web3/blob/main/yihaowang.md) | ✅ | ✅ | ✅ | ✅ |   | | | | | | | | | | | | | | | | |
 | [Ghw2066](https://github.com/IntensiveCoLearning/Start-Web3/blob/main/Ghw2066.md) | ✅ | ✅ | ✅ | ✅ |   | | | | | | | | | | | | | | | | |
 | [202141521](https://github.com/IntensiveCoLearning/Start-Web3/blob/main/202141521.md) | ⭕️ | ⭕️ | ❌ | | | | | | | | | | | | | | | | | | |
-| [AlengYou](https://github.com/IntensiveCoLearning/Start-Web3/blob/main/AlengYou.md) | ✅ | ✅ | ✅ | ✅ |   | | | | | | | | | | | | | | | | |
+| [AlengYou](https://github.com/IntensiveCoLearning/Start-Web3/blob/main/AlengYou.md) | ✅ | ✅ | ✅ | ✅ | ✅ | | | | | | | | | | | | | | | | |
 | [tangcupaiguxiang](https://github.com/IntensiveCoLearning/Start-Web3/blob/main/tangcupaiguxiang.md) | ✅ | ✅ | ✅ | ✅ |   | | | | | | | | | | | | | | | | |
 | [hub3r3](https://github.com/IntensiveCoLearning/Start-Web3/blob/main/hub3r3.md) | ✅ | ✅ | ✅ | ✅ | ✅ | | | | | | | | | | | | | | | | |
 | [Crocs77](https://github.com/IntensiveCoLearning/Start-Web3/blob/main/Crocs77.md) | ✅ | ✅ | ✅ | ✅ |   | | | | | | | | | | | | | | | | |
@@ -222,6 +222,7 @@ How to DeFi [How to DeFi 简介 | How to DeFi: Advanced（中文版） ](https:/
 | [L-sage](https://github.com/IntensiveCoLearning/Start-Web3/blob/main/L-sage.md) | ✅ | ✅ | ⭕️ | ✅ |   | | | | | | | | | | | | | | | | |
 | [Ullllllla](https://github.com/IntensiveCoLearning/Start-Web3/blob/main/Ullllllla.md) | ⭕️ | ⭕️ | ✅ | ❌ | | | | | | | | | | | | | | | | | |
 <!-- END_COMMIT_TABLE -->
+
 
 
 
