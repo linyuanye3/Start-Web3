@@ -531,6 +531,61 @@ timezone: UTC+8
 
 
 ### 2025.03.09
+**Web3行业术语大全**
+-
+- 紀錄新學到的術語
+
+✔ **A**(11): ABI, AMA, AMM, Alpha, 空投Airdrop, Avatar, Avatar 项目projects, ATH, Alts, Arbitrum, Apeing In
+
+✔ **B**(13): BTC, 币圈, Beta收益（β）, 燃烧, Bear Market, 看跌, 区块, 区块链, Bridge, Bull Market, 看涨, BTD, Bagholder
+
+✔ **C**(12): CEX, 冷钱包, 集中化, CeFi, 硬币, 抵押品, 共识, 共识机制, 加密货币, 吃肉, 创世, 持仓
+
+✔ **D**(11): Defi, DD, DYOR, DAO, Dapp, 德根degen, DEX, Diamond Hands, Discord, 难度炸弹, 分布式账本
+
+✔ **E**(5): ETH, ERC, ERC-20, ERC-721, ERC-1155
+
+✔ **F**(7): Floor, FOMO, Few, Fiat, 分叉, FUD, 全节点
+
+✔ **G**(5): Gas Fee, Gamefi, GM, GOAT, GMI
+
+✔ **H**(4): 散列, 哈希率, HFSP, 热钱包
+
+✔ **I**(3): ICO, IEO, IRL
+
+✔ **K**(4): 按键, Kovan, KYC, 科学家
+
+✔ **L**(6): L1, L2, L3, Lambo, 轻节点, Liquidity Pool
+
+✔ **M**(8): 主节点, 元宇宙, Mempool, 铸造, Moonboy, Merkle Root, Merkle Tree, MEV
+
+✔ **N**(3): NFT, NGMI, Nocoiner
+
+✔ **O**(3): Oracle, Off-chain, OTC
+
+✔ **P**(7): P2P, Paper Hands, PFP, 私钥, PoS, PoW, 公钥
+
+✔ **Q**(1): Queued Pool
+
+✔ **R**(4): Rugged, Rekt, Rug, 路线图
+
+✔ **S**(9): 质押, Satoshis/Sats, Ser, SHA-256, Sidechain, 削减, 滑点, 智能合约, 稳定币
+
+✔ **T**(5): 测试网, Token, TPS, TVL, Txn Hash
+
+✔ **U**(1): 只涨 Up Only 看涨立场，只涨不跌，玩笑语，一般带有讽刺意味。
+
+✔ **V**(1): Vaporware
+
+✔ **W**(3): WAGMI, Whale, Web3.0
+
+✔ **X**(2): XR, X2E：X to Earn
+
+✔ **Y**(2): YOLO：You Only Live Once, Your Bags
+
+✔ **Z**(1): ZK：Zero-Knowledge Proof
+
+✔ **其他**(3): 51%Attack, 1：1art：, 10k project
 
 ### 2025.03.10
 
