@@ -242,7 +242,7 @@ https://eips.ethereum.org/EIPS/eip-721
 ----
 本人技術也不深，所以大改也只了解了一些皮毛，希望有緣人看到我的筆記，能夠給予不正確的地方，可以DM我，WeChat: Aleng85
 
-### 2025.03.06
+### 2025.03.07
 区块链技术简介 [web3-general-manual/chapter2/2.2-blockchain.md at main · lxdao-official/web3-general-manual · GitHub ](https://github.com/lxdao-official/web3-general-manual/blob/main/chapter2/2.2-blockchain.md)
 
 #### 前言
