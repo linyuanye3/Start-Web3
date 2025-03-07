@@ -119,11 +119,9 @@ timezone: UTC+8
 
 ### 2025.03.07
 学习资料：https://github.com/lxdao-official/web3-general-manual/blob/main/chapter3/3.4-wallet.md
+
 一、钱包本质：管理私钥/助记词的工具，资产实际在链上，钱包=钥匙串。
-1. 关键功能：
-    * 生成密钥 → 控制资产所有权
-    * 签名交易 → 授权链上操作
-    * 多链支持 → 管理BTC、ETH、NFT等
+1. 关键功能：生成密钥 → 控制资产所有权 签名交易 → 授权链上操作 多链支持 → 管理BTC、ETH、NFT等
 
 二、钱包种类
 1. 软件钱包（如MetaMask）：手机/电脑上用，方便但怕黑客（联网=风险）。适合：日常小额，像随身带的零钱包。
