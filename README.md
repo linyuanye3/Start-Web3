@@ -177,12 +177,12 @@ How to DeFi [How to DeFi 简介 | How to DeFi: Advanced（中文版） ](https:/
 | [Ric-Li-C](https://github.com/IntensiveCoLearning/Start-Web3/blob/main/Ric-Li-C.md) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | | | | | | | | | | | | | | | |
 | [LiuWillows](https://github.com/IntensiveCoLearning/Start-Web3/blob/main/LiuWillows.md) | ✅ | ✅ | ✅ | ✅ | ✅ |   | | | | | | | | | | | | | | | |
 | [ixiejun](https://github.com/IntensiveCoLearning/Start-Web3/blob/main/ixiejun.md) | ✅ | ✅ | ✅ | ✅ | ✅ |   | | | | | | | | | | | | | | | |
-| [debugzhao](https://github.com/IntensiveCoLearning/Start-Web3/blob/main/debugzhao.md) | ⭕️ | ✅ | ✅ | ✅ | ✅ |   | | | | | | | | | | | | | | | |
+| [debugzhao](https://github.com/IntensiveCoLearning/Start-Web3/blob/main/debugzhao.md) | ⭕️ | ✅ | ✅ | ✅ | ✅ | ✅ | | | | | | | | | | | | | | | |
 | [asanqi2010](https://github.com/IntensiveCoLearning/Start-Web3/blob/main/asanqi2010.md) | ✅ | ✅ | ✅ | ✅ | ⭕️ | ✅ | | | | | | | | | | | | | | | |
 | [Winkler77](https://github.com/IntensiveCoLearning/Start-Web3/blob/main/Winkler77.md) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | | | | | | | | | | | | | | | |
-| [SixLi666](https://github.com/IntensiveCoLearning/Start-Web3/blob/main/SixLi666.md) | ✅ | ✅ | ✅ | ✅ | ✅ |   | | | | | | | | | | | | | | | |
+| [SixLi666](https://github.com/IntensiveCoLearning/Start-Web3/blob/main/SixLi666.md) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | | | | | | | | | | | | | | | |
 | [marvelshan](https://github.com/IntensiveCoLearning/Start-Web3/blob/main/marvelshan.md) | ⭕️ | ⭕️ | ✅ | ✅ | ✅ | ✅ | | | | | | | | | | | | | | | |
-| [huxlife](https://github.com/IntensiveCoLearning/Start-Web3/blob/main/huxlife.md) | ✅ | ✅ | ✅ | ✅ | ✅ |   | | | | | | | | | | | | | | | |
+| [huxlife](https://github.com/IntensiveCoLearning/Start-Web3/blob/main/huxlife.md) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | | | | | | | | | | | | | | | |
 | [Su-u-un](https://github.com/IntensiveCoLearning/Start-Web3/blob/main/Su-u-un.md) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | | | | | | | | | | | | | | | |
 | [PI-33](https://github.com/IntensiveCoLearning/Start-Web3/blob/main/PI-33.md) | ✅ | ⭕️ | ✅ | ⭕️ | ❌ | | | | | | | | | | | | | | | | |
 | [BaseAI998](https://github.com/IntensiveCoLearning/Start-Web3/blob/main/BaseAI998.md) | ✅ | ✅ | ✅ | ⭕️ | ⭕️ |   | | | | | | | | | | | | | | | |
@@ -201,11 +201,11 @@ How to DeFi [How to DeFi 简介 | How to DeFi: Advanced（中文版） ](https:/
 | [HappinessTime](https://github.com/IntensiveCoLearning/Start-Web3/blob/main/HappinessTime.md) | ✅ | ✅ | ✅ | ✅ | ✅ |   | | | | | | | | | | | | | | | |
 | [lupin36079](https://github.com/IntensiveCoLearning/Start-Web3/blob/main/lupin36079.md) | ✅ | ✅ | ✅ | ✅ | ✅ |   | | | | | | | | | | | | | | | |
 | [Wonder0918](https://github.com/IntensiveCoLearning/Start-Web3/blob/main/Wonder0918.md) | ⭕️ | ⭕️ | ❌ | | | | | | | | | | | | | | | | | | |
-| [felix-Hex](https://github.com/IntensiveCoLearning/Start-Web3/blob/main/felix-Hex.md) | ✅ | ✅ | ✅ | ✅ | ⭕️ |   | | | | | | | | | | | | | | | |
+| [felix-Hex](https://github.com/IntensiveCoLearning/Start-Web3/blob/main/felix-Hex.md) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | | | | | | | | | | | | | | | |
 | [Slienfore](https://github.com/IntensiveCoLearning/Start-Web3/blob/main/Slienfore.md) | ✅ | ⭕️ | ⭕️ | ❌ | | | | | | | | | | | | | | | | | |
 | [sysy-sysy](https://github.com/IntensiveCoLearning/Start-Web3/blob/main/sysy-sysy.md) | ⭕️ | ⭕️ | ❌ | | | | | | | | | | | | | | | | | | |
 | [joycexingji-web3](https://github.com/IntensiveCoLearning/Start-Web3/blob/main/joycexingji-web3.md) | ✅ | ✅ | ✅ | ✅ | ✅ |   | | | | | | | | | | | | | | | |
-| [Pearl1978](https://github.com/IntensiveCoLearning/Start-Web3/blob/main/Pearl1978.md) | ✅ | ✅ | ✅ | ✅ | ✅ |   | | | | | | | | | | | | | | | |
+| [Pearl1978](https://github.com/IntensiveCoLearning/Start-Web3/blob/main/Pearl1978.md) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | | | | | | | | | | | | | | | |
 | [AdamLeeeee](https://github.com/IntensiveCoLearning/Start-Web3/blob/main/AdamLeeeee.md) | ✅ | ✅ | ✅ | ✅ | ✅ |   | | | | | | | | | | | | | | | |
 | [StarryDeserts](https://github.com/IntensiveCoLearning/Start-Web3/blob/main/StarryDeserts.md) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | | | | | | | | | | | | | | | |
 | [YunaQuinn](https://github.com/IntensiveCoLearning/Start-Web3/blob/main/YunaQuinn.md) | ⭕️ | ⭕️ | ❌ | | | | | | | | | | | | | | | | | | |
@@ -222,6 +222,11 @@ How to DeFi [How to DeFi 简介 | How to DeFi: Advanced（中文版） ](https:/
 | [L-sage](https://github.com/IntensiveCoLearning/Start-Web3/blob/main/L-sage.md) | ✅ | ✅ | ⭕️ | ✅ | ⭕️ | ✅ | | | | | | | | | | | | | | | |
 | [Ullllllla](https://github.com/IntensiveCoLearning/Start-Web3/blob/main/Ullllllla.md) | ⭕️ | ⭕️ | ✅ | ❌ | | | | | | | | | | | | | | | | | |
 <!-- END_COMMIT_TABLE -->
+
+
+
+
+
 
 
 
