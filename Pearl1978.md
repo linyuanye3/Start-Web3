@@ -69,8 +69,22 @@ Dapp的上下游技术：
       合约代码中，以执行决策并分配所有权。
       gitcoin是一个DAO
       gamefi 链游
-  
-
+### 2025.03.08
+ WEB3生态
+ 分层
+ 协议层：
+ 区块链网络
+ 区块链网络也称为链，构建了整个区块链网络的基础。一条链是一个相对独立的生态，我们比较熟悉的有：btc,etherum,solana,bnb等。 基于以太坊生态对公链
+ 进行扩容，出现了一些layer2和侧链，比如optimism,arbitrum polygon等
+ 同时还有一种连接不同区块链网络的技术或协议：跨链桥。
+ 应用层：
+ 治理&DAO
+ 钱包：metamask, gnosissafe, rainbow,coinbase,walletconnect
+ 金融：uniswap,compound,aave,panscakeswap
+ 游戏：alienworlds, splinterlands
+ NFT
+ 社交等
+ 质押：作为区块链节点验证者质押代币，保护区块链安全，从而赚取代币。每一种质押都有大量参与者，其涉及到的领域有电脑硬件，区块链协议，应用层defi等
   
   
 <!-- Content_END -->
