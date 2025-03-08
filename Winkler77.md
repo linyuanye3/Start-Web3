@@ -55,4 +55,8 @@ KwYHFL7WfhJPkfQkp1LsUwHvy1Pd9KynuxjjVDMZvRSV5D9VJq3v
 
 以太坊账户：外部所有账户、合约账户
 
+
+### 2025.03.08
+行业术语大全也太多，先存个档，或者边实操边学
+
 <!-- Content_END -->
