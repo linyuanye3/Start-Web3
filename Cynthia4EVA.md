@@ -117,4 +117,19 @@ timezone: UTC+8
  官方英文词库地址：https://github.com/bitcoin/bips/blob/master/bip-0039/english.txt
  官方中文词库地址：https://github.com/bitcoin/bips/blob/master/bip-0039/chinese_simplified.txt
 
+### 2025.03.07
+学习资料：https://github.com/lxdao-official/web3-general-manual/blob/main/chapter3/3.4-wallet.md
+
+一、钱包本质：管理私钥/助记词的工具，资产实际在链上，钱包=钥匙串。
+1. 关键功能：生成密钥 → 控制资产所有权 签名交易 → 授权链上操作 多链支持 → 管理BTC、ETH、NFT等
+
+二、钱包种类
+1. 软件钱包（如MetaMask）：手机/电脑上用，方便但怕黑客（联网=风险）。适合：日常小额，像随身带的零钱包。
+2. 硬件钱包（如Ledger）：U盘大小，离线存钥匙，最安全。适合：大额囤币，像家用保险箱。
+3. 纸钱包：把钥匙抄纸上，完全离线，怕水怕火。
+
+三、账户模型
+1. 传统账户（如以太坊）：像银行账户，直接改余额。优点：简单，适合智能合约。缺点：数据存储成本高。
+2. UTXO模型（如比特币）：像现金交易，花整钱找零。举例：你有10元纸币，买3元咖啡，给10元，收7元找零。优点：隐私好，适合简单转账。缺点：复杂交易难处理。
+
 <!-- Content_END -->
