@@ -53,4 +53,11 @@ authority to deduction
 早期挖矿：
 PoW 类算法给参与节点带来的计算开销，除了延续区块链生长外无任何其他意义，却需要耗费巨大的能源，并且该开销会随着参与的节点数目的上升而上升，是对能源的巨大浪费。
 
+### 2025.03.07
+
+工作量证明(Proof of Work, PoW)类的共识算法；
+Po*的凭证类共识算法；
+拜占庭容错(Byzantine Fault Tolerance, BFT)类算法
+结合可信执行环境的共识算法 (Trusted Execution Environment, TEE)
+
 <!-- Content_END -->
