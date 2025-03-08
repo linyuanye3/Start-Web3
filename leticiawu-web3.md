@@ -540,8 +540,12 @@ timezone: UTC+8
     - 控制方式：	私钥	vs. 智能合约代码逻辑
 
 ✔ 私钥 vs. 公钥
-- 私钥：类似**银行密码**，控制钱包资产，丢失即无法访问资金。
-- 公钥：类似**邮箱地址**，其他人可向你的公钥地址转账。
+- 私钥：类似**银行密码**（掌控资产）。
+- 公钥：类似**银行账号**（对外可见，但不能用来支配资金）。
+- 钱包地址 = **银行账号的缩短版**（更短、更易读的版本）
+  - 地址是从公钥生成的。
+  - 别人向你转账时，**你提供钱包地址收款，不是公钥**。
+- 補充：**私钥可以生成公钥，公钥可以生成钱包地址，但钱包地址不能反推出私钥**，确保安全性。
 
 
 ✔ 如何选择钱包？
@@ -565,59 +569,149 @@ timezone: UTC+8
 ### 2025.03.09
 **Web3行业术语大全**
 -
-- 紀錄新學到的術語
+- 僅紀錄新學到的術語
 
 ✔ **A**(11): ABI, AMA, AMM, Alpha, 空投Airdrop, Avatar, Avatar 项目projects, ATH, Alts, Arbitrum, Apeing In
+  - ABI
+  - AMA
+  - Avatar
+  - Avatar 项目projects
+  - Arbitrum
+  - Apeing In
 
 ✔ **B**(13): BTC, 币圈, Beta收益（β）, 燃烧, Bear Market, 看跌, 区块, 区块链, Bridge, Bull Market, 看涨, BTD, Bagholder
+  - Beta收益（β）
+  - 燃烧
+  - 区块
+  - Bridge
+  - BTD
+  - Bagholder
 
 ✔ **C**(12): CEX, 冷钱包, 集中化, CeFi, 硬币, 抵押品, 共识, 共识机制, 加密货币, 吃肉, 创世, 持仓
+  - 集中化
+  - CeFi
+  - 抵押品
+  - 共识
+  - 共识机制
+  - 吃肉
+  - 创世
 
 ✔ **D**(11): Defi, DD, DYOR, DAO, Dapp, 德根degen, DEX, Diamond Hands, Discord, 难度炸弹, 分布式账本
+  - DD
+  - 难度炸弹
+  - 分布式账本
 
 ✔ **E**(5): ETH, ERC, ERC-20, ERC-721, ERC-1155
+  - ERC
+  - ERC-20
+  - ERC-721
+  - ERC-1155
 
 ✔ **F**(7): Floor, FOMO, Few, Fiat, 分叉, FUD, 全节点
+  - Few
+  - 分叉
+  - 全节点  
 
 ✔ **G**(5): Gas Fee, Gamefi, GM, GOAT, GMI
+  - GOAT
+  - GMI
 
 ✔ **H**(4): 散列, 哈希率, HFSP, 热钱包
+  - 散列
+  - 哈希率
+  - HFSP
 
 ✔ **I**(3): ICO, IEO, IRL
+  - ICO
+  - IEO
+  - IRL
 
 ✔ **K**(4): 按键, Kovan, KYC, 科学家
+  - 按键
+  - Kovan
+  - 科学家
 
 ✔ **L**(6): L1, L2, L3, Lambo, 轻节点, Liquidity Pool
+  - L1
+  - L2
+  - L3
+  - Lambo
+  - 轻节点
+  - Liquidity Pool
 
 ✔ **M**(8): 主节点, 元宇宙, Mempool, 铸造, Moonboy, Merkle Root, Merkle Tree, MEV
+  - 主节点
+  - 元宇宙
+  - Mempool
+  - 铸造
+  - Moonboy
+  - Merkle Root
+  - Merkle Tree
+  - MEV
 
 ✔ **N**(3): NFT, NGMI, Nocoiner
+  - NGMI
+  - Nocoiner
 
 ✔ **O**(3): Oracle, Off-chain, OTC
+  - Oracle
+  - Off-chain
+  - OTC
 
-✔ **P**(7): P2P, Paper Hands, PFP, 私钥, PoS, PoW, 公钥
+✔ **P**(7): 
+  - P2P
+  - Paper Hands
+  - PFP
+  - PoS
+  - PoW
+
 
 ✔ **Q**(1): Queued Pool
+  - Queued Pool
 
 ✔ **R**(4): Rugged, Rekt, Rug, 路线图
+  - Rugged
+  - Rekt
+  - Rug
+  - 路线图
 
 ✔ **S**(9): 质押, Satoshis/Sats, Ser, SHA-256, Sidechain, 削减, 滑点, 智能合约, 稳定币
+  - Satoshis/Sats
+  - Ser
+  - SHA-256
+  - Sidechain
+  - 削减
+  - 滑点
 
 ✔ **T**(5): 测试网, Token, TPS, TVL, Txn Hash
+  - 测试网
+  - TPS
+  - TVL
+  - Txn Hash
 
-✔ **U**(1): 只涨 Up Only 看涨立场，只涨不跌，玩笑语，一般带有讽刺意味。
+✔ **U**(1): UO
+  - UO: 只涨 Up Only 看涨立场，只涨不跌，玩笑语，一般带有讽刺意味。
 
 ✔ **V**(1): Vaporware
+  - Vaporware
 
 ✔ **W**(3): WAGMI, Whale, Web3.0
+  - WAGMI
 
 ✔ **X**(2): XR, X2E：X to Earn
+  - XR
+  - X2E：X to Earn
 
 ✔ **Y**(2): YOLO：You Only Live Once, Your Bags
+  - Your Bags
 
 ✔ **Z**(1): ZK：Zero-Knowledge Proof
+  - ZK：Zero-Knowledge Proof
 
 ✔ **其他**(3): 51%Attack, 1：1art：, 10k project
+  - 51%Attack
+  - 1：1art：
+  - 0k project
 
 **Web3之父回答：Web3究竟是什么？**
 -
