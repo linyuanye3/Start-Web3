@@ -60,4 +60,23 @@ Po*的凭证类共识算法；
 拜占庭容错(Byzantine Fault Tolerance, BFT)类算法
 结合可信执行环境的共识算法 (Trusted Execution Environment, TEE)
 
+### 2025.03.09
+
+区块链是一种革命性的协议，允许多方拥有单一真实版本
+
+layer 1: （基建）
+公链：比特币，以太坊
+联盟链：Quorum（摩根大通）、Hyperledger Fabric（linux基金会）
+私链：受限访问/定制化/高效
+
+layer 2:（扩展/效率）
+状态通道(state channels):在链下交易再提交到主链
+侧链(sidechain)：和主链并行，可以转来转去
+plasma：一个框架，里面多个子链和主链相接
+rollups：在链下交易，再打包结果到主链
+跨链桥：让资产和数据在不同区块链上流动
+  1.简单支付验证(SPV)桥：通过验证另一个链上的交易来工作
+  2.联邦桥：由一组管理者验证，负责在两个链之间转移资产
+  3.TSS (阈值签名方案)桥：使用多方计算，来创建跨链交易的签名
+
 <!-- Content_END -->
