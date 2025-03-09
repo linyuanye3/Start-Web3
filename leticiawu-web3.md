@@ -467,125 +467,251 @@ timezone: UTC+8
 
 
 ### 2025.03.08
-**区块链钱包：你的数字黄金的宝箱**
+**钱包简介**
 -
-- 加密货币存放的区块链钱包。
+- 区块链钱包：你的数字黄金的宝箱。
 
 
 ✔ 区块链钱包：是什么？
-- 区块链钱包不是一个真正的“钱包”。你不能把它放在口袋里或用它买咖啡。
-- 加密钱包发送、接收和存储加密货币如(BTC) 和以太币 (ETH) 等。 
+- 區塊鏈錢包 ≠ 傳統錢包，它是一種數位工具，用於存儲、發送和接收加密貨幣。
+- 主要分為兩種：
+  1. 托管型（Custodial）：**交易所掌控私钥**，用戶無法直接控制資產。
+  2. 非托管型（Non-Custodial）：用戶自己掌控私钥，完全擁有資產控制權。
+
+- 非托管型錢包的特點：
+    - 交易無限額、無法撤銷，帳戶無法被凍結。
+    - 全球可轉帳，交易不受地域所限制。
+  
+- 非托管型區塊鏈錢包的核心 ＝ 私钥 & 助记词
+  - ≠ 直接存放资产，而是「管理私钥的工具」
+  - 私钥可在不同去中心化錢包軟體使用（如 MetaMask、Trust Wallet、Ledger），但交易所帳戶不行。
+    - 私钥 ≠ 單一地址，而是「種子」，可派生多個地址。
+    - 同一私钥可生成多條鏈上的不同地址（BTC/ETH/SOL）。
+
+    - 交易所錢包 → ❌ 不能互用
+       - 舉例（Binance & Kraken））：
+         1. Binance 和 Kraken 都是中心化交易所（CEX），每個交易所的帳戶是交易所內部的數據，不能互通
+         2. 你在 Binance 生成的錢包地址 是 Binance 控制的，你不能用同一組私钥登入 Kraken。
+         3. 交易所之間「互用」的方式是提幣，比如從 Binance 提 USDT 到 Kraken 的 USDT 地址，但這跟「帳戶互通」無關。
+
+  - 傳統銀行帳戶 vs. 區塊鏈錢包
+    - 核心區別：
+      - 銀行帳戶：由**銀行**控制，帳戶與銀行綁定，無法跨銀行互用。
+      - 區塊鏈帳戶：由**私钥**控制，可跨不同錢包軟體使用。
+    - 帳戶與平台關係：
+      - 銀行帳戶： 1 個身份只能註冊 1 個帳戶，1 個帳戶對應 1 家銀行，不可跨銀行使用。
+      - 區塊鏈帳戶：1 個私钥可用於多個錢包軟體（如 Ledger、CoolWallet），1 個身份可創建多個帳戶（地址），不同鏈上可有不同地址（BTC/ETH/SOL）。
+      - 多帳戶管理方式：
+        - 銀行：每家銀行內部分配不同類型帳戶（如活期、證券），但仍受該銀行控制。
+        - 區塊鏈錢包：私钥可派生多個地址，如 BTC、ETH、SOL，看似不同地址，但都由同一私钥控制。   
+      - 帳戶跨平台可用性：
+      - 銀行帳戶不能互通， A 銀行帳戶無法用於 B 銀行。
+      - 區塊鏈帳戶可跨錢包使用，如同一私钥可在錢包軟體 Ledger 與 CoolWallet 之間切換，資產不變。
 
 
 ✔ 钱包的种类
-- 软件钱包
-- 硬件钱包
-- 纸钱包
+- 软件钱包（热钱包）：基于 Web、移动或桌面应用，私钥存储在联网设备上，易受黑客攻击。
+- 硬件钱包（冷钱包）：离线存储私钥的设备，安全性高，但操作较复杂，需连接软件才能使用。
+- 纸钱包：私钥和公钥打印在纸上，完全离线，安全但易丢失或损坏。
+
 
 ✔ 账户模型
 - 传统账号模型 vs. UTXO模型
 
-- 传统账号模型
-  - 举例
-    - 操作一
-    - 操作二
+- 传统账号模型（银行、以太坊）
+  - 使用关系型数据库，支持事务处理（ACID）。
+  - 账户余额随交易更新，例如 A 转 500 元给 B，A -500，B +500。
 
 
-✔ UTXO模型
-  - 举例
-    - 操作一
-    - 操作二
-    - 操作三
-    - 操作四
+✔ UTXO模型（比特币、狗狗币、莱特币）
+  - 每笔交易包含**交易输入 & 交易输出**，不会直接修改账户余额。
+  - 例如 A 向 B 支付 5 BTC，A 失去 5 BTC 的 UTXO，B 获得 5 BTC 的 UTXO。
 
 
 ✔ 以太坊账户概述
   - 账户类型
-    1. 外部所有账户 (Externally Owned Accounts, EOA)
-    2. 合约账户 (Contract Accounts, CA) 
+    1. 外部所有账户 (Externally Owned Accounts, EOA)：由用户私钥控制，可存 ETH & 代币，能主动发起交易。
+    2. 合约账户 (Contract Accounts, CA) ：：存储**智能合约代码**，仅能在接收交易时执行操作，**无私钥**。
   - 账户功能
   - 账户的主要区别：外部 vs. 合約
-    - 外部账户
-    - 合约账户
-
+    - 创建成本：	免费	vs. 需支付 Gas 费
+    - 交易权限：	可主动发起交易 vs. 只能在接收交易时执行
+    - 存储内容：	ETH、代币 vs. 智能合约代码
+    - 控制方式：	私钥	vs. 智能合约代码逻辑
 
 ✔ 私钥 vs. 公钥
-- 私钥
-- 公钥
+- 私钥：类似**银行密码**（掌控资产）。
+- 公钥：类似**银行账号**（对外可见，但不能用来支配资金）。
+- 钱包地址 = **银行账号的缩短版**（更短、更易读的版本）
+  - 地址是从公钥生成的。
+  - 别人向你转账时，**你提供钱包地址收款，不是公钥**。
+- 補充：**私钥可以生成公钥，公钥可以生成钱包地址，但钱包地址不能反推出私钥**，确保安全性。
 
 
 ✔ 如何选择钱包？
-- 安全性
-- 易用性
-- 兼容性
+- 安全性：选择信誉良好的钱包，避免私钥泄露。
+- 易用性：初学者可选 UI 界面友好的钱包。
+- 兼容性：确保钱包支持你想要存储的加密货币。
 
 
 ✔ 注意事项
-- 备份你的钱包
+- 备份你的钱包：避免因设备丢失而无法恢复资产。
 - 不要与他人分享你的私钥
-- 小心钓鱼攻击 
+- 小心钓鱼攻击：仅从官方渠道下载钱包应用。
 
 
 ✔ 总结
-- 区块链钱包是存储和管理你的数字资产的关键工具，谨慎地使用它。
+- 区块链钱包 ≠ 直接存储资产，是管理私钥的工具。
+- 账户模型适用于以太坊，UTXO 模型用于比特币等。
+- 选择安全、兼容的钱包，并妥善保管私钥，保障资产安全。
 
 
 ### 2025.03.09
 **Web3行业术语大全**
 -
-- 紀錄新學到的術語
+- 僅紀錄新學到的術語
 
 ✔ **A**(11): ABI, AMA, AMM, Alpha, 空投Airdrop, Avatar, Avatar 项目projects, ATH, Alts, Arbitrum, Apeing In
+  - ABI
+  - AMA
+  - Avatar
+  - Avatar 项目projects
+  - Arbitrum
+  - Apeing In
 
 ✔ **B**(13): BTC, 币圈, Beta收益（β）, 燃烧, Bear Market, 看跌, 区块, 区块链, Bridge, Bull Market, 看涨, BTD, Bagholder
+  - Beta收益（β）
+  - 燃烧
+  - 区块
+  - Bridge
+  - BTD
+  - Bagholder
 
 ✔ **C**(12): CEX, 冷钱包, 集中化, CeFi, 硬币, 抵押品, 共识, 共识机制, 加密货币, 吃肉, 创世, 持仓
+  - 集中化
+  - CeFi
+  - 抵押品
+  - 共识
+  - 共识机制
+  - 吃肉
+  - 创世
 
 ✔ **D**(11): Defi, DD, DYOR, DAO, Dapp, 德根degen, DEX, Diamond Hands, Discord, 难度炸弹, 分布式账本
+  - DD
+  - 难度炸弹
+  - 分布式账本
 
 ✔ **E**(5): ETH, ERC, ERC-20, ERC-721, ERC-1155
+  - ERC
+  - ERC-20
+  - ERC-721
+  - ERC-1155
 
 ✔ **F**(7): Floor, FOMO, Few, Fiat, 分叉, FUD, 全节点
+  - Few
+  - 分叉
+  - 全节点  
 
 ✔ **G**(5): Gas Fee, Gamefi, GM, GOAT, GMI
+  - GOAT
+  - GMI
 
 ✔ **H**(4): 散列, 哈希率, HFSP, 热钱包
+  - 散列
+  - 哈希率
+  - HFSP
 
 ✔ **I**(3): ICO, IEO, IRL
+  - ICO
+  - IEO
+  - IRL
 
 ✔ **K**(4): 按键, Kovan, KYC, 科学家
+  - 按键
+  - Kovan
+  - 科学家
 
 ✔ **L**(6): L1, L2, L3, Lambo, 轻节点, Liquidity Pool
+  - L1
+  - L2
+  - L3
+  - Lambo
+  - 轻节点
+  - Liquidity Pool
 
 ✔ **M**(8): 主节点, 元宇宙, Mempool, 铸造, Moonboy, Merkle Root, Merkle Tree, MEV
+  - 主节点
+  - 元宇宙
+  - Mempool
+  - 铸造
+  - Moonboy
+  - Merkle Root
+  - Merkle Tree
+  - MEV
 
 ✔ **N**(3): NFT, NGMI, Nocoiner
+  - NGMI
+  - Nocoiner
 
 ✔ **O**(3): Oracle, Off-chain, OTC
+  - Oracle
+  - Off-chain
+  - OTC
 
-✔ **P**(7): P2P, Paper Hands, PFP, 私钥, PoS, PoW, 公钥
+✔ **P**(7): 
+  - P2P
+  - Paper Hands
+  - PFP
+  - PoS
+  - PoW
+
 
 ✔ **Q**(1): Queued Pool
+  - Queued Pool
 
 ✔ **R**(4): Rugged, Rekt, Rug, 路线图
+  - Rugged
+  - Rekt
+  - Rug
+  - 路线图
 
 ✔ **S**(9): 质押, Satoshis/Sats, Ser, SHA-256, Sidechain, 削减, 滑点, 智能合约, 稳定币
+  - Satoshis/Sats
+  - Ser
+  - SHA-256
+  - Sidechain
+  - 削减
+  - 滑点
 
 ✔ **T**(5): 测试网, Token, TPS, TVL, Txn Hash
+  - 测试网
+  - TPS
+  - TVL
+  - Txn Hash
 
-✔ **U**(1): 只涨 Up Only 看涨立场，只涨不跌，玩笑语，一般带有讽刺意味。
+✔ **U**(1): UO
+  - UO: 只涨 Up Only 看涨立场，只涨不跌，玩笑语，一般带有讽刺意味。
 
 ✔ **V**(1): Vaporware
+  - Vaporware
 
 ✔ **W**(3): WAGMI, Whale, Web3.0
+  - WAGMI
 
 ✔ **X**(2): XR, X2E：X to Earn
+  - XR
+  - X2E：X to Earn
 
 ✔ **Y**(2): YOLO：You Only Live Once, Your Bags
+  - Your Bags
 
 ✔ **Z**(1): ZK：Zero-Knowledge Proof
+  - ZK：Zero-Knowledge Proof
 
 ✔ **其他**(3): 51%Attack, 1：1art：, 10k project
+  - 51%Attack
+  - 1：1art：
+  - 0k project
 
 **Web3之父回答：Web3究竟是什么？**
 -

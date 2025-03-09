@@ -353,9 +353,11 @@ $$ (\text{IL}, \text{IR}) = \text{HMAC-SHA512}(\text{parent key}, \text{child in
    - **SHA-256 計算公鑰哈希**
    - **再用 RIPEMD-160 計算最終的公鑰哈希**
    
-   $$ \text{PKH} = \text{RIPEMD-160}(\text{SHA-256}(\text{Public Key})) $$
+   \[
+   \text{PKH} = \text{RIPEMD-160}(\text{SHA-256}(\text{Public Key}))
+   \]
    
-2. **雙重 SHA-256 計算 checksum**
+3. **雙重 SHA-256 計算 checksum**
    - **Bitcoin 地址會用 Base58Check 編碼**
    - 其中，Checksum 是：
      $$ \text{Checksum} = \text{SHA-256}(\text{SHA-256}(\text{Payload})) $$
@@ -394,5 +396,48 @@ That's why SHA-256 是加密貨幣世界的基石之一
 [cedricbellet/_sha256.js from github](https://gist.github.com/cedricbellet/aca1fbecb5847c94be4b8f3bf96df3bc#file-_sha256-js)
 
 ### 2025.03.09
+
+`Web3` 是基於區塊鏈的去中心化網絡生態系統，可以被視為互聯網的下一階段，甚至可能影響整個人類社會的未來。這個概念最早由 **以太坊（Ethereum）聯合創始人 Gavin Wood（加文·伍德）** 於 2014 年提出，當時稱為「Web3.0」。
+
+為了理解 Web3，我們可以對比前兩個時代：  
+- **Web1.0**（過去）—— 主要以靜態網頁為主，內容由少數人創建，使用者只能被動瀏覽。  
+- **Web2.0**（現在）—— 互聯網高度集中化，大量數據、通信和商業活動被少數科技巨頭（如 Google、Meta、Amazon）壟斷。  
+
+Web3 的核心願景是打破這種壟斷，透過 **區塊鏈技術** 構建 **去中心化** 的應用程式（DApps），使數據和資源由用戶擁有，而非科技巨頭。這一理念正在透過 **Web3 基金會（Web3 Foundation）** 和 **Parity Technologies** 等組織推動，後者負責開發 **Polkadot**（一個重要的區塊鏈互操作性項目）。  
+
+### **Gavin Wood 介紹**  
+
+Gavin Wood 是區塊鏈領域的頂尖技術專家，他在 2014 年與 Vitalik Buterin 等人共同創立了 **以太坊（Ethereum）**，並發明了 **Solidity 編程語言**，這是以太坊智能合約的主要語言。 
+
+#### **早年生活與教育**  
+Gavin Wood **1980 年出生於英國蘭開斯特**，自小對技術與創新充滿興趣。他在 **約克大學** 攻讀計算機系統與軟件工程，並於 **2005 年完成博士學位**，研究主題與音樂聲音的協作導航有關。  
+
+#### **進入加密貨幣領域**  
+**2013 年**，Wood 開始關注 **比特幣**，並認識到其潛力。**2014 年**，他與 **Vitalik Buterin** 共同創立了 **以太坊（Ethereum）**，在開發技術基礎設施方面發揮了關鍵作用。他設計了 **Solidity 編程語言**，並負責 **以太坊虛擬機（EVM）** 的開發。  
+
+#### **創立 Polkadot**  
+**2016 年**，Wood 離開以太坊，創立了 **Polkadot**，該項目致力於連接不同的區塊鏈，實現去中心化互聯網。Polkadot 仍在發展中，但已成為加密貨幣領域最具潛力的技術之一。  
+
+他的技術創新持續影響著加密貨幣與 Web3 生態系統。
+
+#### **主要成就**
+- **以太坊（Ethereum）**
+  - 作為 **以太坊聯合創始人**，Gavin 為以太坊設計了技術架構，撰寫了**以太坊黃皮書**（Yellow Paper），詳細描述了以太坊虛擬機（EVM，Ethereum Virtual Machine）的運作方式。
+  - **Solidity 語言創建者**，這是目前大部分智能合約使用的主要語言。  
+
+- **Parity Technologies**
+  - **創辦人**，該公司致力於開發高效的區塊鏈技術，最著名的產品包括：
+    - **Parity Ethereum**（曾是以太坊的高性能客戶端，後來停止開發）  
+    - **Polkadot**（跨鏈互操作性平台）  
+    - **Substrate**（區塊鏈開發框架，許多項目如 Moonbeam、Astar 皆基於此開發）  
+
+- **Web3 基金會（Web3 Foundation）**
+  - 成立於 2017 年，目標是推動去中心化技術的發展，資助與 Web3 相關的研究與項目（如 Polkadot、Kusama）。  
+
+#### **Web3 的未來願景**
+Gavin Wood 強調 Web3 是關於 **個人數據主權** 和 **去中心化控制**，讓用戶真正擁有網絡上的資產，而不是依賴中心化機構。他認為未來的網絡應該：
+- **開放透明**（不依賴中心化平台，如 Facebook、Google）  
+- **抗審查**（不被政府或企業單方面封鎖）  
+- **用戶自主**（數據由個人掌控，而非科技公司）  
 
 <!-- Content_END -->
