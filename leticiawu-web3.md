@@ -571,147 +571,197 @@ timezone: UTC+8
 -
 - 僅紀錄新學到的術語
 
-✔ **A**(11): ABI, AMA, AMM, Alpha, 空投Airdrop, Avatar, Avatar 项目projects, ATH, Alts, Arbitrum, Apeing In
-  - ABI
-  - AMA
-  - Avatar
-  - Avatar 项目projects
-  - Arbitrum
-  - Apeing In
+
+✔ **A**(11): ABI, AMA, AMM, Alpha, 空投（Airdrop）, Avatar, Avatar 项目（projects）, ATH, Alts, 归档节点（Archive Node）, Arbitrum, Apeing In
+  - ABI：全名 Application Binary Interface，為 "智能合約與外部應用程式溝通的接口"，ABI 告訴應用程式如何與智能合約交互，主要用於以太坊（Ethereum）等支持智能合約的區塊鏈。
+    - ABI 讓這兩者能理解彼此的操作方式，**類似於 API（應用程式接口）**，但 ABI 是專門用來與智能合約溝通的。
+    - ABI 是智能合約的「翻譯版」，讓應用程式知道如何與合約溝通，而不需要讀懂源碼（如開發者寫的程式碼 Solidity ）。
+    - 应用场景 1：DApp（去中心化应用） Uniswap，前端界面，会调用智能合约执行代币兑换。
+    - 应用场景 2：中心化平台（CEX, 银行等）
+      - Binance、Kraken 等交易所 可能通过智能合约来提供链上资产托管或交易功能。
+      - 银行或支付平台 可能会集成区块链智能合约，处理数字资产结算（如 Visa 使用美元稳定币 USDC 进行交易结算）。
+    - 应用场景 3：数据分析 & 监控工具 - 查询智能合约状态，但不执行交易
+      - Etherscan 让用户查看智能合约交互历史，查询交易状态。
+    - 应用场景 4：自动化交易机器人 & 量化交易系统 - 可直接调用智能合约
+  
+- AMA：Ask Me Anything，出現在项目方或交易负责人举办的问答活动環節。
+- AMM：Automated Market Makers（自动化做市商），通过**智能合约、算法定价和流动性池** 实现去中心化交易，让用户可自由兑换资产，而 LP 可提供流动性赚取收益。
+    - 去中心化交易模式：AMM 无需订单簿。即交易者在 AMM 上不需要挂单，而是直接和智能合约管理的流动性池进行兑换，交易价格由 AMM 的算法公式决定，而不是买卖双方撮合。
+
+    - 算法定价机制：采用公式（如 x*y=k）决定交易价格，避免人工撮合，交易者无需等待对手方。
+    - 流动性提供者（LP）赚取手续费：任何人可向AMM 资金池存入代币，成为流动性提供者（LP），赚取交易手续费和 DeFi 挖矿奖励。
+
+- 归档节点：Archive Node。存储完整历史状态（包括账户余额的每次变化）。
+  - 主要 5 种节点类型：
+    - 完整区块链数据：全节点（Full Node）、归档节点（Archive Node）
+    - 不存储完整数据：轻节点（Light Node）、验证者节点（Validator Node）、矿工节点（Mining Node）
+  
+- Avatar：虚拟化身（人或其他非人型实体）
+- Avatar 项目（projects）：头像类 NFT，主要用于社交媒体 PFP（Profile Picture）。代表项目有 CryptoPunks、Bored Ape Yacht Club（BAYC）。
+    - 補充：什么是 10k 项目？ 10k 是人为设定的数量 - 兼顾稀缺性 & 社群规模：
+      - “10k 项目” 指的是拥有 10,000 个独特 NFT 的收藏系列，最早由 CryptoPunks（2017 年） 引领潮流。后来的 NFT 项目（如 BAYC、Doodles）沿用了这个标准，形成行业共识。
+  - Arbitrum：以太坊主网（Layer 1）交易慢、Gas 费高，为了提高效率，Arbitrum 为为 Layer 2 **在主网之外处理交易，只在必要时与主网交互**。
+    - 做法：在 Arbitrum 上，交易先在 Layer 2 进行计算，然后再把最终结果提交到 Layer 1 进行验证，因而减少 Gas 费 & 提高速度。
+    - 滚动 Rollup = 将多笔交易“打包压缩”后提交到以太坊 Layer 1，减少主网交易次数。 Arbitrum 采用 Optimistic Rollup，默认交易正确，只有争议时才触发欺诈证明（Fraud Proofs）进行验证，确保安全。
+  - Apeing / Ape In：盲目、不做功課就亂買 NFT 項目。
 
 ✔ **B**(13): BTC, 币圈, Beta收益（β）, 燃烧, Bear Market, 看跌, 区块, 区块链, Bridge, Bull Market, 看涨, BTD, Bagholder
-  - Beta收益（β）
-  - 燃烧
-  - 区块
-  - Bridge
-  - BTD
-  - Bagholder
+  - Beta收益（β）：似标普 500，一般指大盘指数收益或市场平均收益，為被动投资的概念。(vs. Alpha：主动选股、主动投资策略，超越市场平均回报的收益。)
+  - 燃烧：永久销毁 NFT，使其无法再被交易或使用。保持稀缺性、提高已售 NFT 的价值。
+  - 区块：Block = 记录交易的“数据包”，是区块链的基本单位。
+  - 区块链：一个可公开访问的数字存款本，用于存储和传输信息，不需要中心机构。
+  - Bridge：连接不同区块链的通道，是ㄧ個区块链协议（智能合约+跨链技术的组合），让代币、数据等资产在不同区块链之间转移，使用方式如下：
+    1. 访问 跨链桥平台（如 Arbitrum Bridge、Polygon Bridge）。
+    2. 连接你的钱包（如 MetaMask）。
+    3. 选择 你想转移的资产（如 ETH 从以太坊转到 Arbitrum）。
+    4. 发送交易并等待确认，完成资产跨链。 
+
+  - BTD：Buy the fucking dip. 加密货币价格大幅下跌时：买入！
+  - Bagholder：套牢侠（资产暴跌后仍不愿卖出的投资者）。vs. 钻石手：主动选择长期持有，	坚定信仰，不因短期波动卖出。
 
 ✔ **C**(12): CEX, 冷钱包, 集中化, CeFi, 硬币, 抵押品, 共识, 共识机制, 加密货币, 吃肉, 创世, 持仓
-  - 集中化
-  - CeFi
-  - 抵押品
-  - 共识
-  - 共识机制
-  - 吃肉
-  - 创世
+  - CeFi：涉及加密货币的集中式企业（如 Grayscale ）。
+  - 抵押品：任何被接受作为贷款担保的资产。
+  - 共识：网络节点达成一致。
+  - 共识机制：实现“网络节点达成一致”的规则。
+  - 吃肉：在 Web3 里通过挖矿、质押或投资等方式获得的代币或金钱等实际收益。
+  - 创世：Genesis Block = 区块链的起始点，也称为区块 0，是区块链中第一个区块，后面的所有区块都在它之上搭建。 vs. airdrop是后期免费派发的形式。
 
 ✔ **D**(11): Defi, DD, DYOR, DAO, Dapp, 德根degen, DEX, Diamond Hands, Discord, 难度炸弹, 分布式账本
-  - DD
-  - 难度炸弹
-  - 分布式账本
+  - DD：Due Diligence（尽职调查），在投资之前要自己做足功课，好好研究项目是否值得投入。
+  - 难度炸弹：Difficulty bomb。让挖矿难度随时间急速上升的机制。
+  - 分布式账本：Distributed ledger Technology（DLT）。分布式账本中的**所有节点都会保存相同的交易记录并互相验证**，从而维护数据的完整与安全。
 
 ✔ **E**(5): ETH, ERC, ERC-20, ERC-721, ERC-1155
-  - ERC
-  - ERC-20
-  - ERC-721
-  - ERC-1155
+  - ERC：一套以太坊合约标准规范。
+  - ERC-20：是普通代币（USDT, ETH) 标准。
+  - ERC-721：是非同质化代币（NFT）标准。
+  - ERC-1155：可同时支持多种同质与非同质资产的多功能标准（如游戏中的金币和装备）。
 
 ✔ **F**(7): Floor, FOMO, Few, Fiat, 分叉, FUD, 全节点
-  - Few
-  - 分叉
-  - 全节点  
+  - Few：通常用来形容只有少数人参与或持有某个代币。
+  - 分叉：指区块链因**协议升级**或**分歧**而分裂成两个或多个独立链的现象。
+    - 协议升级 - 以太坊 The Merge（合并）：以太坊从工作量证明（PoW）升级到权益证明（PoS），这是协议升级，但整个网络仍然维持同一个链，没有形成分叉。
+    - 分歧 - 比特币现金（Bitcoin Cash，BCH）：由于社区对比特币扩容方案存在分歧，一部分人支持增加区块大小（8MB），而另一部分人坚持原本的1MB限制，最终导致2017年比特币（BTC）与比特币现金（BCH）分叉成两条独立的区块链。
+  - 全节点：完整保存并验证整个区块链的数据。
 
 ✔ **G**(5): Gas Fee, Gamefi, GM, GOAT, GMI
-  - GOAT
-  - GMI
+  - GOAT：Greatest Of All Time 指“史上最强”，在 Web3 里通常是表达敬意，有时会搭配彩虹特效或山羊图案来象征。
+  - GMI：Gonna Make It.
 
 ✔ **H**(4): 散列, 哈希率, HFSP, 热钱包
-  - 散列
-  - 哈希率
-  - HFSP
+  - 散列：Hashing. 将数据转换成固定长度的字符串，用于加密或验证数据完整性。
+  - 哈希率：Hash Rate. 衡量区块链网络计算能力的指标，表示**每秒执行的哈希计算次数**，通常用于挖矿效率评估。
+  - HFSP：Have Fun Staying Poor. 通常用于嘲笑那些不相信加密货币或错失投资机会的人。
 
 ✔ **I**(3): ICO, IEO, IRL
-  - ICO
-  - IEO
-  - IRL
+  - ICO：Initial Coin Offering. 首次代币发行，项目方直接向公众募资。
+  - IEO：Initial Public Offering. 通过交易所代售，交易所会审核项目，提高可信度。
+  - IRL：现实生活中（In Real Life），指区块链或加密圈**外**的现实世界。
 
-✔ **K**(4): 按键, Kovan, KYC, 科学家
-  - 按键
-  - Kovan
-  - 科学家
+✔ **K**(4): Kovan, KYC, 科学家
+  - Kovan：以太坊的测试网络之一，用于模拟交易环境，不涉及真实资产。
+  - 科学家：快速扫货、抢先交易（MEV）获利的高阶玩家。
 
 ✔ **L**(6): L1, L2, L3, Lambo, 轻节点, Liquidity Pool
-  - L1
-  - L2
-  - L3
-  - Lambo
-  - 轻节点
-  - Liquidity Pool
+  - L1（Layer 1）：区块链的主网，如比特币、以太坊。
+  - L2（Layer 2）：搭建在L1上的扩展解决方案，如 滾动 Rollups。
+  - L3（Layer 3）：构建在L2上的应用层，提供更高效的功能。
+    - 主要用于 特定应用，例如 游戏、隐私、定制化网络 等。
+      - Arbitrum Orbit：在 L2（如Arbitrum） 之上创建的 L3 解决方案，允许开发者定制自己的区块链。这对链游、DAO、企业级 DeFi 和 NFT 交易市场 都有巨大优势，使 Web3 应用可以更灵活地运作。
+      - Aztec：构建在 以太坊 L2 上的 L3 隐私网络，专注于隐私交易。
+      - Xai（L3 Gaming）：专门为 区块链游戏 设计的 L3，降低交易成本，提高游戏流畅度。
+
+  - Lambo（Lamborghini）：象征暴富。“Wen Lambo？” 我刚刚购买了价值xx的xx，这笔投资何时才能到购买一辆兰博基尼的价值？
+  - 轻节点（Light Node）：不存完整区块链数据，只验证部分交易的节点。
+  - Liquidity Pool（流动性池）：用户存入资金供交易，帮助去中心化交易所运行。
+    - SundaeSwap 是构建在 Cardano 区块链上的去中心化交易所（DEX），采用自动做市商（AMM）模型来促进交易。
+    - 质押 vs. 流动性提供
+      - 质押：​将 ADA 代币**委托给验证者节点，帮助维护网络安全**，获得固定的质押奖励，**风险较低**。​
+      - 流动性提供：​将代币存入 DEX 的流动性池，**赚取交易手续费和可能的额外奖励**，但**需承担无常损失等风险**。
 
 ✔ **M**(8): 主节点, 元宇宙, Mempool, 铸造, Moonboy, Merkle Root, Merkle Tree, MEV
-  - 主节点
-  - 元宇宙
-  - Mempool
-  - 铸造
-  - Moonboy
-  - Merkle Root
-  - Merkle Tree
-  - MEV
+  - 主节点（Masternode）：提供区块链特殊功能（如即时交易、隐私）的高级节点，通常需要质押大量代币。
+  - 元宇宙：（Metaverse）：虚拟世界，结合区块链、VR、NFT 等技术，打造**沉浸式数字经济生态**。
+  - Mempool：（内存池）：存储尚未确认的交易，等待验证并打包进区块。
+    - 作用：矿工从 Mempool 选择交易，**优先处理交易费较高的交易**。
+    - 名称来源：由“Memory（内存）”+“Pool（池）”组合而成。
+
+  - 铸造（Minting）：创建新代币或 NFT，并写入区块链的过程。
+  - Moonboy：过度乐观的投资者，坚信某个币会暴涨“上月球”（to the moon）。
+  - Merkle Root：一棵树的“根”，它是所有交易数据最终汇总的结果，用于验证数据完整性。 **如果 树叶（交易数据）有任何改动，整棵树的结构就会变化，Merkle Root 也会不同。这样，区块链可以用 Merkle Root 快速检查交易是否被篡改，而不用逐一检查所有交易。**
+  - Merkle Tree：一种数据结构，将多个交易哈希值组合成树状，方便快速验证区块数据。
+  - MEV（最大可提取价值，Maximal Extractable Value）：MEV 的核心在于**交易排序的控制权**，矿工、验证者或 MEV 机器人可以**利用高 Gas 费或直接控制打包顺序，让自己的交易优先执行，从而获得额外收益**。
+  - 举例：三明治攻击（Sandwich Attack）、清算套利（Liquidation Arbitrage）、DEX 价格套利（DEX Arbitrage）。
 
 ✔ **N**(3): NFT, NGMI, Nocoiner
-  - NGMI
-  - Nocoiner
+  - NGMI（Not Gonna Make It）：指那些在加密市场中做出错误决定、看衰加密货币，最终不会成功的人。
+  - Nocoiner：指没有持有加密货币，通常对加密市场持怀疑或否定态度的人。
 
 ✔ **O**(3): Oracle, Off-chain, OTC
-  - Oracle
-  - Off-chain
-  - OTC
+  - Oracle（预言机）：**连接区块链和现实世界数据的工具**，比如提供价格信息给智能合约。
+  - Off-chain（链下）：不直接记录在区块链上的数据或交易，比如闪电网络（比特币的 Layer 2 扩展方案）或中心化交易所的交易。
+    - 闪电网络（Lightning Network）：BTC 的 Layer 2  扩展方案，用于加快交易速度并降低手续费。
+    - 核心概念：
+      1. 链下支付通道：用户可以在链下开设支付通道，多次交易后再结算到比特币主链，**减少主链负担**。
+      2. 低成本 & 高速交易：交易不需要全网确认，只需在通道内完成，因此速度快、手续费低。
+      3. 适用于小额支付：特别适合日常小额交易（如买咖啡、打赏），避免比特币主网的高昂 Gas 费和拥堵。 
+  - OTC（Over-The-Counter，场外交易）：私下进行的大额加密货币交易，通常不通过公开交易所，以避免市场影响。 如 Strategy 通过 OTC 买 BTC。
 
 ✔ **P**(7): 
-  - P2P
-  - Paper Hands
-  - PFP
-  - PoS
-  - PoW
-
+  - P2P（Peer-to-Peer）：点对点交易，无需中介，用户直接互相交易，如比特币网络。
+  - Paper Hands（纸手）：指容易因市场波动而恐慌抛售的人，反义词是 Diamond Hands（钻石手）。
+  - PFP（Profile Picture）：指用作社交媒体头像的 NFT，例如 BAYC（无聊猿）、CryptoPunks。
+  - PoS（Proof of Stake，权益证明）：通过质押代币来验证交易，能耗低，如以太坊 2.0。
+  - PoW（Proof of Work，工作量证明）：矿工用计算力竞争记账权，能耗高，如比特币挖矿。
 
 ✔ **Q**(1): Queued Pool
-  - Queued Pool
+  - Queued Pool（排队池）：等待执行的交易池，类似 Mempool，交易需按顺序处理。
 
 ✔ **R**(4): Rugged, Rekt, Rug, 路线图
-  - Rugged
-  - Rekt
-  - Rug
-  - 路线图
+  - Rugged（被拉地毯）：指投资项目被开发团队欺诈，导致资金损失。
+  - Rekt（惨赔）：源自 "wrecked"，形容投资亏损惨重或项目崩盘。
+  - Rug（Rug Pull，拉地毯）：项目方卷款跑路，导致投资者血本无归。
+  - 路线图（Roadmap）：区块链项目的发展计划，展示未来功能、目标和时间表。
 
 ✔ **S**(9): 质押, Satoshis/Sats, Ser, SHA-256, Sidechain, 削减, 滑点, 智能合约, 稳定币
-  - Satoshis/Sats
-  - Ser
-  - SHA-256
-  - Sidechain
-  - 削减
-  - 滑点
+  - Satoshis/Sats：比特币的最小单位，1 BTC = 100,000,000 Sats。
+  - Ser：加密社区对 "Sir"（先生）的俚语，带点调侃或戏谑意味。
+  - SHA-256：比特币使用的哈希算法，确保数据安全和不可篡改。
+  - Sidechain（侧链）：与主链并行运行的独立区块链，可提高扩展性或增加功能。
+  - 削减（Slashing）：PoS 机制中，惩罚作恶或离线的验证者，扣除部分质押资产。
+  - 滑点（Slippage）：交易执行价格与预期价格的偏差，通常因市场流动性不足导致。
+  - 智能合約：智能合約是區塊鏈上的自動執行程式，它們通常用 Solidity 語言編寫。
 
 ✔ **T**(5): 测试网, Token, TPS, TVL, Txn Hash
-  - 测试网
-  - TPS
-  - TVL
-  - Txn Hash
+  - 测试网（Testnet）：用于开发和测试的区块链环境，不涉及真实资产。
+  - TPS（Transactions Per Second）：区块链每秒能处理的交易数量，衡量其性能。
+  - TVL（Total Value Locked）：DeFi 协议中存入的总资金量，反映协议规模。
+  - Txn Hash（交易哈希）：交易的唯一标识码，可在区块链浏览器查询交易状态。
 
 ✔ **U**(1): UO
   - UO: 只涨 Up Only 看涨立场，只涨不跌，玩笑语，一般带有讽刺意味。
 
 ✔ **V**(1): Vaporware
-  - Vaporware
+  - Vaporware：承诺很多但从未真正开发或交付的项目，类似“画大饼”。
 
 ✔ **W**(3): WAGMI, Whale, Web3.0
-  - WAGMI
+  - WAGMI（We’re All Gonna Make It）：表达对加密市场或项目的乐观信念。
 
 ✔ **X**(2): XR, X2E：X to Earn
-  - XR
-  - X2E：X to Earn
+  - XR（Extended Reality）：包括 AR（增强现实）和 VR（虚拟现实）的统称。
+  - X2E：X to Earn：如 Play to Earn（边玩边赚），通过某种活动获取收益的模式。
 
 ✔ **Y**(2): YOLO：You Only Live Once, Your Bags
-  - Your Bags
+  - Your Bags：指自己持有的加密资产，通常希望其价值增长。
 
 ✔ **Z**(1): ZK：Zero-Knowledge Proof
-  - ZK：Zero-Knowledge Proof
+  - ZK（Zero-Knowledge Proof，零知识证明）：无需透露具体信息即可证明某事真实的密码学技术，如 ZK-Rollups 提高区块链隐私性和扩展性。
 
 ✔ **其他**(3): 51%Attack, 1：1art：, 10k project
-  - 51%Attack
-  - 1：1art：
-  - 0k project
+  - 51%Attack：当单一实体控制 51% 以上算力时，可篡改区块链交易，威胁 PoW 机制的安全。
+  - 1：1art：独一无二的 NFT 艺术作品，不像 PFP 那样批量生成。
+  - 0k project：没有实际产品或开发进度的项目，类似 Vaporware。
 
 **Web3之父回答：Web3究竟是什么？**
 -
@@ -721,10 +771,15 @@ timezone: UTC+8
 ✔ 什么是Web3？
 
 1. 为什么要有Web3？
+  - Web3 旨在解决 Web2.0 中的中心化问题，赋予用户对自身数据和身份的控制权，减少对中介机构的依赖。
 2. 少一点信任，多一点真实
+  - Web3 强调通过技术手段实现透明和可信赖的系统，减少对第三方的盲目信任。
 3. 打破垄断，可能吗？
+  - 通过去中心化技术，Web3 有望削弱大型科技公司的垄断地位，促进互联网的开放性和公平性。
 4. 什么是去中心化？
+  - 去中心化指系统不依赖单一控制实体，所有参与者共同维护网络，确保公平和安全。
 5. Web3的世界是什么样子？
+  - 在 Web3 世界中，用户拥有对自身数据和数字资产的控制权，参与去中心化应用，享受更安全、私密和自主的互联网体验。
 
 ### 2025.03.10
 
