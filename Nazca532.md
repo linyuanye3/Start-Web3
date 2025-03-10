@@ -148,4 +148,7 @@ UTXO模型：比如BTC比特币，DOGE狗狗币，LTC莱特币。非消费交易
 
 备份钱包！不要分享！小心钓鱼。注意安全。
 
+### 2025.03.09
+记录术语：https://medium.com/@RongHui_Academy/%E5%B0%8F%E7%99%BD%E8%BF%9B%E9%98%B6%E4%B9%8B%E8%B7%AF-web3%E8%A1%8C%E4%B8%9A%E6%9C%AF%E8%AF%AD%E5%A4%A7%E5%85%A8-ea29163ef175
+
 <!-- Content_END -->

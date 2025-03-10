@@ -148,4 +148,16 @@ timezone: UTC+8
 
 三、什么是Layer 1（第一层）？Layer 1是区块链的 “主链”，直接处理交易和存储数据的底层网络。
 
+### 2025.03.09
+学习资料：https://github.com/lxdao-official/web3-general-manual/blob/main/chapter2/2.4-layer2_and_cross-chain_bridge.md
+https://www.odaily.news/post/5190102
+一、Layer2是什么：
+搭建在区块链主链（如以太坊）上的“加速器”，处理交易更快更便宜，主链只负责最终结算。为什么需要：主链堵车（交易慢、Gas费贵）。Layer2帮主链分担压力
+二、常见Layer2类型：
+Channels状态通道（如比特币闪电网络）：两人私下多次交易，最后结算一次上链（像微信发红包，最后算总账）。
+Sidechains侧链（如Polygon）：独立运行的链，和主链资产互通（像主链的“分行”）。
+Rollup（如Optimism）：打包多笔交易压缩后上链（把100封信装一个快递发走）。
+Plasma 是一种二层扩容框架，也被称为“链中链（blockchains in blockchains）”。任何人都可以在底层区块链之上创建不同的 Plasma 支持不同的业务需求，例如分布式交易所、社交网络、游戏等。
+
+
 <!-- Content_END -->
