@@ -32,5 +32,13 @@ timezone: UTC+8
 以太坊白皮书：https://ethereum.org/en/whitepaper/#ethereum-whitepaper
 ### 2025.03.07
 略 打算看白皮书，没看懂，遂作罢
+### 2025.03.08
+为什么我总是打卡不成功！！
+### 2025.03.09
+Web3承诺的是，提供一个无中介的读写网络，即一个去中心化的互联网。
+用一句话来解释Web3，Gavin认为它的定义是“少一点信任（trust），多一点真实（truth）”。（但现实中的信任允许离不开是事实，事实也离不开信任）
+Web3将带来的具有财务义务或经济上更强大的应用程序——以点对点方式在个人之间提供经济服务
+![image](https://github.com/user-attachments/assets/17e49e2f-8d59-4226-bfaf-af13bacfdca9)
+【这张图片突出了Token】
 
 <!-- Content_END -->

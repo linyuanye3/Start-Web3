@@ -162,8 +162,11 @@ Rug：加密行业中出现的参与潜逃的事件
 TVL：Total Value Locked，锁定的总价值。锁定在dapp智能合约中的资产的数量度
 Vaporware：蒸发产品，宣布和特斯拉的产品或项目，但从未真正实现
 
-
-
+### 2025.03.09
+XR：扩展现实，指通过将真实与虚拟相结合，打造一个可人机交互的虚拟环境
+X2E：X to Earn：指一切能够在web3中获得收益的行为
+YOLO：You Only Live Once，通常指在单一资产上投入过多的资金
+Your Bags：你的背包，意指NFT钱包地址
 
 ### 2025.07.12
 <!-- Content_END -->

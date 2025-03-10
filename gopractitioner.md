@@ -34,4 +34,8 @@ Sharding Techniques: Distributing the UTXO set across different nodes or shards
 PoW / BFT
 Layer1 / Layer2
 
+### 2025.03.09
+P2P network
+Previous hash, Mekle treeroot
+
 <!-- Content_END -->
