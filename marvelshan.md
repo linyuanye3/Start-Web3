@@ -600,10 +600,176 @@ Polygon 提供多種技術來擴展以太坊區塊鏈，主要是通過以下幾
 
 ### 2025.03.11
 
+## **Plasma**
+Plasma 是一種 **子鏈 (Child Chain) 技術**，由 **Vitalik Buterin 和 Joseph Poon** 在 2017 年提出。它的核心思想是透過在以太坊主鏈之上構建多個子鏈，使交易能夠在子鏈上執行，而不必每筆交易都寫入主鏈，從而提升吞吐量。
 
-- **Plasma**：使用智能合約代替中心化角色，讓用戶能夠證明自己擁有資金，並自由離開Plasma鏈。Plasma將區塊標頭上傳到L1，但交易數據保留在operator手中，這可能會導致資料不可用的問題。
+### **Plasma 的運作原理**
+1. **建立 Plasma 子鏈**  
+   - Plasma 協議允許在以太坊主鏈上建立多條子鏈，每條子鏈可以有自己的共識機制和交易規則。
+   - 這些子鏈由 **Plasma 合約** 連結到以太坊主鏈。
 
-- **ZK Rollup**：ZK Rollup使用零知識證明來保障安全性，並且可以在資料可用性上做出一定的讓步，因為資料的正確性由零知識證明保證，而不依賴於上傳所有交易資料。
+2. **交易在子鏈上執行**  
+   - 使用者的交易會在 Plasma 子鏈上處理，這些交易不會立即提交到以太坊主鏈，而是由子鏈的 **運營者 (Operator)** 進行處理和批次提交。
+
+3. **定期提交 Merkle 根到主鏈**  
+   - Plasma 子鏈的交易數據會定期生成 **Merkle 根 (Merkle Root)**，然後提交到以太坊主鏈，以確保子鏈的狀態是可驗證的。
+
+4. **用戶可安全退出 (Exit Mechanism)**  
+   - 如果子鏈運營者惡意行為 (例如試圖篡改交易)，用戶可以透過 **欺詐證明 (Fraud Proofs)** 來提出挑戰，並安全地將資產撤回到主鏈。
+
+### **Plasma 的優勢**
+- **擴展性高**：可以建立多條 Plasma 子鏈，每條子鏈可以獨立處理大量交易。
+- **成本低**：交易主要發生在子鏈上，降低了使用者的 gas 費用。
+- **安全性**：子鏈數據提交到以太坊主鏈，並且支持欺詐證明機制。
+
+### **Plasma 的缺點**
+- **交互性較差**：不同 Plasma 子鏈之間的資產轉移不夠流暢。
+- **退出時間長**：用戶需要等待一定時間才能安全地從子鏈退出資金。
+- **不適合智能合約**：Plasma 主要適用於簡單的資產轉移，不太適用於複雜的智能合約應用。
+
+### **以太坊 Layer2 分類爭論與 Plasma 的回歸**
+
+在過去幾年，以太坊的 Layer2 擴容技術經歷了許多討論和演變。**L2BEAT 研究機構**與**研究員 Emmanuel Awosika** 近期針對 Layer2 定義問題進行辯論，**Vitalik Buterin (V 神)** 也加入討論，並重新提及 Plasma 技術，強調其核心功能是「**資產退出機制**」。
+
+## **1. Layer2 分類爭論與 Redstone 爭議**
+1. **L2BEAT 研究員 donnoh.eth** 在 X 平台發文，討論 **Redstone (Layer2) 是否應該歸類為 Plasma**，因其具有 **鏈下資料可用性 (DA) + 提供用戶退出保證**。
+2. **Emmanuel Awosika 提問**：  
+   - 如果 Redstone 是 Plasma，那麼 Plasma 與 Rollup 在安全性上的主要區別是什麼？
+   - Plasma 如何解決資料可用性問題？
+3. **V 神回應**：  
+   - Plasma 的**主要目標不是防止無效狀態變更**，而是**確保用戶在狀態不可用或惡意行為發生時，仍可安全撤回資產**，並防止資產重複提款。
+
+---
+
+## **2. V 神：「Plasma 仍然值得探索」**
+
+1. **2023 年 11 月，V 神於 L2DAYS 重新提出 Plasma**：
+   - **結合 ZK 技術 (ZK-SNARKs)**，可解決 Plasma 在客戶端資料存儲和退出複雜性的問題。
+   - 這將使 Plasma **支持 EVM**，提升其潛力。
+
+2. **V 神的結論**：
+   - **Rollups 仍然是 Layer2 的黃金標準**，但 Plasma **在降低交易成本方面具優勢**。
+   - **對於 Validium (使用鏈下 DA 層的 ZK Rollup)**，Plasma 可能是一種更安全的替代方案。
+   - **Plasma 可以迴避數據可用性問題，大幅降低交易費用**，可能成為新的 Layer2 方案。
+
+---
+
+## **3. 以太坊基金會與 Layer2 定義爭議**
+1. **基金會成員 Dankrad Feist 的觀點**：
+   - **「真正的 Layer2 應使用以太坊作為 DA 層」**，否則不能算 Layer2。
+   - **Validium (使用鏈下 DA 的 ZK Rollup) 不算 Layer2**，因為其安全性不夠。
+   - **Plasma 和狀態通道仍算 Layer2**，因為用戶可安全撤回資金至 Layer1。
+
+2. **L2BEAT 調整分類標準**：
+   - **Optimistic Chain → 更名為 Optimium**（指不使用以太坊 DA 層的 OP Rollup）。
+   - **新增「Rollups only」篩選功能**，將 Validium、Optimium 等排除。
+
+---
+
+## **4. Layer2 主要類別分類**
+| 類型 | 證明機制 | DA 層 | 特點 |
+|------|---------|-------|------|
+| **Validium** | 有效性證明 (ZK-SNARKs) | **鏈下 DA** | 資料可用性風險 |
+| **Plasma** | 欺詐證明 | **鏈下 DA** | 資金可安全撤回，但退出複雜 |
+| **Optimistic Rollup** | 欺詐證明 | **以太坊 DA** | 需要 7 天挑戰期 |
+| **ZK-Rollup** | 有效性證明 | **以太坊 DA** | 安全性高，交易速度快 |
+
+L2BEAT 也將「**欺詐證明 + 第三方 DA 層**」的方案分類為 **「Optimium」**，以區分不同 Layer2 的安全性模型。
+
+---
+
+## **ZK Rollup**
+ZK Rollup (零知識匯總) 是一種 Layer 2 技術，透過使用 **零知識證明 (Zero-Knowledge Proofs, ZKP)** 來提高以太坊的交易吞吐量，同時保持安全性。
+
+### **ZK Rollup 的運作原理**
+1. **打包交易**  
+   - ZK Rollup 會將多筆交易**批次打包 (Batching)**，並在 Layer 2 上執行。
+
+2. **生成零知識證明**  
+   - 為了保證這些交易的正確性，ZK Rollup 會生成一個 **SNARK 或 STARK** (兩種不同的零知識證明技術)，這個證明可以在不洩露交易細節的情況下，證明這些交易是有效的。
+
+3. **提交到主鏈**  
+   - Layer 2 會將打包好的交易摘要 (如 Merkle 根) 和 **零知識證明** 一起提交到以太坊主鏈，主鏈驗證證明即可確認交易狀態。
+
+### **ZK Rollup 的優勢**
+- **安全性高**：ZK Rollup 直接繼承了以太坊的安全性，因為交易的正確性是透過數學證明保證的。
+- **交易速度快**：ZK Rollup 只需要驗證零知識證明，而不是驗證每筆交易，這讓交易處理速度大幅提升。
+- **資產退出迅速**：不像 Plasma，ZK Rollup 的資產退出不需要等待欺詐證明期，可以快速提現。
+
+### **ZK Rollup 的缺點**
+- **計算成本高**：生成零知識證明需要較高的計算資源。
+- **開發難度大**：ZK Rollup 需要專門的密碼學技術來實現，開發難度較高。
+- **智能合約支援有限 (部分解決中)**：早期的 ZK Rollup 主要用於資產轉移，但現在越來越多 ZK Rollup 支援通用智能合約，如 zkSync 和 StarkNet。
+
+
+**不同 ZK-Rollup 方案**（如 **StarkNet、zkSync、Polygon Hermez、Scroll**）與 **Ethereum (EVM)** 的 **智能合約執行方式**，從**語言層 (Language)** 到 **運行時環境 (Runtime)**，並依據與以太坊 EVM 的相容性進行排序（從左到右越相容）。
+
+![image](https://github.com/user-attachments/assets/0ef3ec90-881b-448f-98c6-b07576c2e3f0)
+
+### **1. 各方案與 EVM 相容性的比較**
+橫向比較顯示了四個主要的 ZK-Rollup 方案與 Ethereum EVM 的兼容程度：
+- **最左邊的 StarkNet**（最不相容）
+- **最右邊的 Scroll**（最相容）
+- **Ethereum 作為基準對象**
+
+### **2. 解釋**
+#### **(1) Language**
+所有方案都支持 **Solidity**（開發者最常用的智能合約語言），但不同 ZK-Rollup 在 Solidity 之後的處理方式不同：
+- **StarkNet** 轉換為 **Readable Cairo**（使用 Cairo 作為 ZK 計算的基礎語言）
+- **zkSync** 轉換為 **LLVM-IR**（LLVM 中間表示）
+- **Polygon Hermez 和 Scroll** 則直接轉換為 **IR**（中間表示）
+
+#### **(2) Bytecode**
+這部分顯示了智能合約在 Rollup 內部的轉換過程：
+- **StarkNet**：Cairo 轉為 Cairo Assembly
+- **zkSync**：LLVM-IR 轉為 Zinc instruction
+- **Polygon Hermez**：IR 轉為 Micro Opcode
+- **Scroll**：IR 轉為 Opcode
+- **Ethereum**：IR 轉為 Opcode（標準 EVM 處理方式）
+
+#### **(3) Runtime**
+- **StarkNet**：使用 **Cairo zkVM** 作為執行環境
+- **zkSync**：使用 **Zinc zkVM**
+- **Polygon Hermez**：使用 **uVM**
+- **Scroll**：使用 **zkEVM**
+- **Ethereum**：使用 **EVM**
+
+**從左到右，相容性越高**，Scroll 和 Polygon Hermez 接近 EVM，而 StarkNet 則最不相容。
+
+### **3. 總結**
+1. **StarkNet（最左）**
+   - 兼容 Solidity，但需要轉換為 Cairo 語言。
+   - **與 EVM 相容性較低**，但可能擁有較高的 ZK 計算效能。
+
+2. **zkSync**
+   - 透過 **LLVM-IR** 作為中間層，與 EVM 兼容性**中等**。
+
+3. **Polygon Hermez**
+   - 轉換為 **Micro Opcode**，並運行在 **uVM**，比 zkSync 更相容 EVM。
+
+4. **Scroll（最右）**
+   - **最接近 EVM**，使用標準的 EVM Opcode 和 **zkEVM**，與現有 Ethereum DApp 兼容性最高。
+
+5. **Ethereum（基準）**
+   - 原生 EVM 執行智能合約，與現有 DApp 100% 相容。
+
+## **Plasma vs. ZK Rollup 比較**
+|  **比較項目**  | **Plasma** | **ZK Rollup** |
+|------------|------------|------------|
+| **核心技術** | 子鏈 + 欺詐證明 | 零知識證明 |
+| **安全性** | 依賴欺詐證明，需要等待挑戰期 | 透過零知識證明直接驗證交易 |
+| **退出時間** | 慢 (可能需要 7 天) | 快 (即時或短時間內) |
+| **交易成本** | 低 | 更低 |
+| **適用場景** | 簡單交易，適合支付和轉帳 | 適用於支付、轉帳，甚至智能合約 |
+| **擴展性** | 高 | 更高 |
+
+參考：
+
+[V神要復興「Plasma」？喊話核心功能是「資產退出機制」](https://www.blocktempo.com/vitalik-buterin-replied-the-core-function-of-plasma-is-the-asset-exit-mechanism/)
+
+[ZK Rollup 是什麼？生態項目整理、如何成為以太坊L2贏家](https://www.blocktempo.com/what-is-zk-rollup-ecological-project-arrangement/)
+
+### 2025.03.12
 
 - **Validium**：Validium是Rollup和第三方資料存儲模式的結合，資料由外部保管，減少上傳到L1的需求，但需要信任第三方。
 
