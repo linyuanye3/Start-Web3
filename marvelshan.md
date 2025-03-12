@@ -600,14 +600,254 @@ Polygon 提供多種技術來擴展以太坊區塊鏈，主要是通過以下幾
 
 ### 2025.03.11
 
+## **Plasma**
+Plasma 是一種 **子鏈 (Child Chain) 技術**，由 **Vitalik Buterin 和 Joseph Poon** 在 2017 年提出。它的核心思想是透過在以太坊主鏈之上構建多個子鏈，使交易能夠在子鏈上執行，而不必每筆交易都寫入主鏈，從而提升吞吐量。
 
-- **Plasma**：使用智能合約代替中心化角色，讓用戶能夠證明自己擁有資金，並自由離開Plasma鏈。Plasma將區塊標頭上傳到L1，但交易數據保留在operator手中，這可能會導致資料不可用的問題。
+### **Plasma 的運作原理**
+1. **建立 Plasma 子鏈**  
+   - Plasma 協議允許在以太坊主鏈上建立多條子鏈，每條子鏈可以有自己的共識機制和交易規則。
+   - 這些子鏈由 **Plasma 合約** 連結到以太坊主鏈。
 
-- **ZK Rollup**：ZK Rollup使用零知識證明來保障安全性，並且可以在資料可用性上做出一定的讓步，因為資料的正確性由零知識證明保證，而不依賴於上傳所有交易資料。
+2. **交易在子鏈上執行**  
+   - 使用者的交易會在 Plasma 子鏈上處理，這些交易不會立即提交到以太坊主鏈，而是由子鏈的 **運營者 (Operator)** 進行處理和批次提交。
 
-- **Validium**：Validium是Rollup和第三方資料存儲模式的結合，資料由外部保管，減少上傳到L1的需求，但需要信任第三方。
+3. **定期提交 Merkle 根到主鏈**  
+   - Plasma 子鏈的交易數據會定期生成 **Merkle 根 (Merkle Root)**，然後提交到以太坊主鏈，以確保子鏈的狀態是可驗證的。
 
-- **Volition**：Volition是一種混合模式，允許用戶選擇是否將資料上傳到L1或交由第三方保管。
+4. **用戶可安全退出 (Exit Mechanism)**  
+   - 如果子鏈運營者惡意行為 (例如試圖篡改交易)，用戶可以透過 **欺詐證明 (Fraud Proofs)** 來提出挑戰，並安全地將資產撤回到主鏈。
+
+### **Plasma 的優勢**
+- **擴展性高**：可以建立多條 Plasma 子鏈，每條子鏈可以獨立處理大量交易。
+- **成本低**：交易主要發生在子鏈上，降低了使用者的 gas 費用。
+- **安全性**：子鏈數據提交到以太坊主鏈，並且支持欺詐證明機制。
+
+### **Plasma 的缺點**
+- **交互性較差**：不同 Plasma 子鏈之間的資產轉移不夠流暢。
+- **退出時間長**：用戶需要等待一定時間才能安全地從子鏈退出資金。
+- **不適合智能合約**：Plasma 主要適用於簡單的資產轉移，不太適用於複雜的智能合約應用。
+
+### **以太坊 Layer2 分類爭論與 Plasma 的回歸**
+
+在過去幾年，以太坊的 Layer2 擴容技術經歷了許多討論和演變。**L2BEAT 研究機構**與**研究員 Emmanuel Awosika** 近期針對 Layer2 定義問題進行辯論，**Vitalik Buterin (V 神)** 也加入討論，並重新提及 Plasma 技術，強調其核心功能是「**資產退出機制**」。
+
+## **1. Layer2 分類爭論與 Redstone 爭議**
+1. **L2BEAT 研究員 donnoh.eth** 在 X 平台發文，討論 **Redstone (Layer2) 是否應該歸類為 Plasma**，因其具有 **鏈下資料可用性 (DA) + 提供用戶退出保證**。
+2. **Emmanuel Awosika 提問**：  
+   - 如果 Redstone 是 Plasma，那麼 Plasma 與 Rollup 在安全性上的主要區別是什麼？
+   - Plasma 如何解決資料可用性問題？
+3. **V 神回應**：  
+   - Plasma 的**主要目標不是防止無效狀態變更**，而是**確保用戶在狀態不可用或惡意行為發生時，仍可安全撤回資產**，並防止資產重複提款。
+
+---
+
+## **2. V 神：「Plasma 仍然值得探索」**
+
+1. **2023 年 11 月，V 神於 L2DAYS 重新提出 Plasma**：
+   - **結合 ZK 技術 (ZK-SNARKs)**，可解決 Plasma 在客戶端資料存儲和退出複雜性的問題。
+   - 這將使 Plasma **支持 EVM**，提升其潛力。
+
+2. **V 神的結論**：
+   - **Rollups 仍然是 Layer2 的黃金標準**，但 Plasma **在降低交易成本方面具優勢**。
+   - **對於 Validium (使用鏈下 DA 層的 ZK Rollup)**，Plasma 可能是一種更安全的替代方案。
+   - **Plasma 可以迴避數據可用性問題，大幅降低交易費用**，可能成為新的 Layer2 方案。
+
+---
+
+## **3. 以太坊基金會與 Layer2 定義爭議**
+1. **基金會成員 Dankrad Feist 的觀點**：
+   - **「真正的 Layer2 應使用以太坊作為 DA 層」**，否則不能算 Layer2。
+   - **Validium (使用鏈下 DA 的 ZK Rollup) 不算 Layer2**，因為其安全性不夠。
+   - **Plasma 和狀態通道仍算 Layer2**，因為用戶可安全撤回資金至 Layer1。
+
+2. **L2BEAT 調整分類標準**：
+   - **Optimistic Chain → 更名為 Optimium**（指不使用以太坊 DA 層的 OP Rollup）。
+   - **新增「Rollups only」篩選功能**，將 Validium、Optimium 等排除。
+
+---
+
+## **4. Layer2 主要類別分類**
+| 類型 | 證明機制 | DA 層 | 特點 |
+|------|---------|-------|------|
+| **Validium** | 有效性證明 (ZK-SNARKs) | **鏈下 DA** | 資料可用性風險 |
+| **Plasma** | 欺詐證明 | **鏈下 DA** | 資金可安全撤回，但退出複雜 |
+| **Optimistic Rollup** | 欺詐證明 | **以太坊 DA** | 需要 7 天挑戰期 |
+| **ZK-Rollup** | 有效性證明 | **以太坊 DA** | 安全性高，交易速度快 |
+
+L2BEAT 也將「**欺詐證明 + 第三方 DA 層**」的方案分類為 **「Optimium」**，以區分不同 Layer2 的安全性模型。
+
+---
+
+## **ZK Rollup**
+ZK Rollup (零知識匯總) 是一種 Layer 2 技術，透過使用 **零知識證明 (Zero-Knowledge Proofs, ZKP)** 來提高以太坊的交易吞吐量，同時保持安全性。
+
+### **ZK Rollup 的運作原理**
+1. **打包交易**  
+   - ZK Rollup 會將多筆交易**批次打包 (Batching)**，並在 Layer 2 上執行。
+
+2. **生成零知識證明**  
+   - 為了保證這些交易的正確性，ZK Rollup 會生成一個 **SNARK 或 STARK** (兩種不同的零知識證明技術)，這個證明可以在不洩露交易細節的情況下，證明這些交易是有效的。
+
+3. **提交到主鏈**  
+   - Layer 2 會將打包好的交易摘要 (如 Merkle 根) 和 **零知識證明** 一起提交到以太坊主鏈，主鏈驗證證明即可確認交易狀態。
+
+### **ZK Rollup 的優勢**
+- **安全性高**：ZK Rollup 直接繼承了以太坊的安全性，因為交易的正確性是透過數學證明保證的。
+- **交易速度快**：ZK Rollup 只需要驗證零知識證明，而不是驗證每筆交易，這讓交易處理速度大幅提升。
+- **資產退出迅速**：不像 Plasma，ZK Rollup 的資產退出不需要等待欺詐證明期，可以快速提現。
+
+### **ZK Rollup 的缺點**
+- **計算成本高**：生成零知識證明需要較高的計算資源。
+- **開發難度大**：ZK Rollup 需要專門的密碼學技術來實現，開發難度較高。
+- **智能合約支援有限 (部分解決中)**：早期的 ZK Rollup 主要用於資產轉移，但現在越來越多 ZK Rollup 支援通用智能合約，如 zkSync 和 StarkNet。
+
+
+**不同 ZK-Rollup 方案**（如 **StarkNet、zkSync、Polygon Hermez、Scroll**）與 **Ethereum (EVM)** 的 **智能合約執行方式**，從**語言層 (Language)** 到 **運行時環境 (Runtime)**，並依據與以太坊 EVM 的相容性進行排序（從左到右越相容）。
+
+![image](https://github.com/user-attachments/assets/0ef3ec90-881b-448f-98c6-b07576c2e3f0)
+
+### **1. 各方案與 EVM 相容性的比較**
+橫向比較顯示了四個主要的 ZK-Rollup 方案與 Ethereum EVM 的兼容程度：
+- **最左邊的 StarkNet**（最不相容）
+- **最右邊的 Scroll**（最相容）
+- **Ethereum 作為基準對象**
+
+### **2. 解釋**
+#### **(1) Language**
+所有方案都支持 **Solidity**（開發者最常用的智能合約語言），但不同 ZK-Rollup 在 Solidity 之後的處理方式不同：
+- **StarkNet** 轉換為 **Readable Cairo**（使用 Cairo 作為 ZK 計算的基礎語言）
+- **zkSync** 轉換為 **LLVM-IR**（LLVM 中間表示）
+- **Polygon Hermez 和 Scroll** 則直接轉換為 **IR**（中間表示）
+
+#### **(2) Bytecode**
+這部分顯示了智能合約在 Rollup 內部的轉換過程：
+- **StarkNet**：Cairo 轉為 Cairo Assembly
+- **zkSync**：LLVM-IR 轉為 Zinc instruction
+- **Polygon Hermez**：IR 轉為 Micro Opcode
+- **Scroll**：IR 轉為 Opcode
+- **Ethereum**：IR 轉為 Opcode（標準 EVM 處理方式）
+
+#### **(3) Runtime**
+- **StarkNet**：使用 **Cairo zkVM** 作為執行環境
+- **zkSync**：使用 **Zinc zkVM**
+- **Polygon Hermez**：使用 **uVM**
+- **Scroll**：使用 **zkEVM**
+- **Ethereum**：使用 **EVM**
+
+**從左到右，相容性越高**，Scroll 和 Polygon Hermez 接近 EVM，而 StarkNet 則最不相容。
+
+### **3. 總結**
+1. **StarkNet（最左）**
+   - 兼容 Solidity，但需要轉換為 Cairo 語言。
+   - **與 EVM 相容性較低**，但可能擁有較高的 ZK 計算效能。
+
+2. **zkSync**
+   - 透過 **LLVM-IR** 作為中間層，與 EVM 兼容性**中等**。
+
+3. **Polygon Hermez**
+   - 轉換為 **Micro Opcode**，並運行在 **uVM**，比 zkSync 更相容 EVM。
+
+4. **Scroll（最右）**
+   - **最接近 EVM**，使用標準的 EVM Opcode 和 **zkEVM**，與現有 Ethereum DApp 兼容性最高。
+
+5. **Ethereum（基準）**
+   - 原生 EVM 執行智能合約，與現有 DApp 100% 相容。
+
+## **Plasma vs. ZK Rollup 比較**
+|  **比較項目**  | **Plasma** | **ZK Rollup** |
+|------------|------------|------------|
+| **核心技術** | 子鏈 + 欺詐證明 | 零知識證明 |
+| **安全性** | 依賴欺詐證明，需要等待挑戰期 | 透過零知識證明直接驗證交易 |
+| **退出時間** | 慢 (可能需要 7 天) | 快 (即時或短時間內) |
+| **交易成本** | 低 | 更低 |
+| **適用場景** | 簡單交易，適合支付和轉帳 | 適用於支付、轉帳，甚至智能合約 |
+| **擴展性** | 高 | 更高 |
+
+參考：
+
+[V神要復興「Plasma」？喊話核心功能是「資產退出機制」](https://www.blocktempo.com/vitalik-buterin-replied-the-core-function-of-plasma-is-the-asset-exit-mechanism/)
+
+[ZK Rollup 是什麼？生態項目整理、如何成為以太坊L2贏家](https://www.blocktempo.com/what-is-zk-rollup-ecological-project-arrangement/)
+
+### 2025.03.12
+
+### **Validium**  
+Validium 是一種以太坊 Layer 2 擴容解決方案，屬於 ZK-Rollup（零知識彙總）技術的一個變種。它與標準的 ZK-Rollup 不同的主要之處在於 **數據可用性（Data Availability）** 的存儲方式：
+
+1. **核心概念**  
+   - Validium 使用零知識證明（ZK-SNARKs 或 ZK-STARKs）來驗證交易的有效性，但 **交易數據並不存儲在以太坊主網上**，而是存儲在 **鏈下（off-chain）**。
+   - 由於以太坊的區塊鏈存儲成本很高，Validium 透過將數據存放在外部數據可用性委員會（Data Availability Committee, DAC）或其他鏈下存儲方式，大幅降低 Gas 費用。
+   - Validium 仍然保持 **去中心化驗證**，因為鏈下數據並不影響交易的有效性，驗證者只需要 ZK 證明來確認交易的正確性。
+
+2. **優勢**
+   - **高效擴容**：由於鏈下存儲數據，Validium 的吞吐量遠高於標準的 ZK-Rollup，可達 **10,000 TPS 以上**。
+   - **低 Gas 成本**：因為不需要在以太坊主網存儲交易數據，因此 Gas 費大幅降低。
+   - **隱私保護**：部分 Validium 設計允許數據保持私密，不公開存放在區塊鏈上。
+
+3. **劣勢**
+   - **數據可用性風險**：如果鏈下數據提供者（如 DAC）出問題，可能導致用戶無法取回自己的資產（但仍可進行強制提款機制）。
+   - **信任假設增加**：與標準 ZK-Rollup 相比，Validium 需要信任數據可用性提供者。
+
+4. **應用場景**
+   - 適合 **遊戲、NFT 交易市場、社交應用**，這些場景對於 **隱私性要求高，且交易量大**，但不需要完全去中心化的數據存儲。
+   - 例如 **Immutable X**（專注於 NFT 的 Layer 2）使用 Validium 來降低 Gas 費用，提升交易速度。
+
+---
+
+### **Volition**  
+Volition 是 Validium 和 ZK-Rollup 的混合方案，允許用戶自由選擇其交易數據存儲方式：
+
+1. **核心概念**  
+   - 在 Volition 架構下，**每筆交易都可以選擇使用 Validium（鏈下數據存儲）或 ZK-Rollup（鏈上數據存儲）**。
+   - 這種模式為用戶提供了更大的靈活性，讓他們可以在交易成本和數據可用性之間做權衡。
+
+2. **優勢**
+   - **靈活選擇數據可用性**：用戶可在交易時決定是否要在主網存儲數據（ZK-Rollup 模式）或使用鏈下存儲（Validium 模式）。
+   - **降低成本**：大多數日常交易可以使用 Validium 來降低 Gas，而關鍵交易（如提款）可以選擇存儲在鏈上以確保安全性。
+   - **安全性提升**：與純 Validium 相比，Volition 允許用戶選擇 ZK-Rollup，因此部分交易仍然可以利用鏈上的數據可用性，減少鏈下數據存儲的風險。
+
+3. **劣勢**
+   - **技術複雜度高**：Volition 需要額外的智能合約來管理用戶的選擇，增加開發與運營難度。
+   - **用戶決策成本增加**：用戶需要根據不同交易類型決定是否使用鏈上或鏈下存儲，這可能會影響使用者體驗。
+
+4. **應用場景**
+   - 適用於 **金融應用、去中心化交易所（DEX）、NFT 市場等**，因為這些應用同時需要 **低成本交易** 和 **部分交易的強安全保障**。
+   - 例如 **StarkNet** 的 Volition 模式允許開發者決定哪些數據存儲在鏈上，哪些存儲在鏈下。
+
+### **Validium vs. Volition 比較**
+| 特性       | Validium | Volition |
+|------------|----------|----------|
+| **數據存儲** | 鏈下存儲（DAC 或其他） | 用戶可選鏈上（Rollup）或鏈下（Validium） |
+| **交易成本** | 低（因為數據不存於以太坊主網） | 靈活（用戶可選更低成本或更高安全性） |
+| **安全性** | 需要信任數據可用性提供者 | 提供鏈上數據可用性選項，安全性更高 |
+| **適用場景** | 高頻交易、遊戲、NFT | 需要部分交易更安全的應用，如 DEX、金融應用 |
+| **技術複雜度** | 相對較低 | 較高（需要管理存儲選項） |
+
+### **Lens Network**
+
+**主要特點：**
+
+- **模組化設計**：Lens Network 採用模組化架構，允許開發者根據需求添加新功能或進行調整，提升協議的靈活性和可擴展性。 citeturn0search0
+
+- **高性能與互操作性**：透過最新的 V3 更新，Lens Network 為社交應用提供高性能、互操作的平台，促進不同應用之間的協同運作。 citeturn0search0
+
+**Lens Protocol V2 的四大功能更新：**
+
+1. **開放操作（Open Actions）**：用戶和開發者可以在 Lens 上啟用外部智能合約操作，甚至擴展至具有預言機支持的跨鏈操作，提供更多元且原生的操作體驗。 citeturn0search1
+
+2. **共同價值分享（Collective Value Share）**：引入價值共享機制，允許創作者與參與者分享收益，強化生態系統內的合作與協同。 citeturn0search1
+
+3. **個人檔案更新**：整合 ERC-6551 代幣標準，使用戶的個人檔案能夠累積價值，提升用戶體驗和參與度。 citeturn0search1
+
+4. **個人檔案管理**：允許用戶將社交操作委派給不同的錢包，並支持 DAO 或社群的個人檔案儲存在智能合約中，增強安全性和靈活性。 citeturn0search1
+
+參考:
+
+[Lens Protocol 推出混合式網路 Lens Network ，提升效率同時維護社交去中心化](https://abmedia.io/lens-protocol-will-launche-lens-network)
+
+[简析三种零知识证明扩容方案：ZK Rollup、Validium与Volition](https://www.web3sj.com/news/50328/)
+
+### 2025.03.13
 
 - **Optimistic Rollup**：相比ZK Rollup，Optimistic Rollup的安全性依賴於挑戰機制，需要完整的交易資料來進行挑戰，這使其在資料可用性上較為薄弱。
 
