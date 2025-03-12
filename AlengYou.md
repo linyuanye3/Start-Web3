@@ -330,4 +330,11 @@ L2同時也有跨連橋的存在，目的是當不同的鏈出現，必定會衍
 - TSS（阈值签名方案）桥： 使用多方计算来创建跨链交易的签名。
 ####
 L2總結，任何衍伸出的生態性，背後都有商業作用與價值所在，而L2最大的目的是解決交易費與網路問題，類似OP。
+
+### 2025.03.11
+比特币简介 [web3-general-manual/chapter3/3.2-bitcoin.md at main · lxdao-official/web3-general-manual · GitHub ](https://github.com/lxdao-official/web3-general-manual/blob/main/chapter3/3.2-bitcoin.md)
+
+BTC是個分帳式帳本，最一開始推出是因金融海嘯，導致對銀行的不信任，而衍伸出的去中心化商品，就叫BTC。白皮書也有詳細介紹BTC的技術，還有如何得到BTC。為何BTC會真貴，主要是因為稀缺性和商業炒作，而BTC只有2100万枚，所以會越挖越少，且每次年挖礦獎勵就會減半一次，導致幣價上漲。
+
+想要獲得比特幣，只有兩種途徑，交易和挖礦，所以想必你必定要成為其中一方。
 <!-- Content_END -->
