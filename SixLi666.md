@@ -198,5 +198,13 @@ UTXO_C：0.4 BTC，给自己（找零）。
 在UTXO模型中，个人拥有的财富是通过UTXO来体现的。当旧的UTXO被销毁并创建新的UTXO时，资金的所有权发生了转移。旧的UTXO不再存在，个人只拥有新的UTXO。
 在UTXO模型中，没有明确的余额概念，余额需要通过遍历UTXO来计算。例如，Alice的余额是UTXO1（0.5 BTC） + UTXO2（0.3 BTC） + UTXO3（0.2 BTC） = 1 BTC。
 
+### 2025.03.12
+
+Web 3 Ecosystem 
+* DAO：去中心化自治组织，实现社区治理和协作。
+* GameFi：游戏金融，玩家通过玩游戏赚取收益。
+* Creator Economy：创作者经济，赋能创作者直接与粉丝互动并获得收益。
+* Storage：去中心化存储，确保数据的安全和隐私。
+
 
 <!-- Content_END -->
