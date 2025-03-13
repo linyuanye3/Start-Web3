@@ -206,5 +206,29 @@ Web 3 Ecosystem
 * Creator Economy：创作者经济，赋能创作者直接与粉丝互动并获得收益。
 * Storage：去中心化存储，确保数据的安全和隐私。
 
+### 2025.03.13
+
+Web 3 landscape
+
+协议层（protocol layer）
+- 区块链网络：BTC、Ethereum、BNB、Optimism、Arbitrum、Polygon、Base
+- 跨链桥blockchain bridges：across protocol、synapse protocol、stargate
+- 基础设施infrastructure：节点服务Node service、alchemy、infura、quicknode
+- 网络存储Network storage：Arweave、filecoin
+- 数据服务：Dune、theGraph、etherscan
+
+应用层 Application Layer
+- 治理&DAO（Govern）：Snapshot、Tally、Boardroom、Aragon
+- 钱包（Wallet）：MetaMask、GnosisSafe、Rainbow、Coinbase、WalletConnect
+- 金融（Finance）：Uniswap、Compound、PancakeSwap
+- 游戏（Game）：Alien Worlds、Splinterlands
+- NFT：OpenSea、Blur
+- 社交（Social）：Lens Protocol、Farcaster
+- 创作&内容（Creator & Content）：Mirror、Sound
+
+Others
+- 智能合约Smart Contract
+- 应用协议 Application protocol
+- 质押Staking
 
 <!-- Content_END -->
