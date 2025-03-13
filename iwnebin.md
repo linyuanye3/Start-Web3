@@ -14,6 +14,15 @@ timezone: UTC+8
 <!-- Content_START -->
 
 
+### 2025.03.13
+#### Web3 生态
+##### 分层
+协议层（Protocol layer）：区块链网络 （Blockchain network）、跨链桥（Blockchain bridges）
+基础设施（Infrastructure）：节点服务（Node service）、网络存储（Network storage）、数据服务（Data service）
+应用层（Application layer）：治理 & DAO （Govern）、钱包（Wallet）、金融（Finance）
+其它领域（Others）：智能合约（Smart Contract）、应用协议 （Application Protocol）、质押（Staking）
+
+
 ### 2025.03.11
 #### DAO
 DAO的全名是“decentralized autonomous organization”，中文是“去中心化的自治组织”。  
