@@ -41,6 +41,10 @@ Previous hash, Mekle treeroot
 ### 2025.03.10
 Meme coins are basically gambling...
 
+### 2025.03.11
+the minority is subordinate to the majority
+
+
 
 
 <!-- Content_END -->
