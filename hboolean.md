@@ -196,8 +196,25 @@ Web3生态：
     NFT
     社交
     创作&内容
+    ……
   
-### 2025.07.12
+### 2025.03.13
+钓鱼攻击：
+  1.0：Transfer 转账
+      SafeTransferFrom 转NFT
+  2.0：Approve 授权额度
+      Increase Allowance 提升额度
+      SetApproveForAll 授权NFT
+  防范方法：
+    警惕链接
+    推特搜索或者谷歌搜索都不一定安全
+    用官方查找：DeFiLiama，coinmarketcap
+    安全工具：Scam Sniffer
+              Rabby Wallet
+    资金隔离：大资金用冷钱包
+             小资金用热钱包
+             未知项目用新钱包 
+
 ### 2025.07.12
 ### 2025.07.12
 ### 2025.07.12
