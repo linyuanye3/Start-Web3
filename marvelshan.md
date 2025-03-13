@@ -849,11 +849,116 @@ Volition 是 Validium 和 ZK-Rollup 的混合方案，允許用戶自由選擇�
 
 ### 2025.03.13
 
-- **Optimistic Rollup**：相比ZK Rollup，Optimistic Rollup的安全性依賴於挑戰機制，需要完整的交易資料來進行挑戰，這使其在資料可用性上較為薄弱。
+## **1. Optimistic Rollup**
+Optimistic Rollup（OR）是一種 **Layer 2 擴容技術**，其主要目標是提升區塊鏈（特別是 Ethereum）的交易吞吐量，降低 Gas 費用，同時維持去中心化與安全性。
 
-- **MetisDAO、Arbitrum AnyTrust、Celestium**：這些項目嘗試在資料可用性上做出折衷或改進，例如由去中心化儲存系統保管資料，並通過特定的信任假設來確保資料安全性和可用性。
+### **Optimistic Rollup 的工作原理**
+1. **Rollup**：將多筆交易合併成一個批次，並將其提交到以太坊主網，而不是每筆交易都在主網上處理。
+2. **Optimistic（樂觀）**：假設交易是有效的，不會立即進行驗證，而是允許驗證者在一定的挑戰期內提出欺詐證明（Fraud Proof）。
+3. **欺詐證明機制**：
+   - 若有用戶認為某筆交易無效，他可以在挑戰期內提交欺詐證明。
+   - 系統會重新執行該交易，若證明有效，則該交易及相關區塊將被取消，並懲罰惡意提交者。
 
+### **Optimistic Rollup 的優勢**
+- 兼容 EVM（Ethereum Virtual Machine），開發者可使用 Solidity 編寫智能合約  
+- 降低 Gas 費用，提高交易吞吐量  
+- 由於使用欺詐證明機制，因此不需要大量的計算資源驗證交易  
 
-## Proto-Danksharding
+### **Optimistic Rollup 的挑戰**
+⚠ **提款延遲**：用戶從 Layer 2 提現回 Layer 1 需要等待 **約 7 天**，確保沒有欺詐行為  
+⚠ **數據可用性問題**：交易數據仍存儲在 Layer 1，影響擴展性  
+⚠ **挑戰機制依賴誠信驗證者**，若沒有人監督可能會有安全風險  
+
+### **Optimistic Rollup 的代表項目**
+- **Arbitrum One**（最受歡迎的 Optimistic Rollup）  
+- **Optimism（OP）**（另一個主要 OR 解決方案）  
+- **MetisDAO**（一種基於 Optimistic Rollup 的去中心化 Layer 2）  
+
+## **2. MetisDAO（Metis）**
+MetisDAO 是基於 **Optimistic Rollup** 的 Layer 2 擴容方案，但它針對 **DAO（去中心化自治組織）與企業應用** 進行了優化，與 Arbitrum 和 Optimism 有所不同。
+
+### **MetisDAO 的特色**
+- **更快的提款時間**：透過「Rangers」驗證機制，減少提款時間（比傳統 OR 快）  
+- **支持 DAC（去中心化自治公司）**：Metis 提供 **Decentralized Autonomous Company (DAC)**，使企業可以輕鬆使用區塊鏈技術  
+- **便捷的 Layer 2 開發環境**：Metis 內建了 **Metis Virtual Machine (MVM)**，讓開發者更容易部署 DApp  
+- **低 Gas 費用**：比以太坊主網更便宜  
+
+### **MetisDAO 的應用**
+- 適用於 **DeFi、NFT、市場、DAO 管理** 等  
+- 企業可利用 MetisDAC 創建 **去中心化公司**，降低運營成本  
+- 提供「社區挖礦」機制，用戶可透過貢獻社區獲得獎勵  
+
+### **MetisDAO 代幣（METIS）**
+- **用途**：支付 Gas 費、質押、治理  
+- **總供應量**：10,000,000 METIS  
+- **生態系統**：許多 DeFi 和 NFT 平台已經在 Metis 上運行，例如 Netswap、Tethys、Hermes  
+
+## **3. Arbitrum AnyTrust**
+Arbitrum AnyTrust 是 **Arbitrum 團隊開發的 Layer 2 解決方案**，但它與傳統的 **Optimistic Rollup** 有一些不同，主要針對 **低成本與高效能** 進行優化。
+
+### **Arbitrum AnyTrust 與 Arbitrum One 的不同**
+| **特性**        | **Arbitrum One** (OR) | **Arbitrum AnyTrust** |
+|---------------|------------------|-----------------|
+| **技術類型**   | Optimistic Rollup | Hybrid Rollup（OR + Data Availability Committee） |
+| **數據存儲**   | 所有交易數據存儲在 Layer 1 | 交易數據存儲在專門的「數據可用性委員會（DAC）」 |
+| **Gas 費用**   | 高（需支付 Layer 1 存儲費用） | 低（因為數據存儲在 DAC，而不是 Layer 1） |
+| **應用場景**   | 高度去中心化的 DeFi、DApps | 低成本應用，例如遊戲、社交、NFT |
+
+### **Arbitrum AnyTrust 的特點**
+- **更低的 Gas 費**：不需要將所有交易數據存儲在 Ethereum 主網  
+- **更快的交易確認**：減少交易延遲  
+- **適合高頻交易應用**（如遊戲、NFT 市場）  
+
+### **數據可用性委員會（Data Availability Committee, DAC）**
+- 由一組可信賴的驗證者負責存儲交易數據  
+- 這些驗證者如果作惡，系統會回到 Rollup 模式，保證安全性  
+- 這樣的架構大幅降低 Gas 費用，但仍維持一定程度的安全性  
+
+目前 AnyTrust 主要應用於 **Arbitrum Nova**，這是一個專門針對遊戲與社交應用的低成本 Layer 2 解決方案。
+
+## **4. Celestium**
+Celestium 是由 Offchain Labs（Arbitrum 開發團隊）提出的一種 **Layer 2 架構**，它結合了 **Optimistic Rollup 和 Modular Blockchain（模塊化區塊鏈）** 的概念，並使用 Celestia 作為數據可用性層。
+
+### **Celestium 的關鍵概念**
+- **使用 Celestia 提供數據可用性（DA）**  
+- **執行仍然依賴於以太坊 Layer 1**  
+- **降低 Gas 費用**：數據不需要存儲在 Ethereum，而是放在 Celestia  
+- **提高交易吞吐量**  
+
+### **Celestium vs. Optimistic Rollup**
+| **特性**            | **Optimistic Rollup** | **Celestium** |
+|------------------|------------------|-------------|
+| **數據可用性**     | 依賴 Ethereum L1 | 依賴 Celestia |
+| **Gas 費用**     | 高 | 低 |
+| **安全性**       | 受 L1 保護 | 受 Celestia 保障 |
+| **適用場景**     | DeFi、大型 DApps | 高吞吐量應用（如社交、遊戲） |
+
+Celestium 是 **模塊化區塊鏈（Modular Blockchain）** 的一部分，這是一種新的區塊鏈架構，將 **執行層、數據可用性層、結算層** 分離，提高擴展性與彈性。
+
+## **總結**
+| **技術/平台** | **類型** | **主要優勢** | **適用場景** |
+|--------------|---------|------------|-------------|
+| **Optimistic Rollup** | Layer 2 | 高吞吐量，EVM 兼容 | DeFi、DApps |
+| **MetisDAO** | OR 變體 | 低 Gas、快速提款、DAO 支持 | DAO、企業應用 |
+| **Arbitrum AnyTrust** | Hybrid Rollup | 低成本、適合遊戲/NFT | 遊戲、社交 |
+| **Celestium** | 模塊化區塊鏈 | Celestia DA 支持、低 Gas | 高吞吐量應用 |
+
+參考：
+
+[Rollup 的分類](https://medium.com/taipei-ethereum-meetup/what-is-sovereign-settlement-based-rollup-7b3c32b79072)
+
+[為什麼說第二代Optimistic Rollup是Layer2的未來？](https://news.cnyes.com/news/id/4982982)
+
+[坎昆升級前夕，Metis會是最大黑馬嗎？](https://news.cnyes.com/news/id/5468835)
+
+[Introducing AnyTrust Chains: Cheaper, Faster L2 Chains with Minimal Trust Assumptions](https://medium.com/offchainlabs/introducing-anytrust-chains-cheaper-faster-l2-chains-with-minimal-trust-assumptions-31def59eb8d7)
+
+[又一個以太坊殺手？模塊化區塊鏈Celestia對ETH是威脅還是幫助](https://www.blocktempo.com/what-is-the-difference-between-celestia-and-eth/)
+
+### 2025.03.14
+
+Proto-Danksharding
+
+Starkent
 
 <!-- Content_END -->
