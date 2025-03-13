@@ -187,8 +187,8 @@ Plasma 是一种二层扩容框架，也被称为“链中链（blockchains in b
 
 ### 2025.03.12
 学习资料：https://github.com/lxdao-official/web3-general-manual/blob/main/web3_ecosystem/DAO.md
-DAO（去中心化自治组织，Decentralized Autonomous Organization）是一种在区块链上运行的组织形式，没有传统的中央管理机构，而是由智能合约和成员共同决策来运行。
 
+DAO（去中心化自治组织，Decentralized Autonomous Organization）是一种在区块链上运行的组织形式，没有传统的中央管理机构，而是由智能合约和成员共同决策来运行。
 DAO 的核心特点：去中心化： 没有单一领导者，所有决策由社区成员投票决定。自治性： 规则写入智能合约，自动执行，无需人工干预。
 透明性： 资金流动和决策过程在区块链上公开可查。全球性： 任何人都可以加入 DAO 并参与治理。信任最小化： 规则由代码执行，减少对个体或机构的依赖。
 
@@ -203,6 +203,7 @@ DeFi（去中心化金融，如 MakerDAO）： 社区治理金融协议，如稳
 公益组织（如 Gitcoin）： 通过 DAO 筹集和分配资金支持开源项目。
 
 ### 2025.03.13
+学习资料：https://myfirstnft.info/
 一、什么是NFT?
 NFT（非同质化代币，Non-Fungible Token）是一种基于区块链的数字资产，与比特币等同质化代币（FT，Fungible Token）不同，每个 NFT 都是独一无二的，无法互换。它通过智能合约存储在区块链上，确保真实性、所有权和不可篡改性，广泛应用于艺术、游戏、音乐、虚拟地产等领域。
 
