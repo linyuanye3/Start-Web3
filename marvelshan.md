@@ -957,8 +957,456 @@ Celestium 是 **模塊化區塊鏈（Modular Blockchain）** 的一部分，這�
 
 ### 2025.03.14
 
-Proto-Danksharding
+## Proto-Danksharding（EIP-4844）
 
-Starkent
+### **概述**
+Proto-Danksharding（EIP-4844）是一項過渡性升級，旨在為以太坊最終實現完整的**Danksharding**（分片技術）鋪路。這項提案主要引入**Blob（數據塊）交易**，以提升 Layer 2（L2）的擴展性，使 Rollups 的交易成本大幅降低。
+
+Proto-Danksharding 由 Ethereum 研究員 **Dankrad Feist** 和 **Proto Lambda** 提出，因此名稱中包含 "Proto"（代表過渡性）和 "Danksharding"（指最終的全分片技術）。
+
+### **主要特點**
+1. **引入 Blob-carrying Transactions（攜帶 Blob 的交易）**
+   - 這些交易允許 L2 存儲大量數據，並且數據不會直接進入 EVM，而是透過 KZG（Kate-Zaverucha-Goldberg）承諾來驗證其正確性。
+   
+2. **使用 KZG Commitments**
+   - 透過 **KZG polynomial commitments** 來驗證 Blob 的數據完整性，而不需所有節點儲存完整數據。
+
+3. **降低 Rollups 成本**
+   - 目前 Rollups 需要將交易數據發佈到 L1（Call Data），但 Proto-Danksharding 提供更高效的方式儲存數據，減少 Gas 費用。
+
+4. **過渡性方案**
+   - 雖然 EIP-4844 不是完整的 Danksharding，但它為未來的**全分片架構**提供基礎，並允許 L2 先行享受成本降低的好處。
+
+### **與完整 Danksharding 的區別**
+| 特性           | Proto-Danksharding (EIP-4844) | Danksharding |
+|--------------|--------------------------|-------------|
+| **數據存儲**   | Blob 附加到 L1，但不進入 EVM | 完全分片化數據存儲 |
+| **驗證方式**   | KZG Commitments         | Data Availability Sampling (DAS) |
+| **影響範圍**   | Layer 2 交易成本降低      | 全面提升擴展性 |
+| **完整性**     | 過渡性升級              | 完全實現以太坊分片 |
+
+Proto-Danksharding 透過 EIP-4844 率先部署「Blob-carrying Transactions」，這將使 Rollups 交易成本顯著降低，並為未來完整的 Danksharding 做準備。
+
+### **EIP-4844：Shard Blob Transactions**  
+
+#### **介紹**  
+EIP-4844 引入了一種新的交易格式：blob-carrying transactions。這些交易包含大量數據，但這些數據不會被 EVM 執行訪問，只能透過 commitment進行驗證。這種交易格式與未來 full sharding 方案的設計相容。  
+
+#### **動機**  
+Rollup 是目前及未來可預見的唯一 trustless擴容解決方案。以太坊 L1 交易費用長期處於高位，促使整個生態系統急需轉向 Rollup。  
+
+現在 Rollup 已顯著降低交易費用，例如 Optimism 和 Arbitrum 讓交易費用比 L1 低 **3-8 倍**，而 ZK Rollup（透過更好的數據壓縮和無需包含簽名）則降低至 **40-100 倍**。但這對許多用戶來說仍然過於昂貴。  
+
+長期來看，Rollup 需要「數據分片」來進一步降低成本，使區塊鏈每個區塊額外增加 **16 MB** 的專屬數據空間供 Rollup 使用。然而，完整實現數據分片仍需較長時間。EIP-4844 提供一個 **過渡解決方案**：  
+
+- **引入分片格式的交易**，但不真正分片，而是將這些數據存儲在 Beacon Chain，並由共識節點（consensus nodes）完整下載，之後可以在短時間內刪除。  
+- **初期限制數據量**，每個區塊目標數據量約 **0.375 MB**，上限 **0.75 MB**。  
+
+---
+
+### **技術細節**  
+
+#### **Blob 交易格式**  
+EIP-4844 定義了一種新的 **EIP-2718** 交易類型 **BLOB_TX_TYPE**，其 **RLP 序列化格式** 為：  
+
+```
+[chain_id, nonce, max_priority_fee_per_gas, max_fee_per_gas, gas_limit, to, value, data, access_list, max_fee_per_blob_gas, blob_versioned_hashes, y_parity, r, s]
+```  
+
+- **與 EIP-1559 交易類似**，但 `to` **不可為空**（即不可用於創建合約）。  
+- **新增字段**：
+  - `max_fee_per_blob_gas`：用於計算 blob 交易的費用。  
+  - `blob_versioned_hashes`：存儲 KZG 承諾（KZG commitment）的哈希值。  
+
+##### **交易簽名**  
+簽名 `y_parity, r, s` 是對以下 Keccak 哈希值的 secp256k1 簽名：  
+
+```
+keccak256(BLOB_TX_TYPE || rlp([交易數據, max_fee_per_blob_gas, blob_versioned_hashes]))
+```
+
+### **區塊頭擴展（Header Extension）**  
+EIP-4844 在當前的區塊頭（Block Header）中新增兩個字段（64-bit 無符號整數）：  
+
+- `blob_gas_used`：該區塊內交易使用的總 blob gas。  
+- `excess_blob_gas`：累積的超額 blob gas，類似於 EIP-1559 的 base fee 機制。  
+
+區塊頭的新 RLP 序列化格式為：  
+
+```
+rlp([
+    parent_hash,
+    0x1dcc4d..., # ommers hash
+    coinbase,
+    state_root,
+    txs_root,
+    receipts_root,
+    logs_bloom,
+    0, # difficulty
+    number,
+    gas_limit,
+    gas_used,
+    timestamp,
+    extradata,
+    prev_randao,
+    0x0000000000000000, # nonce
+    base_fee_per_gas,
+    withdrawals_root,
+    blob_gas_used,
+    excess_blob_gas,
+])
+```
+
+#### **`excess_blob_gas` 計算方式**
+```python
+def calc_excess_blob_gas(parent: Header) -> int:
+    if parent.excess_blob_gas + parent.blob_gas_used < TARGET_BLOB_GAS_PER_BLOCK:
+        return 0
+    else:
+        return parent.excess_blob_gas + parent.blob_gas_used - TARGET_BLOB_GAS_PER_BLOCK
+```
+（首次分叉後的區塊中，`blob_gas_used` 和 `excess_blob_gas` 皆為 `0`。）
+
+---
+
+### **Gas 計算機制**
+EIP-4844 引入了一種新型 gas **「Blob Gas」**，它獨立於現有的 EVM gas，並遵循類似 **EIP-1559** 的自適應機制。  
+
+#### **Blob Gas 計算**  
+```python
+def calc_blob_fee(header: Header, tx: Transaction) -> int:
+    return get_total_blob_gas(tx) * get_base_fee_per_blob_gas(header)
+
+def get_total_blob_gas(tx: Transaction) -> int:
+    return GAS_PER_BLOB * len(tx.blob_versioned_hashes)
+
+def get_base_fee_per_blob_gas(header: Header) -> int:
+    return fake_exponential(
+        MIN_BASE_FEE_PER_BLOB_GAS,
+        header.excess_blob_gas,
+        BLOB_BASE_FEE_UPDATE_FRACTION
+    )
+```
+**Blob Gas 費用計算**：
+- `blob_fee` **在交易執行前扣除且不退還**，即使交易失敗。  
+- `base_fee_per_blob_gas` 採用類似 EIP-1559 的增減機制。  
+
+---
+
+### **新的 EVM 操作碼與預編譯合約**
+#### **BLOBHASH 操作碼**
+新增 `BLOBHASH` 指令，可用於檢索 `tx.blob_versioned_hashes` 的值。  
+
+#### **KZG 驗證預編譯合約**
+新增預編譯合約（Precompile），地址為 `POINT_EVALUATION_PRECOMPILE_ADDRESS`，用於驗證 KZG 證明（Proof）。  
+
+驗證函數：
+```python
+def point_evaluation_precompile(input: Bytes) -> Bytes:
+    assert len(input) == 192
+    versioned_hash, z, y, commitment, proof = parse_input(input)
+
+    # 確保 KZG 承諾匹配 blob_versioned_hashes
+    assert kzg_to_versioned_hash(commitment) == versioned_hash
+
+    # 驗證 KZG 證明
+    assert verify_kzg_proof(commitment, z, y, proof)
+
+    # 返回 FIELD_ELEMENTS_PER_BLOB 和 BLS_MODULUS
+    return Bytes(U256(FIELD_ELEMENTS_PER_BLOB).to_be_bytes32() + U256(BLS_MODULUS).to_be_bytes32())
+```
+
+以上主要驗證兩件事：
+1. 給定一個多項式 p(x) 的承諾（commitment）和一個 KZG 證明，確認 p(z) = y
+2. 確認提供的承諾與所提供的 versioned_hash 匹配
+
+## 輸入數據結構
+
+函數接收一個 192 字節的輸入，按照以下方式組織：
+- 前 32 字節：versioned_hash
+- 接下來 32 字節：z（以大端格式填充至 32 字節）
+- 接下來 32 字節：y（以大端格式填充至 32 字節）
+- 接下來 48 字節：commitment（多項式的承諾）
+- 最後 48 字節：proof（KZG 證明）
+
+1. 首先檢查輸入長度是否為 192 字節：
+   ```python
+   assert len(input) == 192
+   ```
+
+2. 將輸入分解為各個組件：
+   ```python
+   versioned_hash = input[:32]
+   z = input[32:64]
+   y = input[64:96]
+   commitment = input[96:144]
+   proof = input[144:192]
+   ```
+
+3. 驗證承諾與 versioned_hash 是否匹配：
+   ```python
+   assert kzg_to_versioned_hash(commitment) == versioned_hash
+   ```
+   這裡使用 `kzg_to_versioned_hash` 函數將承諾轉換為 versioned_hash，並確認它與提供的 versioned_hash 相同。
+
+4. 驗證 KZG 證明：
+   ```python
+   assert verify_kzg_proof(commitment, z, y, proof)
+   ```
+   使用 `verify_kzg_proof` 函數來驗證 KZG 證明，確認 p(z) = y。
+
+5. 返回兩個常數值：
+   ```python
+   return Bytes(U256(FIELD_ELEMENTS_PER_BLOB).to_be_bytes32() + U256(BLS_MODULUS).to_be_bytes32())
+   ```
+   返回兩個常數：`FIELD_ELEMENTS_PER_BLOB` 和 `BLS_MODULUS`，它們都被轉換為 32 字節的大端格式。
+   
+- **KZG 承諾**：一種允許承諾多項式並後續證明特定評估點的方案。
+- **Versioned hash**：似乎是承諾的特定哈希表示形式。
+- **多項式點評估**：證明 p(z) = y，其中 p 是一個多項式，z 是評估點，y 是預期值。
+
+### **共識層（Consensus Layer）與執行層（Execution Layer）**
+- **共識層**：Blob 數據不直接存儲於 Beacon Block，而是透過「sidecar」機制單獨傳播。  
+- **執行層**：新增 `validate_block()` 函數，檢查 blob gas 費用、簽名、KZG 承諾等。  
+
+### **為什麼選擇這種設計？**
+EIP-4844 不是簡單地調整 calldata 費用，而是直接引入未來分片架構的一部分，使 Rollup **僅需升級一次**，減少不必要的開發負擔。  
+
+完整分片仍需：
+- **數據可用性抽樣（DAS）**
+- **Proposer-Builder 分離（PBS）**
+- **驗證機制（如 Proof of Custody）**
+
+這段程式碼是一個名為 `validate_block` 的函數，用於驗證區塊鏈中的區塊，特別針對包含 blob 交易的區塊進行驗證。我來詳細解釋這段程式碼：
+
+## 函數概述
+
+這個函數負責驗證一個區塊是否有效，尤其關注與 blob 相關的各種條件。Blob 交易是一種特殊類型的交易，通常用於存儲大量數據。
+
+## code
+
+1. **驗證 excess blob gas 更新**:
+   ```python
+   assert block.header.excess_blob_gas == calc_excess_blob_gas(block.parent.header)
+   ```
+   確保區塊頭中的 excess_blob_gas 值正確更新，這個值是通過計算父區塊頭得出的。
+
+2. **初始化 blob gas 使用量計數器**:
+   ```python
+   blob_gas_used = 0
+   ```
+
+3. **遍歷區塊中的所有交易進行驗證**:
+   對於每個交易：
+
+   a. **檢查餘額是否足夠支付費用**:
+   ```python
+   max_total_fee = tx.gas * tx.max_fee_per_gas
+   if get_tx_type(tx) == BLOB_TX_TYPE:
+       max_total_fee += get_total_blob_gas(tx) * tx.max_fee_per_blob_gas
+   assert signer(tx).balance >= max_total_fee
+   ```
+   計算交易可能的最大費用，對於 blob 交易，加上 blob gas 費用，然後確認交易簽名者有足夠的餘額支付。
+
+   b. **特定於 blob 交易的驗證邏輯**:
+   ```python
+   if get_tx_type(tx) == BLOB_TX_TYPE:
+       # 至少要有一個 blob
+       assert len(tx.blob_versioned_hashes) > 0
+
+       # 所有 versioned blob hashes 必須以 VERSIONED_HASH_VERSION_KZG 開頭
+       for h in tx.blob_versioned_hashes:
+           assert h[0] == VERSIONED_HASH_VERSION_KZG
+
+       # 確保用戶願意至少支付當前的 blob 基礎費用
+       assert tx.max_fee_per_blob_gas >= get_base_fee_per_blob_gas(block.header)
+
+       # 記錄區塊中消耗的總 blob gas
+       blob_gas_used += get_total_blob_gas(tx)
+   ```
+   
+   對 blob 交易進行額外檢查：
+   - 確保至少包含一個 blob
+   - 確保所有 blob 的 versioned hash 以正確的版本標識符開頭
+   - 確保用戶願意支付至少等於當前基礎費率的 blob gas 費用
+   - 累計區塊中使用的總 blob gas 量
+
+4. **確保總 blob gas 使用量不超過限制**:
+   ```python
+   assert blob_gas_used <= MAX_BLOB_GAS_PER_BLOCK
+   ```
+   驗證區塊中使用的總 blob gas 不超過每個區塊的最大允許值。
+
+5. **確保 blob_gas_used 與區塊頭一致**:
+   ```python
+   assert block.header.blob_gas_used == blob_gas_used
+   ```
+   確保計算得出的 blob gas 使用量與區塊頭中記錄的值一致。
+
+## Starknet（由 StarkWare 開發）
+
+### **概述**
+Starknet 是一個基於以太坊的去中心化 Layer 2（L2）擴展解決方案，使用 STARK（Scalable Transparent Argument of Knowledge）來提高交易吞吐量，並降低 Gas 費用。它由 **StarkWare** 公司開發，該公司也負責開發 StarkEx。
+
+Starknet 採用了 **ZK-STARK（Zero-Knowledge Scalable Transparent Argument of Knowledge）** 這種零知識證明技術來進行交易批處理，並在 L1 上驗證交易的正確性。
+
+### **核心特點**
+1. **ZK-STARK 技術**
+   - Starknet 使用 ZK-STARK 來進行交易批次驗證，與 ZK-SNARK 相比，它具備更高的可擴展性，且不依賴可信任設定（Trusted Setup）。
+   
+2. **Cairo 智能合約**
+   - Starknet 使用 **Cairo** 這種專門為 STARK 設計的編程語言，而非 Solidity。
+
+3. **Layer 2 角色**
+   - Starknet 是**通用的 L2 扩展解決方案**，允許開發者部署去中心化應用（dApps），不同於 StarkEx（針對特定應用的 L2 方案）。
+
+4. **安全性**
+   - Starknet 依賴數學加密技術來確保交易的正確性，而非社群共識，因此它比 Optimistic Rollups（例如 Arbitrum, Optimism）具有更快的最終確定性。
+
+### **Starknet 的優勢**
+- **比 Optimistic Rollups 更快的交易確認**
+- **無需信任設定的 STARK 零知識證明**
+- **更高的可擴展性，相比 ZK-SNARK 更適合大規模計算**
+- **去中心化：逐步去除 StarkWare 公司的影響，讓社群治理 Starknet**
+
+```Cairo
+/// Interface representing `HelloContract`.
+/// This interface allows modification and retrieval of the contract balance.
+#[starknet::interface]
+pub trait IHelloStarknet<TContractState> {
+    /// Increase contract balance.
+    fn increase_balance(ref self: TContractState, amount: felt252);
+    /// Retrieve contract balance.
+    fn get_balance(self: @TContractState) -> felt252;
+}
+
+/// Simple contract for managing balance.
+#[starknet::contract]
+mod HelloStarknet {
+    use core::starknet::storage::{StoragePointerReadAccess, StoragePointerWriteAccess};
+
+    #[storage]
+    struct Storage {
+        balance: felt252,
+    }
+
+    #[abi(embed_v0)]
+    impl HelloStarknetImpl of super::IHelloStarknet<ContractState> {
+        fn increase_balance(ref self: ContractState, amount: felt252) {
+            assert(amount != 0, 'Amount cannot be 0');
+            self.balance.write(self.balance.read() + amount);
+        }
+
+        fn get_balance(self: @ContractState) -> felt252 {
+            self.balance.read()
+        }
+    }
+}
+```
+這段程式碼展示了一個基本的 StarkNet 智能合約，使用 Cairo 程式語言編寫。讓我詳細解釋這段程式碼的組成和功能：
+
+## 程式碼結構概述
+
+1. **餘額增加功能** (`increase_balance`): 允許用戶給合約增加一定數量的餘額。這個函數會檢查增加的金額不能為零，然後將新金額添加到現有餘額上。
+
+2. **餘額查詢功能** (`get_balance`): 允許用戶查詢合約當前的餘額。
+
+這個程式碼包含兩個主要部分：
+1. 合約介面（`IHelloStarknet`）
+2. 合約實現（`HelloStarknet`）
+
+## 合約介面
+
+```Cairo
+#[starknet::interface]
+pub trait IHelloStarknet<TContractState> {
+    fn increase_balance(ref self: TContractState, amount: felt252);
+    fn get_balance(self: @TContractState) -> felt252;
+}
+```
+
+這部分定義了合約的 public interface：
+- `#[starknet::interface]` 是一個屬性宏，標記這是一個 StarkNet 合約介面
+- `IHelloStarknet` 是介面名稱，使用泛型參數 `TContractState`
+- 介面定義了兩個函數：
+  - `increase_balance`: 增加合約餘額的函數
+  - `get_balance`: 獲取當前餘額的函數
+- `felt252` 是 Cairo 的基本資料類型，用於表示域上的元素（field element）
+
+## 合約實現
+
+```Cairo
+#[starknet::contract]
+mod HelloStarknet {
+    // 省略部分程式碼...
+}
+```
+
+`#[starknet::contract]` 屬性宏標記這是一個 StarkNet 合約實現。
+
+### 存儲結構
+
+```Cairo
+#[storage]
+struct Storage {
+    balance: felt252,
+}
+```
+
+這定義了合約的儲存結構：
+- `#[storage]` 是一個屬性宏，標記這是合約的儲存結構
+- `Storage` 結構只有一個欄位 `balance`，類型為 `felt252`
+
+### 合約方法實現
+
+```Cairo
+#[abi(embed_v0)]
+impl HelloStarknetImpl of super::IHelloStarknet<ContractState> {
+    fn increase_balance(ref self: ContractState, amount: felt252) {
+        assert(amount != 0, 'Amount cannot be 0');
+        self.balance.write(self.balance.read() + amount);
+    }
+
+    fn get_balance(self: @ContractState) -> felt252 {
+        self.balance.read()
+    }
+}
+```
+
+這部分實現了介面定義的函數：
+- `#[abi(embed_v0)]` 是一個屬性宏，標記這是合約的 ABI（應用程式二進制介面）版本
+- `impl HelloStarknetImpl of super::IHelloStarknet<ContractState>` 表示這是 `IHelloStarknet` 介面的實現
+- `increase_balance` 函數：
+  - 檢查 `amount` 是否為零，若為零則拋出錯誤
+  - 讀取當前餘額，加上 `amount`，然後寫回儲存
+- `get_balance` 函數：
+  - 簡單地讀取並返回當前餘額
+
+## 特殊語法和概念
+
+1. `ref self: ContractState` vs `self: @ContractState`：
+   - `ref self` 表示可變引用，允許修改合約狀態
+   - `@self` 表示不可變引用，只能讀取不能修改
+
+2. `self.balance.read()` 和 `self.balance.write()`：
+   - 這些是與儲存互動的方法
+   - `read()` 從儲存中讀取值
+   - `write()` 將值寫入儲存
+
+3. `assert(amount != 0, 'Amount cannot be 0')`：
+   - 條件檢查，如果條件為假，則停止執行並返回錯誤訊息
+
+參考：
+
+[EIP-4844 的 Proof of Equivalence 機制介紹](https://medium.com/taipei-ethereum-meetup/eip-4844-proof-of-equivalence-how-does-it-work-e6-a9-9f-e5-88-b6-e4-bb-8b-e7-b4-b9-854224c43c83)
+
+[EIPS/eip-4844.md](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-4844.md)
+
+[docs.starknet](https://docs.starknet.io/quick-start/hellostarknet/)
+
+### 2025.03.15
+
+OrbiterFinance
+EmpiricNetwork
 
 <!-- Content_END -->
