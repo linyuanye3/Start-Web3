@@ -52,24 +52,20 @@ timezone: UTC+8
     * 比特币（BTC）：数字黄金
     * 以太币（ETH）：智能合约燃料
     * USDC：1:1锚定美元的稳定币
-
 2）. NFT（非同质化资产）
 * 定义：独一无二的数字产权证书
 * 典型代表：
     * CryptoPunks（像素头像NFT）
     * BAYC
-
 3）. 治理代币（DAO权益凭证）
 * 定义：参与社区决策的投票权
 * 典型代表：
     * UNI（Uniswap交易所治理权）
-
 4）. 数据资产（用户行为价值化）
 * 定义：用户产生的数据变为可交易资产
 * 典型代表：
     * 社交图谱（Lens Protocol的关注关系NFT）
     * 运动数据（STEPN跑步记录可售给研究机构）
-
 5）. 合成资产（现实资产镜像）
 * 定义：锚定现实资产的链上凭证
 * 典型代表：
@@ -99,7 +95,7 @@ timezone: UTC+8
 
 
 ### 2025.03.06
-学习资料：https://www.odaily.news/post/5140472
+#学习资料：https://www.odaily.news/post/5140472
 
 1.助记词是什么？
 一组12或24个英文单词（如 health, fine, profit...），本质也是一串随机数，但通过 BIP39协议 转换为易记的单词形式。
@@ -118,8 +114,7 @@ timezone: UTC+8
  官方中文词库地址：https://github.com/bitcoin/bips/blob/master/bip-0039/chinese_simplified.txt
 
 ### 2025.03.07
-学习资料：https://github.com/lxdao-official/web3-general-manual/blob/main/chapter3/3.4-wallet.md
-
+#学习资料：https://github.com/lxdao-official/web3-general-manual/blob/main/chapter3/3.4-wallet.md
 一、钱包本质：管理私钥/助记词的工具，资产实际在链上，钱包=钥匙串。
 1. 关键功能：生成密钥 → 控制资产所有权 签名交易 → 授权链上操作 多链支持 → 管理BTC、ETH、NFT等
 
@@ -133,7 +128,7 @@ timezone: UTC+8
 2. UTXO模型（如比特币）：像现金交易，花整钱找零。举例：你有10元纸币，买3元咖啡，给10元，收7元找零。优点：隐私好，适合简单转账。缺点：复杂交易难处理。
 
 ### 2025.03.08
-学习资料：https://github.com/lxdao-official/web3-general-manual/blob/main/chapter2/2.2-blockchain.md
+#学习资料：https://github.com/lxdao-official/web3-general-manual/blob/main/chapter2/2.2-blockchain.md
 一、区块链是什么？区块链是一个 “公共记账本”，由全球成千上万的电脑共同维护，记录每一笔交易，且不可篡改。
 
 核心特点：
@@ -149,8 +144,9 @@ timezone: UTC+8
 三、什么是Layer 1（第一层）？Layer 1是区块链的 “主链”，直接处理交易和存储数据的底层网络。
 
 ### 2025.03.09
-学习资料：https://github.com/lxdao-official/web3-general-manual/blob/main/chapter2/2.4-layer2_and_cross-chain_bridge.md
+#学习资料：https://github.com/lxdao-official/web3-general-manual/blob/main/chapter2/2.4-layer2_and_cross-chain_bridge.md
 https://www.odaily.news/post/5190102
+
 一、Layer2是什么：
 搭建在区块链主链（如以太坊）上的“加速器”，处理交易更快更便宜，主链只负责最终结算。为什么需要：主链堵车（交易慢、Gas费贵）。Layer2帮主链分担压力
 二、常见Layer2类型：
@@ -160,7 +156,8 @@ Rollup（如Optimism）：打包多笔交易压缩后上链（把100封信装一
 Plasma 是一种二层扩容框架，也被称为“链中链（blockchains in blockchains）”。任何人都可以在底层区块链之上创建不同的 Plasma 支持不同的业务需求，例如分布式交易所、社交网络、游戏等。
 
 ### 2025.03.10
-学习资料：https://github.com/lxdao-official/web3-general-manual/blob/main/chapter2/2.4-layer2_and_cross-chain_bridge.md
+#学习资料：https://github.com/lxdao-official/web3-general-manual/blob/main/chapter2/2.4-layer2_and_cross-chain_bridge.md
+
 跨链桥是什么？
 一、跨链桥（Cross-Chain Bridge）是一种技术，它让不同区块链之间的资产和数据可以互相转移。
 1. 跨链桥的作用：它帮助不同区块链之间连接，让你能把资产从一个链转移到另一个链。比如，你可以把以太坊上的ETH转到币安智能链（BSC）上。
@@ -170,23 +167,24 @@ Plasma 是一种二层扩容框架，也被称为“链中链（blockchains in b
 总结：Layer2解决了区块链扩展性的问题，让交易更快、费用更低，提高了用户体验。跨链桥打破了不同区块链之间的壁垒，提升了资产的流动性和互操作性，让多个区块链能够互相连接、合作。
 
 ### 2025.03.11
-学习资料：https://github.com/lxdao-official/web3-general-manual/blob/main/chapter3/3.3-ethereum.md
-1. 以太坊是什么？  
+#学习资料：https://github.com/lxdao-official/web3-general-manual/blob/main/chapter3/3.3-ethereum.md
+
+一、以太坊是什么？  
   - 以太坊是一个全球计算机网络，遵循一套被称为以太坊协议的规则。  
   - 为社区、应用程序、组织和数字资产提供基础。  
   - 允许用户在任何地方创建账户、探索或构建应用，而无需依赖中央权威。 
 
-2. 以太坊能做什么？
+二、以太坊能做什么？
 银行服务：只要有互联网连接，每个人都可以访问以太坊及其金融产品，为更多人提供银行服务。  
 开放的互联网：任何人都能与以太坊网络互动或在其上开发应用程序。  
 点对点网络：支持用户之间直接协调、达成协议和转移数字资产。  
 抵御审查：不受任何政府或公司的控制，保障用户自由操作。
 以太坊的合并升级（2022年9月15日）：从工作证明（Proof of Work）转变为权益证明（Proof of Stake），能量消耗减少了 99.95%，同时提高了网络的安全性和可扩展性。
 
-3.以太坊和比特币的不同：以太坊于 2015 年推出，比比特币稍晚。功能上虽然两者都支持数字货币，但以太坊具备可编程性。以太坊允许在其网络上构建和部署去中心化应用（dApps），不仅限于货币转移。  
+三、以太坊和比特币的不同：以太坊于 2015 年推出，比比特币稍晚。功能上虽然两者都支持数字货币，但以太坊具备可编程性。以太坊允许在其网络上构建和部署去中心化应用（dApps），不仅限于货币转移。  
 
 ### 2025.03.12
-学习资料：https://github.com/lxdao-official/web3-general-manual/blob/main/web3_ecosystem/DAO.md
+#学习资料：https://github.com/lxdao-official/web3-general-manual/blob/main/web3_ecosystem/DAO.md
 
 DAO（去中心化自治组织，Decentralized Autonomous Organization）是一种在区块链上运行的组织形式，没有传统的中央管理机构，而是由智能合约和成员共同决策来运行。
 DAO 的核心特点：去中心化： 没有单一领导者，所有决策由社区成员投票决定。自治性： 规则写入智能合约，自动执行，无需人工干预。
@@ -203,7 +201,8 @@ DeFi（去中心化金融，如 MakerDAO）： 社区治理金融协议，如稳
 公益组织（如 Gitcoin）： 通过 DAO 筹集和分配资金支持开源项目。
 
 ### 2025.03.13
-学习资料：https://myfirstnft.info/
+#学习资料：https://myfirstnft.info/
+
 一、什么是NFT?
 NFT（非同质化代币，Non-Fungible Token）是一种基于区块链的数字资产，与比特币等同质化代币（FT，Fungible Token）不同，每个 NFT 都是独一无二的，无法互换。它通过智能合约存储在区块链上，确保真实性、所有权和不可篡改性，广泛应用于艺术、游戏、音乐、虚拟地产等领域。
 
@@ -218,4 +217,22 @@ NFT 的应用场景
 音乐与影视：音乐人可以通过 NFT 直接出售作品，避免传统平台的高额抽成
 虚拟地产：在元宇宙平台（如 Decentraland、The Sandbox）中，NFT 代表虚拟土地，用户可以买卖、租赁或建造虚拟空间。
 会员与身份认证：NFT 可作为访问俱乐部、活动或独家内容的门票
+
+### 2025.03.14
+#学习资料：https://www.bitpush.news/articles/941245
+
+一、DeFi（去中心化金融，Decentralized Finance）是一种基于区块链的金融体系，旨在提供无需中介的金融服务，让用户可以直接进行借贷、交易、储蓄等操作，而不依赖银行或传统金融机构。它主要运行在以太坊等区块链网络上，并通过智能合约自动执行金融交易，确保透明性和可验证性。
+
+DeFi 的核心特点
+去中心化：所有交易和资产管理由智能合约执行，而非银行或机构控制。
+无需许可：任何人只要有互联网和加密钱包，就能使用 DeFi，无需银行账户或身份验证。
+透明性：所有交易数据公开记录在区块链上，任何人都可以查阅。
+可组合性：不同 DeFi 协议可以互相组合，形成更复杂的金融工具（被称为“乐高积木”）。
+DeFi 的主要应用
+去中心化交易所（DEX）：如 Uniswap、Curve，允许用户直接在链上进行代币兑换，无需中介。
+借贷协议：如 Aave、Compound，用户可以抵押加密资产借款，或存入资产赚取利息。
+稳定币：如 DAI，基于智能合约生成，与法币挂钩，提供更稳定的加密货币选择。
+收益聚合（Yield Farming）：用户将资金存入流动性池，以获取利息或奖励，如 Yearn Finance。
+合成资产：如 Synthetix，允许用户创建与现实资产（如黄金、股票）挂钩的代币
+
 <!-- Content_END -->
