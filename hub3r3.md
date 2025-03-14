@@ -189,7 +189,7 @@ Layer 1 是区块链的“地基”，决定网络的基础性能与安全。尽
 3. Rollup（汇总）
    原理：将多笔交易打包成单一交易提交到主链，分为两种类型：  
    Optimistic Rollup：默认交易有效，依靠挑战期验证（如Optimism、Arbitrum，用户很多）。  
-4.ZK-Rollup**：通过零知识证明（ZKP）即时验证交易有效性（如zkSync、StarkNet）。  
+4.ZK-Rollup      ：通过零知识证明（ZKP）即时验证交易有效性（如zkSync、StarkNet）。  
 
 5. Plasma
   原理：构建树状结构的子链，定期将状态根提交到主链，依赖主链解决争议（如OMG Network）。  
@@ -216,6 +216,53 @@ ZK-Rollup的普及：随着零知识证明技术成熟，ZK-Rollup可能成为�
 Layer 2互操作：不同Layer 2网络间的资产无缝转移（如Connext、Hop Protocol）。  
 
 Layer 2是区块链扩展的核心路径之一，平衡了去中心化与效率，为大规模应用（如DeFi、GameFi）提供了基础支持。
+
+### 2025.03.14
+
+Layer 1 与Layer 2 如何协作工作的？
+
+1. 资产从 Layer 1 转移到 Layer 2
+用户操作：通过 Layer 1 的智能合约（如以太坊的桥合约）将资产（如 ETH）锁定。  
+Layer 2 记录：Layer 2 网络生成对应的“凭证”（如映射代币），用户可在 Layer 2 链下自由交易。  
+如：存入 1 ETH 到 Arbitrum，获得 1 “Arbitrum ETH” 用于链下交易。  
+
+2. Layer 2 链下处理交易      
+ 高频交易：用户在 Layer 2 链下网络进行快速、低成本的交易（如转账、DeFi 操作）。  
+ 数据压缩 ：Layer 2 将大量交易打包成批次，通过特定技术（如 Rollup）压缩交易数据。  
+ Rollup 类型：  
+ Optimistic Rollup：默认交易有效，仅在有争议时回 Layer 1 验证。  
+ ZK-Rollup：每笔交易用零知识证明（ZKP）确保有效性，无需争议期。  
+
+3. 将数据提交回 Layer 1      
+批量提交：Layer 2 定期将压缩后的交易数据（或状态变更）提交到 Layer 1 主链。  
+数据存储：这些数据被永久记录在 Layer 1 上，确保透明性和抗审查。  
+如：Arbitrum 将 1000 笔交易打包成一个 Rollup 区块，提交到以太坊主网。  
+
+4. 验证与争议处理      
+挑战期（Optimistic Rollup）：  
+若有人质疑某笔交易，可在挑战期内向 Layer 1 提交欺诈证明（Fraud Proof）。  
+Layer 1 的智能合约会验证争议，错误交易将被回滚。  
+即时验证（ZK-Rollup）：  
+每笔交易附带零知识证明（ZKP），Layer 1 直接验证证明，无需挑战期。  
+
+ 5. 资产从 Layer 2 提回 Layer 1      
+ 用户操作：请求从 Layer 2 提取资产回 Layer 1。  
+ 验证与解锁：  
+ Layer 2 提交最终状态到 Layer 1 的智能合约。  
+ Layer 1 验证后，解锁最初锁定的资产。  
+ 如：从 Optimism 提款需等待 7 天挑战期（防欺诈），而 zkSync 提款更快（因 ZKP 即时验证）。  
+
+关键协作点      
+1. Layer 1 是“验证者” ：  
+负责最终结算、数据存储和争议裁决，保障全局安全性。  
+2.Layer 2 是“执行者” ：  
+处理实际交易，仅将关键数据压缩后交给 Layer 1 存档。  
+3. 信任传递：  
+Layer 2 的安全性依赖于 Layer 1，但通过技术设计（如 Rollup）减少对 Layer 1 的负载。  
+
+总结      
+Layer 1 是根基，确保安全和去中心化；Layer 2 是扩展，提升效率和降低成本。  
+两者通过资产锁定、链下处理、数据提交、验证机制、协同工作，既保留 Layer 1 的安全性，又实现 Layer 2 的高性能。
 
 
 ### 2025.07.11
