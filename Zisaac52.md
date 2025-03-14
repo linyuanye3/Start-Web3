@@ -154,4 +154,8 @@ NFT（非同质化代币）是基于区块链技术的数字资产，具有唯�
 
 DeFi是基于区块链的去中心化金融体系，涵盖交易所、稳定币、存借贷等多种应用，与传统金融相比，其交易和资产真实存在于链上。收益主要来自交易波动、借贷利息、流动性挖矿及理财策略等，但收益与风险并存。参与DeFi需了解稳定币分类，使用数字钱包管理资产，并通过1inch、Uniswap等平台交易，Maker、Compound等平台借贷，以及利用zapper.fi等工具进行流动性挖矿。数据可通过DeFi Pulse、Etherscan等平台查询。文章还通过具体操作演示，展示了如何使用钱包、借贷、交易和挖矿。整体而言，DeFi为用户提供了高收益机会，但也需注意风险管理和信息获取。
 
+### 2025.03.14
+
+Web3 生态由协议层、基础设施层和应用层组成，涵盖区块链网络（如 BTC、Ethereum、Solana）、跨链桥、节点服务、去中心化存储（IPFS、Filecoin）、数据服务（Dune、TheGraph）等基础设施，以及去中心化治理（DAO）、钱包（MetaMask、GnosisSafe）、DeFi（Uniswap、Aave）、NFT（OpenSea、Blur）、社交（Lens Protocol、Farcaster）等丰富的应用。同时，智能合约（Solidity、OpenZeppelin）、应用协议（Uniswap Protocol、Aave Protocol）以及 Staking 机制，共同支撑 Web3 生态的去中心化创新与发展。
+
 <!-- Content_END -->
