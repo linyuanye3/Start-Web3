@@ -13,6 +13,13 @@ timezone: UTC+8
 
 <!-- Content_START -->
 
+
+### 2025.03.15
+#### 区块链黑暗森林自救手册（https://github.com/slowmist/Blockchain-dark-forest-selfguard-handbook/blob/main/README_CN.md）
+两大安全法则：零信任、持续验证、做好隔离    
+
+
+
 ### 2025.03.14
 #### Ordinals铭文
 UTXO ：在比特币区块链中，所有的余额都是存储在一个名为“未花费交易输出”（Unspent Transaction Output, UTXO）的列表中。
