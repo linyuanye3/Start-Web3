@@ -13,6 +13,34 @@ timezone: UTC+8
 
 <!-- Content_START -->
 
+### 2025.03.14
+#### Ordinals铭文
+UTXO ：在比特币区块链中，所有的余额都是存储在一个名为“未花费交易输出”（Unspent Transaction Output, UTXO）的列表中。
+比特币总量是2100万个，每个比特币包含10^8个聪(Satoshi, Sat)。因此，比特币网络上一共有2100万*10^8个聪。Ordinals协议将这些聪区分出来，为每个聪进行唯一编号。  
+
+
+### 2025.03.13
+#### Web3 生态  
+##### 分层  
+协议层（Protocol layer）：区块链网络 （Blockchain network）、跨链桥（Blockchain bridges）  
+基础设施（Infrastructure）：节点服务（Node service）、网络存储（Network storage）、数据服务（Data service）  
+应用层（Application layer）：治理 & DAO （Govern）、钱包（Wallet）、金融（Finance）  
+其它领域（Others）：智能合约（Smart Contract）、应用协议 （Application Protocol）、质押（Staking）  
+
+
+### 2025.03.11
+#### DAO
+DAO的全名是“decentralized autonomous organization”，中文是“去中心化的自治组织”。  
+
+#### DAO的优势
+·任何人都和审计
+·民主 DAO中任何成员都可以提交提案、对别人的提案发起挑战或进行投票。
+·一旦达成共识，任何一方或小团体都无法篡改治理流程。
+
+#### DeFi
+DeFi的主要应用包括交易所、稳定币、存借贷、理财、金融衍生品、支付、期货合约、跨链支付、预言机等业务
+
+
 
 ### 2025.03.10
 #### MyFirstLayer 2 - 2

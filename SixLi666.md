@@ -198,5 +198,65 @@ UTXO_C：0.4 BTC，给自己（找零）。
 在UTXO模型中，个人拥有的财富是通过UTXO来体现的。当旧的UTXO被销毁并创建新的UTXO时，资金的所有权发生了转移。旧的UTXO不再存在，个人只拥有新的UTXO。
 在UTXO模型中，没有明确的余额概念，余额需要通过遍历UTXO来计算。例如，Alice的余额是UTXO1（0.5 BTC） + UTXO2（0.3 BTC） + UTXO3（0.2 BTC） = 1 BTC。
 
+### 2025.03.12
+
+Web 3 Ecosystem 
+* DAO：去中心化自治组织，实现社区治理和协作。
+* GameFi：游戏金融，玩家通过玩游戏赚取收益。
+* Creator Economy：创作者经济，赋能创作者直接与粉丝互动并获得收益。
+* Storage：去中心化存储，确保数据的安全和隐私。
+
+### 2025.03.13
+
+Web 3 landscape
+
+协议层（protocol layer）
+- 区块链网络：BTC、Ethereum、BNB、Optimism、Arbitrum、Polygon、Base
+- 跨链桥blockchain bridges：across protocol、synapse protocol、stargate
+- 基础设施infrastructure：节点服务Node service、alchemy、infura、quicknode
+- 网络存储Network storage：Arweave、filecoin
+- 数据服务：Dune、theGraph、etherscan
+
+应用层 Application Layer
+- 治理&DAO（Govern）：Snapshot、Tally、Boardroom、Aragon
+- 钱包（Wallet）：MetaMask、GnosisSafe、Rainbow、Coinbase、WalletConnect
+- 金融（Finance）：Uniswap、Compound、PancakeSwap
+- 游戏（Game）：Alien Worlds、Splinterlands
+- NFT：OpenSea、Blur
+- 社交（Social）：Lens Protocol、Farcaster
+- 创作&内容（Creator & Content）：Mirror、Sound
+
+Others
+- 智能合约Smart Contract
+- 应用协议 Application protocol
+- 质押Staking
+
+### 2025.03.14
+智能合约Smart Contract
+智能合约的诞生背景
+- 1994年，Nick Szabo 提出智能合约，他将智能合约定义为“一种以数字形式定义的承诺，包括合约参与方可以在上面执行这些承诺的协议”。
+- 区块链的出现：2008年，中本聪（Satoshi Nakamoto）发布了比特币白皮书，提出了区块链技术。比特币的区块链主要用于记录交易，但其脚本语言功能有限，无法支持复杂的智能合约。
+- 以太坊的诞生：2013年，维塔利克·布特林（Vitalik Buterin）提出了以太坊（Ethereum），一个支持智能合约的区块链平台。以太坊于2015年正式上线，成为第一个广泛支持智能合约的区块链。
+- 
+智能合约的操作模型包括部署、调用和事件触发，
+实际应用涵盖 DeFi、NFT、供应链管理和DAO投票治理等多个领域。
+
+不可篡改是其核心特点之一。如何规避出现程序bug的问题。
+1. 严格测试和审计：确保合约的安全性。
+2. 升级模式：通过代理合约Proxy Contract（使用代理合约将逻辑合约和数据合约分离。代理合约负责管理调用逻辑合约的地址，而逻辑合约包含实际的业务逻辑。当需要升级时，只需更新代理合约中逻辑合约的地址，而不需要修改原有的逻辑合约。）或多签合约（Multi-signature Contract升级需要多个密钥持有者的签名才能执行）实现升级。
+3. 紧急停止机制：快速响应问题，减少损失。
+4. 社区治理：通过 DAO 管理合约的升级和修复。
+
+智能合约有一定的社会意义，在web2.0，社会中的个体对于社会的基础建设影响力是有限的。但在web 3，通过智能合约，约等于每一个用户都可以主动透明地参与在基础设施的构建上。这个去中心化的作用非常强大。但是如何确保透明的民主与自治不会带来劣币驱逐良币的问题呢？
+1. 合理的治理机制
+- 代币加权投票（Token-weighted Voting），持有更多代币的用户拥有更大的投票权。这可以确保那些对系统有更大利益关系的用户有更大的话语权。
+- 声誉系统：引入声誉系统，根据用户的历史行为和对系统的贡献赋予不同的权重。声誉高的用户拥有更大的影响力。
+- 二次方投票（Quadratic Voting）： 用户可以通过支付更多的代币来增加投票权重，但成本呈二次方增长。这可以防止少数富有的用户垄断决策权。
+
+2. 激励机制设计：通过正向激励和惩罚机制引导用户行为。
+3. 信息透明与教育：确保信息公开透明，提高用户的知识水平。
+4. 分层治理：结合核心团队与社区治理，逐步实现完全去中心化。
+5. 技术保障：通过智能合约审计和去中心化身份系统防止恶意行为。
+
 
 <!-- Content_END -->
