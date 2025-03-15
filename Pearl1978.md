@@ -152,7 +152,13 @@ Dapp的上下游技术：
 PANCAKESWAP
 TERRASWAP
 OX
- 
+
+### 2025.03.15
+ 去中心化借贷
+Defi的借贷协议限制已经使每个人都能民主化地获得债务。使用你的加密货币作为抵押品，你可以从这些协议中借款并利用它。
+作为Defi上的最大类别之一，去中心化借贷已成倍增长。
+领先的借贷协议是：compound, maker, aave和cream
+
   
   
 <!-- Content_END -->
