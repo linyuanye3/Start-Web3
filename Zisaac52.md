@@ -158,4 +158,8 @@ DeFi是基于区块链的去中心化金融体系，涵盖交易所、稳定币�
 
 Web3 生态由协议层、基础设施层和应用层组成，涵盖区块链网络（如 BTC、Ethereum、Solana）、跨链桥、节点服务、去中心化存储（IPFS、Filecoin）、数据服务（Dune、TheGraph）等基础设施，以及去中心化治理（DAO）、钱包（MetaMask、GnosisSafe）、DeFi（Uniswap、Aave）、NFT（OpenSea、Blur）、社交（Lens Protocol、Farcaster）等丰富的应用。同时，智能合约（Solidity、OpenZeppelin）、应用协议（Uniswap Protocol、Aave Protocol）以及 Staking 机制，共同支撑 Web3 生态的去中心化创新与发展。
 
+### 2025.03.15
+
+GameFi是“游戏”与“金融”结合的产物，指通过区块链技术实现的“边玩边赚”游戏模式。玩家在游戏中获得的道具、装备等以NFT形式存在，所有权归玩家所有，数据与钱包绑定，厂商无法回收。其发展经历了从EOS博彩游戏到Axie Infinity开创双币模型的演变，并逐渐衍生出Play to Earn、Run to Earn、Learn to Earn等多种玩法。代表性项目如Axie Infinity，玩家通过繁殖、战斗宠物或交易虚拟地产等方式赚取代币；BigTime则类似《暗黑破坏神》，玩家刷副本打怪获得代币奖励。GameFi的出现为玩家提供了新的经济激励模式，也为游戏行业带来了新的变革。
+
 <!-- Content_END -->

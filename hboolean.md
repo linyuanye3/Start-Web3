@@ -224,6 +224,16 @@ GameFi：Game+Finance 链游
   BigTime玩法类似于《暗黑破坏神》。与此前的现象级链游Axie Infinity相似，Big Time设立了打金机制，玩家刷副本、打怪可获得游戏代币BIGTIME
 
   
-### 2025.07.12
+### 2025.03.15
+恶意签名攻击：链下签名无需手续费
+  permit（）
+  流程：owner先授权给Uniswap permit2/Opensea seaport合约，owner进行一个链下签名，Receiver合法取得签名后的文本，把文本交给Permit2等合约检验，然后就可以转走代币。
+  Hacker诱导授权一个恶意的签名：允许xx转走我的所有代币，允许xx免费购买我的NFT
+  防范：
+    仔细检查签名内容，仔细检查签名内容是否包含spender等可疑字眼
+    工具：Scam Sniffer
+
+
+
 ### 2025.07.12
 <!-- Content_END -->
