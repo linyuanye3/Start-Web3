@@ -1406,7 +1406,543 @@ impl HelloStarknetImpl of super::IHelloStarknet<ContractState> {
 
 ### 2025.03.15
 
-OrbiterFinance
-EmpiricNetwork
+## 一、什麼是 Crypto Bridges？
+- **核心概念**：數位高速公路連接不同區塊鏈，解決資產跨鏈轉移問題
+- **運作原理**- 傳統方式：
+  - 鎖定原始資產 → 鑄造包裝代幣（如WETH）
+  - 反向操作需銷毀包裝代幣
+- **痛點**：速度慢（數小時~7天）、複雜流程、安全風險
 
+![image](https://github.com/user-attachments/assets/0877bae3-38d2-4422-8af8-a48a9701c300)
+
+## 二、為什麼需要加密橋？
+1. **跨鏈效用**
+   - 參與不同鏈的質押/NFT/DeFi（例：Optimism ETH → Polygon質押）
+2. **成本優化**
+   - L2手續費遠低於主網
+3. **流動性提升**
+   - 個人：快速資產調配
+   - 機構：穩定跨鏈市場
+4. **套利機會**
+   - 利用不同鏈間的價差
+5. **風險分散**
+   - 資產分佈多鏈降低單鏈風險
+
+## 三、加密橋類型
+| 類型          | 特點                                                                 | 風險                                                                 |
+|---------------|----------------------------------------------------------------------|----------------------------------------------------------------------|
+| **託管橋**    | 中心化管理（如WBTC）<br>操作簡單、有客服支援                         | 資產集中保管風險<br>需信任第三方                                     |
+| **非託管橋**  | 智能合約運作<br>資產自主控制                                         | 合約漏洞風險<br>操作較複雜                                           |
+| **Intents橋接** | 聲明目標→系統自動處理<br>（Across協議採用）                          | 中繼者承擔風險<br>2秒完成轉帳                                        |
+
+## 四、使用注意事項
+
+### Risks
+#### 1. 智能合約漏洞
+```solidity
+// 範例漏洞模式：缺乏重入保護
+function withdraw(uint amount) external {
+    require(balances[msg.sender] >= amount);
+    (bool success, ) = msg.sender.call{value: amount}("");
+    balances[msg.sender] -= amount; // 狀態更新在外部調用後
+}
+```
+- 典型案例：[Qubit Bridge 攻擊](https://certik.medium.com/)利用合約邏輯錯誤
+- 防護措施：採用[OpenZepplin ReentrancyGuard](https://docs.openzeppelin.com/contracts/4.x/api/security#ReentrancyGuard)
+
+#### 2. 包裝資產系統性風險
+- 雙鏈代幣錨定機制：
+  - 源鏈鎖倉 (如 Ethereum 鎖定 1000 ETH)
+  - 目標鏈鑄造 (如 BSC 生成 1000 BETH)
+- 崩潰情境：當跨鏈儲備金被盜時，BETH 將失去支撐
+
+#### 3. 信任模型梯度
+```mermaid
+graph LR
+    A[完全託管] -->|Binance Bridge| B(中心化風險)
+    C[多重簽名] -->|Polygon PoS| D(2/3簽名節點)
+    E[樂觀驗證] -->|Nomad| F(30分鐘挑戰期)
+    G[原生驗證] -->|NEAR Rainbow| H(輕節點驗證)
+```
+
+#### 4. 早期技術風險
+- 未經壓力測試場景：
+  - 極端網路壅塞 (如 NFT 鑄造高峰期)
+  - 跨鏈套利攻擊 (三明治攻擊變體)
+  - 治理代幣波動性衝擊
+
+### Trade-offs
+#### 互操作性三難困境矩陣
+| 維度              | 外部驗證橋           | 本地驗證橋          | 原生驗證橋          |
+|-------------------|----------------------|---------------------|---------------------|
+| 信任最小化        | △ (需多數誠實驗證者) | ◎ (原子交換機制)     | ○ (依賴底層鏈安全)  |
+| 延遲              | 5-30分鐘             | 即時確認            | 1小時+              |
+| Gas 成本          | $0.3-$1.5           | $0.1-$0.5          | $5-$20             |
+| 跨鏈功能          | 完整智能合約交互     | 資產交換            | 基礎資產轉移        |
+| 新鏈接入週期      | 2-4週                | 1-2週               | 3-6個月             |
+
+#### 關鍵技術抉擇
+1. **驗證機制選擇**
+   - Optimistic vs ZK Proofs：  
+     Nomad 採用 30 分鐘挑戰期 vs Polyhedra 的零知識證明即時驗證
+   - 節點激勵模型：  
+     Polygon PoS 的質押懲罰機制 vs Binance Bridge 的信譽背書
+
+2. **流動性碎片化解決方案**
+   - 聚合器模式 (Socket.tech)：  
+     ```javascript
+     const bestRoute = await findOptimalRoute({
+       fromChain: 1,
+       toChain: 137,
+       asset: 'USDC',
+       amount: '1000'
+     });
+     ```
+   - 流動性池鏡像 (Hop Protocol)：  
+     在每條鏈建立 Wrapped Token 儲備池
+
+3. **合規性與去中心化平衡**
+   - KYC 分層實施：  
+     ```solidity
+     function bridgeTransfer(address to, uint amount) external {
+         if (kycEnabled) {
+             require(kycRegistry[msg.sender], "KYC required");
+         }
+         _transferCrossChain(to, amount);
+     }
+     ```
+   - 監管沙盒機制：  
+     如 Circle CCTP 的合規資產傳輸協議
+
+#### 新興技術影響評估
+- 賬戶抽象錢包：  
+  實現跨鏈 Gas 費代付與批量交易
+- EIP-5006 標準化：  
+  統一跨鏈訊息格式降低整合成本
+- LayerZero 全鏈協議：  
+  採用超輕節點 (Ultra Light Node) 平衡安全與效率
+
+> **實務建議**：選擇跨鏈橋時應進行三維評估  
+> 1. 資產規模 < $10k：優先考慮聚合器 (如 Socket)  
+> 2. 機構用戶：採用多重簽名託管橋 (如 Fireblocks)  
+> 3. 開發者：首選原生驗證橋 (如 IBC 協議)
+
+## 五、操作步驟（以Across為例）
+1. 連接錢包
+2. 選擇來源鏈/目標鏈
+3. 輸入轉移金額
+4. 聲明轉移意圖（例："ETH從Optimism到Polygon"）
+5. 確認交易（無需多步驟批准）
+
+## 六、Across協議優勢
+🚀 **四大核心優勢**：
+- **極速**：平均2秒完成
+- **安全**：無資產鎖定 + 中繼者承擔風險
+- **低成本**：中位數轉帳$0.04
+- **直覺操作**：聲明目標即可，無需複雜流程
+
+## 七、常見問答
+**Q：加密橋安全嗎？**  
+> 取決於橋類型。Across採用Intents機制，資產不鎖定合約，中繼者承擔最終風險。
+
+**Q：轉帳失敗怎麼辦？**  
+> Across由中繼網絡保障成功率，異常情況由中繼者承擔損失。
+
+**Q：哪些代幣可橋接？**  
+> 主流代幣如ETH/USDC/WBTC，Across持續擴充支援資產。
+
+**Q：必須使用橋接嗎？**  
+> 需跨鏈操作時必要（如參與不同鏈的DeFi/NFT），否則資產將局限單一鏈。
+
+## Across
+
+### 1. Across 協議核心概念
+- **基於意圖 (Intents) 的跨鏈協議**  
+  與傳統橋接技術不同，Across 讓使用者「聲明預期結果」而非指定執行路徑，中繼器 (Relayer) 會競相以最優條件完成交易。
+
+- **三大核心優勢**  
+  **最快速度**：平均 1-2 分鐘完成跨鏈  
+  **最低成本**：比傳統橋接便宜 50-90%  
+  **無需安全妥協**：採用與底層鏈同級別的安全性
+
+### 2. 傳統橋接 vs Across 方案對比
+| 比較維度          | 傳統消息傳遞橋接                     | Across 基於意圖方案             |
+|-------------------|--------------------------------------|---------------------------------|
+| 交易速度          | 受限於鏈的最終性（數分鐘至數小時）    | 即時完成 (中繼器預支資金)       |
+| 成本結構          | 需支付 gas 費 + 協議費               | 僅支付動態計算的協議費          |
+| 安全模型          | 依賴多重簽名或外部驗證者             | 繼承底層鏈安全性                |
+| 實現複雜度        | 需處理跨鏈消息驗證                   | 僅需聲明意圖結果                |
+
+### 3. 技術架構三層設計 
+```mermaid
+graph TD
+    A[用戶端] -->|發送意圖| B[詢價機制]
+    B --> C{中繼器網路}
+    C -->|競價填充| D[結算層]
+    D -->|資金託管| E[目標鏈資產發放]
+    D -->|延遲驗證| F[中繼者補償]
+```
+
+#### 3.1 運作流程分解
+1. **意圖聲明**  
+   用戶指定「從 A 鏈轉 X 代幣到 B 鏈地址」的結果要求
+
+2. **動態競價**  
+   中繼器網路透過博弈機制提供最佳報價（包含匯率/手續費/到帳時間）
+
+3. **即時執行**  
+   勝出中繼器立即在目標鏈發放資產（需抵押自有資金）
+
+4. **延遲驗證**  
+   協議在後台非同步驗證交易合法性（通常 1-2 小時）
+
+### 4. 開發者整合方案 🛠️
+#### 4.1 主要產品線
+- **跨鏈橋接 dApp**  
+  終端用戶可直接使用的前端介面，支持 12+ 主流鏈
+
+- **REST API 整合**  
+  ```tsx
+  // 範例：發起跨鏈請求
+  const response = await fetch('https://api.across.to/bridge', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      sourceChain: 'ethereum',
+      destinationChain: 'arbitrum',
+      token: 'USDC',
+      amount: '100',
+      recipient: '0x...'
+    })
+  });
+  ```
+## Across Intents 架構
+
+### 一、三層式架構核心設計
+![image](https://github.com/user-attachments/assets/c0b46cc6-26c5-457f-a090-360d59cd24ac)
+
+#### 1. 報價請求層 (RFQ Layer)
+```solidity
+// 當前 RFQ 實現限制
+bool supportsGaslessOrders = false;  // 尚未支援無 Gas 訂單
+bool supportsCrossChainSwaps = false; // 尚未支援跨鏈交換
+```
+- **現行機制**：固定費用模式 + 中繼者速度競賽
+- **未來升級**：規劃實現完整 RFQ 價格拍賣機制
+
+#### 2. 中繼者網絡層 (Relayer Network)
+| 功能階段        | 智能合約方法          | 關鍵動作                     |
+|-----------------|-----------------------|------------------------------|
+| 訂單領取        | `claimOrder()`        | 中繼者取得訂單執行權         |
+| 資產轉移        | `fillRelayV3()`       | 將用戶資產存入 SpokePool     |
+| 還款鏈選擇      | `setRepaymentChain()` | 影響流動性提供者費用分配比例 |
+
+#### 3. 結算驗證層 (Settlement)
+```mermaid
+sequenceDiagram
+    participant D as Dataworker
+    participant H as HubPool
+    participant S as SpokePool
+    D->>D: 60分鐘內聚合有效Fill事件
+    D->>H: 提交Bundle驗證請求
+    H->>UMA: 觸發Optimistic Oracle驗證
+    UMA-->>H: 驗證結果回傳
+    H->>S: 執行跨鏈還款指令
+```
+
+### 二、模組化結算層核心優勢
+
+#### 優勢比較表
+| 傳統方式                 | Across 結算層               | 效益提升                      |
+|--------------------------|-----------------------------|-------------------------------|
+| O(N) Gas 成本            | O(1) Gas 成本               | 節省 90% 以上 Gas 費用        |
+| 多鏈資金管理             | 單鏈還款機制                | 降低中繼者運營複雜度          |
+| 逐筆鏈上驗證             | 批量聚合驗證                | 提升系統吞吐量 10倍+          |
+
+#### 技術亮點解析
+1. **Optimistic 驗證機制**
+   - 採用 UMA Oracle 進行爭議期驗證
+   - 有效減少 73% 的鏈上驗證次數（官方數據）
+
+2. Hub-Spoke 模型運作
+   ```solidity
+   // HubPool 主要功能
+   function executeBundle(
+       bytes32 bundleHash,
+       address[] calldata relayers,
+       uint256[] calldata amounts
+   ) external onlyDataworker {
+       // 跨鏈資金調度邏輯
+   }
+   ```
+   - 流動性提供者 (LP) 被動提供跨鏈資金
+   - 協議自動通過規範橋進行資金再平衡
+
+### 三、中繼者生態系統特性
+#### 角色功能矩陣
+| 中繼者類型       | 服務範圍                  | 收益模式              |
+|------------------|--------------------------|-----------------------|
+| 基礎轉帳型       | 同資產跨鏈轉移           | 固定費率 + 速度獎勵   |
+| 進階交換型       | 跨鏈資產兌換             | 價差套利 + 手續費分成|
+| 協議專屬型       | Across 專屬訂單處理      | 協議補貼 + 優先權獎勵|
+
+#### 運營要點
+1. **開源中繼器實現**
+   - GitHub 倉庫：`across-protocol/relayer-implementation`
+   - 最低硬件需求：16GB RAM + 500GB SSD
+
+2. 多系統訂單整合
+   ```python
+   # 訂單訂閱範例
+   def subscribe_orders():
+       across_orders = get_across_feeds()
+       other_protocol_orders = get_external_feeds()
+       return merge_and_prioritize(across_orders, other_protocol_orders)
+   ```
+
+### 四、架構升級路線圖
+1. **Q3 2024**  
+   - 實現 RFQ 動態費率拍賣
+   - 引入 EIP-712 簽名訂單格式
+
+2. **Q4 2024**  
+   - 推出跨鏈原子交換功能
+   - 整合 LayerZero 的 CCIP 標準
+
+3. **Q1 2025**  
+   - 部署 ZK-Rollup 結算層
+   - 引入 MEV 保護機制
+
+**重要備註**  
+- 當前架構版本：v2.3.1 (2024/03更新)
+- 開發者工具鏈：包含 Typescript SDK 與 Python 監聽套件
+- 安全審計報告：由 OpenZeppelin 與 CertiK 共同完成（2023/Q4）
+
+## Across Settlement
+
+### 核心架構組成
+```solidity
+// 主要技術元件
+interface AcrossV3SpokePool {
+  function depositV3(...); // 存款核心方法
+}
+
+struct CrossChainOrder {
+  address rfqContract;    // RFQ 合約地址
+  uint256 inputAmount;    // 用戶輸入金額
+  uint256 relayerBondAmount; // 中繼者保證金
+  ...
+}
+```
+
+### 七步整合流程
+1. **報價請求 (RFQ)**
+   - 用戶從鏈下系統獲取跨鏈交換報價
+   - 市場做市商競標訂單 (Gas fee 節省 30-50%)
+
+2. **訂單簽署**
+   - 採用 Permit2 簽名標準 (EIP-2612 擴展)
+   - 簽名格式：`ORDER_WITNESS_TYPESTRING`
+
+3. **訂單傳遞**
+   - 中繼者將簽名訂單上鏈
+   - 使用 `permitWitnessTransferFrom` 驗證簽章
+
+4. **保證金機制**
+   ```python
+   # 保證金計算公式
+   total_deposit = user_input + relayer_bond
+   bond_percent = 15%  # 建議保證金比例
+   ```
+
+5. **跨鏈存款**
+   - 調用 `depositV3` 方法參數範例：
+   
+   | 參數 | 值 | 說明 |
+   |---|---|---|
+   | fillDeadline | 3600 | 1小時期限 |
+   | exclusivityDeadline | 3600 | 獨家中繼期限 |
+
+6. **資金託管**
+   - 自動批准 SpokePool 合約操作權限
+   - 採用 SafeERC20 安全轉帳模式
+
+7. **結算驗證**
+   - 整合 UMA Optimistic Oracle
+   - 平均驗證時間縮短 40%
+
+### 智能合約關鍵函數
+```solidity
+function initiate(CrossChainOrder memory order, bytes calldata signature) {
+  // 簽章驗證邏輯
+  permit2.permitWitnessTransferFrom(...);
+  
+  // 保證金收取
+  IERC20(order.inputToken).safeTransferFrom(...);
+  
+  // 存款操作
+  spokePool.deposit(...);
+}
+```
+
+### 費用優化比較表
+| 項目 | 傳統方式 | Across Settlement | 效益提升 |
+|---|---|---|---|
+| Gas 成本結構 | O(n) 線性增長 | O(1) 固定成本 | 90%+ 節省 |
+| 保證金機制 | 全額抵押 | 部分抵押 (15%) | 流動性提升 3x |
+| 失敗補償 | 無自動補償 | Bond 金額返還 | 用戶損失減少 60% |
+
+### 開發注意事項
+1. **安全實踐**
+   - 使用 OpenZeppelin 安全函式庫
+   - 實作 Reentrancy Guard 保護
+   - 完整事件日誌記錄
+
+2. **測試要點**
+   ```javascript
+   // 測試案例覆蓋範圍
+   describe('CrossChain Swap', () => {
+     it('應正確處理 Permit2 簽章');
+     it('應驗證中繼者保證金');
+     it('應觸發 SpokePool 存款事件');
+   });
+   ```
+
+3. **監控指標**
+   - 平均訂單完成時間 (<2分鐘)
+   - 中繼者競價成功率 (>95%)
+   - 跨鏈 Gas 費波動率
+
+### 優勢分析矩陣
+|| 傳統橋接 | Across Settlement |
+|---|---|---|
+| **結算速度** | 5-30分鐘 | <2分鐘 |
+| **費用透明度** | 多層隱性費用 | 單一聚合費率 |
+| **開發複雜度** | 高 (需自建驗證) | 低 (模組化整合) |
+| **風險管理** | 自擔跨鏈風險 | 協議級保障機制 |
+
+## ERC-7683 in Production
+
+### ERC-7683 概念
+- 採用 **intent-based 架構**，使用者只需聲明預期結果(如轉帳金額/接收鏈)，無需指定複雜執行路徑
+- 將執行複雜性轉移至專業 **Relayers** 競相尋找最佳跨鏈路徑
+- 實現 **模組化意圖**，不同協議可自定義實現，同時保持與 ERC-7683 標準兼容
+
+### AcrossOriginSettler 合約核心功能
+```typescript
+interface IOriginSettler {
+  function validateIntent(bytes calldata intentData) external;
+  function processIntent(address sender, bytes calldata intentData) external;
+}
+```
+1. **意圖驗證** - 檢查跨鏈請求參數合法性
+2. **意圖執行** - 轉換為 AcrossV3Deposit 並調用 SpokePool 合約
+   - 支援 `depositV3()` 安全存款
+   - 支援 `unsafeDeposit()` 快速存款
+
+```javascript
+  import { encodeAbiParameters } from 'viem'
+  
+  // 地址填充函數
+  function padAddress(address) {
+      return '0x000000000000000000000000' + address.slice(2);
+  }
+  
+  async function generateIntent(depositorAddress, amount) {
+      const depositor = depositorAddress;
+      const paddedDepositor = padAddress(depositor);
+  
+      // 設定 30 分鐘有效期
+      const fillDeadline = Math.floor(Date.now() / 1000) + 1800; 
+  
+      // EIP-712 類型哈希
+      const orderDataType = "0x9df4b782..."; 
+  
+      // ABI 編碼參數
+      const orderData = encodeAbiParameters(
+          [/* 參數結構定義 */],
+          [{
+              inputToken: "0x833589fCD...", // Base 鏈 USDC
+              inputAmount: amount * 1e6,    // 考慮 6 位小數
+              outputToken: "0xaf88d065e...", // Arbitrum 鏈 USDC
+              outputAmount: 9980000,        // 預期接收金額
+              destinationChainId: 42161,    // Arbitrum 鏈 ID
+              recipient: paddedDepositor,   // 填充地址格式
+              // ...其他參數
+          }]
+      );
+  
+      return { fillDeadline, orderDataType, orderData };
+  }
+```
+
+#### 關鍵參數說明：
+- **fillDeadline**：跨鏈操作有效期時間戳(範例：30分鐘)
+- **orderDataType**：EIP-712 類型哈希，確保數據結構驗證
+- **orderData**：包含以下 ABI 編碼參數：
+  ```javascript
+  struct DepositParams {
+      address inputToken;     // 源鏈代幣地址
+      uint256 inputAmount;   // 發送數量(含小數位)
+      address outputToken;    // 目標鏈代幣地址
+      uint256 outputAmount;   // 預期接收數量
+      uint256 destinationChainId;  // 目標鏈 ID
+      bytes32 recipient;      // 接收地址(需 padding)
+      // ...其他安全參數
+  }
+  ```
+
+### 跨鏈意圖執行步驟
+1. **授權 USDC 轉帳**
+   - 調用 USDC 合約的 `approve()` 函數
+   - 授權 AcrossOriginSettler 合約操作代幣
+   ```javascript
+   // 範例授權參數
+   spender: "0xAcrossOriginSettlerAddress",
+   value: 10000000000 // 最大授權額度
+   ```
+
+2. **提交跨鏈請求**
+   - 調用 AcrossOriginSettler 的 `open()` 函數
+   - 傳入生成的 intent 參數三要素：
+     ```javascript
+     {
+       fillDeadline: 1712345678,
+       orderDataType: "0x9df4b782...",
+       orderData: "0x1234abcd..."
+     }
+     ```
+
+### 跨鏈監控與結果驗證
+1. 在源鏈(Base)交易確認後，Relayers 會競相完成跨鏈操作
+2. 在目標鏈(Arbitrum)查詢餘額：
+   ```javascript
+   // 在 Arbitrum 鏈查詢 USDC 餘額
+   const usdc = await contract.at("0xaf88d065e...");
+   const balance = await usdc.balanceOf(userAddress);
+   ```
+3. 典型完成時間：2-5 分鐘(取決於網路狀態)
+
+### 安全注意事項
+1. **有效期控制**：fillDeadline 需留有足夠緩衝時間
+2. **金額驗證**：outputAmount 需考慮跨鏈手續費
+3. **地址格式**：recipient 必須使用 padded 格式(0x0000... + 地址)
+4. **Gas 費預估**：建議使用各鏈的 gas 費預估工具
+
+參考：
+
+[Across](https://docs.across.to/use-cases/erc-7683-in-production)
+
+[The Complete Guide to Crypto Bridges: Moving Assets Across Chains Made Simple](https://across.to/blog/complete-guide-to-crypto-bridges)
+
+[Cross-chain bridges and associated risks](https://docs.chain.link/resources/bridge-risks)
+
+[eip-7702-erc-7683-demo](https://github.com/across-protocol/eip-7702-erc-7683-demo)
+
+[ERCS/erc-7683.md](https://github.com/ethereum/ERCs/blob/master/ERCS/erc-7683.md)
+
+### 2025.03.16
+OrbiterFinance 
+EmpiricNetwork
+[deBridge](https://docs.debridge.finance/dln-the-debridge-liquidity-network-protocol/protocol-overview)
 <!-- Content_END -->
