@@ -44,6 +44,8 @@ Meme coins are basically gambling...
 ### 2025.03.11
 the minority is subordinate to the majority
 
+### 2025.03.15
+USDT、USDC、TUSD
 
 
 
