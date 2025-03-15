@@ -957,8 +957,992 @@ Celestium 是 **模塊化區塊鏈（Modular Blockchain）** 的一部分，這�
 
 ### 2025.03.14
 
-Proto-Danksharding
+## Proto-Danksharding（EIP-4844）
 
-Starkent
+### **概述**
+Proto-Danksharding（EIP-4844）是一項過渡性升級，旨在為以太坊最終實現完整的**Danksharding**（分片技術）鋪路。這項提案主要引入**Blob（數據塊）交易**，以提升 Layer 2（L2）的擴展性，使 Rollups 的交易成本大幅降低。
 
+Proto-Danksharding 由 Ethereum 研究員 **Dankrad Feist** 和 **Proto Lambda** 提出，因此名稱中包含 "Proto"（代表過渡性）和 "Danksharding"（指最終的全分片技術）。
+
+### **主要特點**
+1. **引入 Blob-carrying Transactions（攜帶 Blob 的交易）**
+   - 這些交易允許 L2 存儲大量數據，並且數據不會直接進入 EVM，而是透過 KZG（Kate-Zaverucha-Goldberg）承諾來驗證其正確性。
+   
+2. **使用 KZG Commitments**
+   - 透過 **KZG polynomial commitments** 來驗證 Blob 的數據完整性，而不需所有節點儲存完整數據。
+
+3. **降低 Rollups 成本**
+   - 目前 Rollups 需要將交易數據發佈到 L1（Call Data），但 Proto-Danksharding 提供更高效的方式儲存數據，減少 Gas 費用。
+
+4. **過渡性方案**
+   - 雖然 EIP-4844 不是完整的 Danksharding，但它為未來的**全分片架構**提供基礎，並允許 L2 先行享受成本降低的好處。
+
+### **與完整 Danksharding 的區別**
+| 特性           | Proto-Danksharding (EIP-4844) | Danksharding |
+|--------------|--------------------------|-------------|
+| **數據存儲**   | Blob 附加到 L1，但不進入 EVM | 完全分片化數據存儲 |
+| **驗證方式**   | KZG Commitments         | Data Availability Sampling (DAS) |
+| **影響範圍**   | Layer 2 交易成本降低      | 全面提升擴展性 |
+| **完整性**     | 過渡性升級              | 完全實現以太坊分片 |
+
+Proto-Danksharding 透過 EIP-4844 率先部署「Blob-carrying Transactions」，這將使 Rollups 交易成本顯著降低，並為未來完整的 Danksharding 做準備。
+
+### **EIP-4844：Shard Blob Transactions**  
+
+#### **介紹**  
+EIP-4844 引入了一種新的交易格式：blob-carrying transactions。這些交易包含大量數據，但這些數據不會被 EVM 執行訪問，只能透過 commitment進行驗證。這種交易格式與未來 full sharding 方案的設計相容。  
+
+#### **動機**  
+Rollup 是目前及未來可預見的唯一 trustless擴容解決方案。以太坊 L1 交易費用長期處於高位，促使整個生態系統急需轉向 Rollup。  
+
+現在 Rollup 已顯著降低交易費用，例如 Optimism 和 Arbitrum 讓交易費用比 L1 低 **3-8 倍**，而 ZK Rollup（透過更好的數據壓縮和無需包含簽名）則降低至 **40-100 倍**。但這對許多用戶來說仍然過於昂貴。  
+
+長期來看，Rollup 需要「數據分片」來進一步降低成本，使區塊鏈每個區塊額外增加 **16 MB** 的專屬數據空間供 Rollup 使用。然而，完整實現數據分片仍需較長時間。EIP-4844 提供一個 **過渡解決方案**：  
+
+- **引入分片格式的交易**，但不真正分片，而是將這些數據存儲在 Beacon Chain，並由共識節點（consensus nodes）完整下載，之後可以在短時間內刪除。  
+- **初期限制數據量**，每個區塊目標數據量約 **0.375 MB**，上限 **0.75 MB**。  
+
+---
+
+### **技術細節**  
+
+#### **Blob 交易格式**  
+EIP-4844 定義了一種新的 **EIP-2718** 交易類型 **BLOB_TX_TYPE**，其 **RLP 序列化格式** 為：  
+
+```
+[chain_id, nonce, max_priority_fee_per_gas, max_fee_per_gas, gas_limit, to, value, data, access_list, max_fee_per_blob_gas, blob_versioned_hashes, y_parity, r, s]
+```  
+
+- **與 EIP-1559 交易類似**，但 `to` **不可為空**（即不可用於創建合約）。  
+- **新增字段**：
+  - `max_fee_per_blob_gas`：用於計算 blob 交易的費用。  
+  - `blob_versioned_hashes`：存儲 KZG 承諾（KZG commitment）的哈希值。  
+
+##### **交易簽名**  
+簽名 `y_parity, r, s` 是對以下 Keccak 哈希值的 secp256k1 簽名：  
+
+```
+keccak256(BLOB_TX_TYPE || rlp([交易數據, max_fee_per_blob_gas, blob_versioned_hashes]))
+```
+
+### **區塊頭擴展（Header Extension）**  
+EIP-4844 在當前的區塊頭（Block Header）中新增兩個字段（64-bit 無符號整數）：  
+
+- `blob_gas_used`：該區塊內交易使用的總 blob gas。  
+- `excess_blob_gas`：累積的超額 blob gas，類似於 EIP-1559 的 base fee 機制。  
+
+區塊頭的新 RLP 序列化格式為：  
+
+```
+rlp([
+    parent_hash,
+    0x1dcc4d..., # ommers hash
+    coinbase,
+    state_root,
+    txs_root,
+    receipts_root,
+    logs_bloom,
+    0, # difficulty
+    number,
+    gas_limit,
+    gas_used,
+    timestamp,
+    extradata,
+    prev_randao,
+    0x0000000000000000, # nonce
+    base_fee_per_gas,
+    withdrawals_root,
+    blob_gas_used,
+    excess_blob_gas,
+])
+```
+
+#### **`excess_blob_gas` 計算方式**
+```python
+def calc_excess_blob_gas(parent: Header) -> int:
+    if parent.excess_blob_gas + parent.blob_gas_used < TARGET_BLOB_GAS_PER_BLOCK:
+        return 0
+    else:
+        return parent.excess_blob_gas + parent.blob_gas_used - TARGET_BLOB_GAS_PER_BLOCK
+```
+（首次分叉後的區塊中，`blob_gas_used` 和 `excess_blob_gas` 皆為 `0`。）
+
+---
+
+### **Gas 計算機制**
+EIP-4844 引入了一種新型 gas **「Blob Gas」**，它獨立於現有的 EVM gas，並遵循類似 **EIP-1559** 的自適應機制。  
+
+#### **Blob Gas 計算**  
+```python
+def calc_blob_fee(header: Header, tx: Transaction) -> int:
+    return get_total_blob_gas(tx) * get_base_fee_per_blob_gas(header)
+
+def get_total_blob_gas(tx: Transaction) -> int:
+    return GAS_PER_BLOB * len(tx.blob_versioned_hashes)
+
+def get_base_fee_per_blob_gas(header: Header) -> int:
+    return fake_exponential(
+        MIN_BASE_FEE_PER_BLOB_GAS,
+        header.excess_blob_gas,
+        BLOB_BASE_FEE_UPDATE_FRACTION
+    )
+```
+**Blob Gas 費用計算**：
+- `blob_fee` **在交易執行前扣除且不退還**，即使交易失敗。  
+- `base_fee_per_blob_gas` 採用類似 EIP-1559 的增減機制。  
+
+---
+
+### **新的 EVM 操作碼與預編譯合約**
+#### **BLOBHASH 操作碼**
+新增 `BLOBHASH` 指令，可用於檢索 `tx.blob_versioned_hashes` 的值。  
+
+#### **KZG 驗證預編譯合約**
+新增預編譯合約（Precompile），地址為 `POINT_EVALUATION_PRECOMPILE_ADDRESS`，用於驗證 KZG 證明（Proof）。  
+
+驗證函數：
+```python
+def point_evaluation_precompile(input: Bytes) -> Bytes:
+    assert len(input) == 192
+    versioned_hash, z, y, commitment, proof = parse_input(input)
+
+    # 確保 KZG 承諾匹配 blob_versioned_hashes
+    assert kzg_to_versioned_hash(commitment) == versioned_hash
+
+    # 驗證 KZG 證明
+    assert verify_kzg_proof(commitment, z, y, proof)
+
+    # 返回 FIELD_ELEMENTS_PER_BLOB 和 BLS_MODULUS
+    return Bytes(U256(FIELD_ELEMENTS_PER_BLOB).to_be_bytes32() + U256(BLS_MODULUS).to_be_bytes32())
+```
+
+以上主要驗證兩件事：
+1. 給定一個多項式 p(x) 的承諾（commitment）和一個 KZG 證明，確認 p(z) = y
+2. 確認提供的承諾與所提供的 versioned_hash 匹配
+
+## 輸入數據結構
+
+函數接收一個 192 字節的輸入，按照以下方式組織：
+- 前 32 字節：versioned_hash
+- 接下來 32 字節：z（以大端格式填充至 32 字節）
+- 接下來 32 字節：y（以大端格式填充至 32 字節）
+- 接下來 48 字節：commitment（多項式的承諾）
+- 最後 48 字節：proof（KZG 證明）
+
+1. 首先檢查輸入長度是否為 192 字節：
+   ```python
+   assert len(input) == 192
+   ```
+
+2. 將輸入分解為各個組件：
+   ```python
+   versioned_hash = input[:32]
+   z = input[32:64]
+   y = input[64:96]
+   commitment = input[96:144]
+   proof = input[144:192]
+   ```
+
+3. 驗證承諾與 versioned_hash 是否匹配：
+   ```python
+   assert kzg_to_versioned_hash(commitment) == versioned_hash
+   ```
+   這裡使用 `kzg_to_versioned_hash` 函數將承諾轉換為 versioned_hash，並確認它與提供的 versioned_hash 相同。
+
+4. 驗證 KZG 證明：
+   ```python
+   assert verify_kzg_proof(commitment, z, y, proof)
+   ```
+   使用 `verify_kzg_proof` 函數來驗證 KZG 證明，確認 p(z) = y。
+
+5. 返回兩個常數值：
+   ```python
+   return Bytes(U256(FIELD_ELEMENTS_PER_BLOB).to_be_bytes32() + U256(BLS_MODULUS).to_be_bytes32())
+   ```
+   返回兩個常數：`FIELD_ELEMENTS_PER_BLOB` 和 `BLS_MODULUS`，它們都被轉換為 32 字節的大端格式。
+   
+- **KZG 承諾**：一種允許承諾多項式並後續證明特定評估點的方案。
+- **Versioned hash**：似乎是承諾的特定哈希表示形式。
+- **多項式點評估**：證明 p(z) = y，其中 p 是一個多項式，z 是評估點，y 是預期值。
+
+### **共識層（Consensus Layer）與執行層（Execution Layer）**
+- **共識層**：Blob 數據不直接存儲於 Beacon Block，而是透過「sidecar」機制單獨傳播。  
+- **執行層**：新增 `validate_block()` 函數，檢查 blob gas 費用、簽名、KZG 承諾等。  
+
+### **為什麼選擇這種設計？**
+EIP-4844 不是簡單地調整 calldata 費用，而是直接引入未來分片架構的一部分，使 Rollup **僅需升級一次**，減少不必要的開發負擔。  
+
+完整分片仍需：
+- **數據可用性抽樣（DAS）**
+- **Proposer-Builder 分離（PBS）**
+- **驗證機制（如 Proof of Custody）**
+
+這段程式碼是一個名為 `validate_block` 的函數，用於驗證區塊鏈中的區塊，特別針對包含 blob 交易的區塊進行驗證。我來詳細解釋這段程式碼：
+
+## 函數概述
+
+這個函數負責驗證一個區塊是否有效，尤其關注與 blob 相關的各種條件。Blob 交易是一種特殊類型的交易，通常用於存儲大量數據。
+
+## code
+
+1. **驗證 excess blob gas 更新**:
+   ```python
+   assert block.header.excess_blob_gas == calc_excess_blob_gas(block.parent.header)
+   ```
+   確保區塊頭中的 excess_blob_gas 值正確更新，這個值是通過計算父區塊頭得出的。
+
+2. **初始化 blob gas 使用量計數器**:
+   ```python
+   blob_gas_used = 0
+   ```
+
+3. **遍歷區塊中的所有交易進行驗證**:
+   對於每個交易：
+
+   a. **檢查餘額是否足夠支付費用**:
+   ```python
+   max_total_fee = tx.gas * tx.max_fee_per_gas
+   if get_tx_type(tx) == BLOB_TX_TYPE:
+       max_total_fee += get_total_blob_gas(tx) * tx.max_fee_per_blob_gas
+   assert signer(tx).balance >= max_total_fee
+   ```
+   計算交易可能的最大費用，對於 blob 交易，加上 blob gas 費用，然後確認交易簽名者有足夠的餘額支付。
+
+   b. **特定於 blob 交易的驗證邏輯**:
+   ```python
+   if get_tx_type(tx) == BLOB_TX_TYPE:
+       # 至少要有一個 blob
+       assert len(tx.blob_versioned_hashes) > 0
+
+       # 所有 versioned blob hashes 必須以 VERSIONED_HASH_VERSION_KZG 開頭
+       for h in tx.blob_versioned_hashes:
+           assert h[0] == VERSIONED_HASH_VERSION_KZG
+
+       # 確保用戶願意至少支付當前的 blob 基礎費用
+       assert tx.max_fee_per_blob_gas >= get_base_fee_per_blob_gas(block.header)
+
+       # 記錄區塊中消耗的總 blob gas
+       blob_gas_used += get_total_blob_gas(tx)
+   ```
+   
+   對 blob 交易進行額外檢查：
+   - 確保至少包含一個 blob
+   - 確保所有 blob 的 versioned hash 以正確的版本標識符開頭
+   - 確保用戶願意支付至少等於當前基礎費率的 blob gas 費用
+   - 累計區塊中使用的總 blob gas 量
+
+4. **確保總 blob gas 使用量不超過限制**:
+   ```python
+   assert blob_gas_used <= MAX_BLOB_GAS_PER_BLOCK
+   ```
+   驗證區塊中使用的總 blob gas 不超過每個區塊的最大允許值。
+
+5. **確保 blob_gas_used 與區塊頭一致**:
+   ```python
+   assert block.header.blob_gas_used == blob_gas_used
+   ```
+   確保計算得出的 blob gas 使用量與區塊頭中記錄的值一致。
+
+## Starknet（由 StarkWare 開發）
+
+### **概述**
+Starknet 是一個基於以太坊的去中心化 Layer 2（L2）擴展解決方案，使用 STARK（Scalable Transparent Argument of Knowledge）來提高交易吞吐量，並降低 Gas 費用。它由 **StarkWare** 公司開發，該公司也負責開發 StarkEx。
+
+Starknet 採用了 **ZK-STARK（Zero-Knowledge Scalable Transparent Argument of Knowledge）** 這種零知識證明技術來進行交易批處理，並在 L1 上驗證交易的正確性。
+
+### **核心特點**
+1. **ZK-STARK 技術**
+   - Starknet 使用 ZK-STARK 來進行交易批次驗證，與 ZK-SNARK 相比，它具備更高的可擴展性，且不依賴可信任設定（Trusted Setup）。
+   
+2. **Cairo 智能合約**
+   - Starknet 使用 **Cairo** 這種專門為 STARK 設計的編程語言，而非 Solidity。
+
+3. **Layer 2 角色**
+   - Starknet 是**通用的 L2 扩展解決方案**，允許開發者部署去中心化應用（dApps），不同於 StarkEx（針對特定應用的 L2 方案）。
+
+4. **安全性**
+   - Starknet 依賴數學加密技術來確保交易的正確性，而非社群共識，因此它比 Optimistic Rollups（例如 Arbitrum, Optimism）具有更快的最終確定性。
+
+### **Starknet 的優勢**
+- **比 Optimistic Rollups 更快的交易確認**
+- **無需信任設定的 STARK 零知識證明**
+- **更高的可擴展性，相比 ZK-SNARK 更適合大規模計算**
+- **去中心化：逐步去除 StarkWare 公司的影響，讓社群治理 Starknet**
+
+```Cairo
+/// Interface representing `HelloContract`.
+/// This interface allows modification and retrieval of the contract balance.
+#[starknet::interface]
+pub trait IHelloStarknet<TContractState> {
+    /// Increase contract balance.
+    fn increase_balance(ref self: TContractState, amount: felt252);
+    /// Retrieve contract balance.
+    fn get_balance(self: @TContractState) -> felt252;
+}
+
+/// Simple contract for managing balance.
+#[starknet::contract]
+mod HelloStarknet {
+    use core::starknet::storage::{StoragePointerReadAccess, StoragePointerWriteAccess};
+
+    #[storage]
+    struct Storage {
+        balance: felt252,
+    }
+
+    #[abi(embed_v0)]
+    impl HelloStarknetImpl of super::IHelloStarknet<ContractState> {
+        fn increase_balance(ref self: ContractState, amount: felt252) {
+            assert(amount != 0, 'Amount cannot be 0');
+            self.balance.write(self.balance.read() + amount);
+        }
+
+        fn get_balance(self: @ContractState) -> felt252 {
+            self.balance.read()
+        }
+    }
+}
+```
+這段程式碼展示了一個基本的 StarkNet 智能合約，使用 Cairo 程式語言編寫。讓我詳細解釋這段程式碼的組成和功能：
+
+## 程式碼結構概述
+
+1. **餘額增加功能** (`increase_balance`): 允許用戶給合約增加一定數量的餘額。這個函數會檢查增加的金額不能為零，然後將新金額添加到現有餘額上。
+
+2. **餘額查詢功能** (`get_balance`): 允許用戶查詢合約當前的餘額。
+
+這個程式碼包含兩個主要部分：
+1. 合約介面（`IHelloStarknet`）
+2. 合約實現（`HelloStarknet`）
+
+## 合約介面
+
+```Cairo
+#[starknet::interface]
+pub trait IHelloStarknet<TContractState> {
+    fn increase_balance(ref self: TContractState, amount: felt252);
+    fn get_balance(self: @TContractState) -> felt252;
+}
+```
+
+這部分定義了合約的 public interface：
+- `#[starknet::interface]` 是一個屬性宏，標記這是一個 StarkNet 合約介面
+- `IHelloStarknet` 是介面名稱，使用泛型參數 `TContractState`
+- 介面定義了兩個函數：
+  - `increase_balance`: 增加合約餘額的函數
+  - `get_balance`: 獲取當前餘額的函數
+- `felt252` 是 Cairo 的基本資料類型，用於表示域上的元素（field element）
+
+## 合約實現
+
+```Cairo
+#[starknet::contract]
+mod HelloStarknet {
+    // 省略部分程式碼...
+}
+```
+
+`#[starknet::contract]` 屬性宏標記這是一個 StarkNet 合約實現。
+
+### 存儲結構
+
+```Cairo
+#[storage]
+struct Storage {
+    balance: felt252,
+}
+```
+
+這定義了合約的儲存結構：
+- `#[storage]` 是一個屬性宏，標記這是合約的儲存結構
+- `Storage` 結構只有一個欄位 `balance`，類型為 `felt252`
+
+### 合約方法實現
+
+```Cairo
+#[abi(embed_v0)]
+impl HelloStarknetImpl of super::IHelloStarknet<ContractState> {
+    fn increase_balance(ref self: ContractState, amount: felt252) {
+        assert(amount != 0, 'Amount cannot be 0');
+        self.balance.write(self.balance.read() + amount);
+    }
+
+    fn get_balance(self: @ContractState) -> felt252 {
+        self.balance.read()
+    }
+}
+```
+
+這部分實現了介面定義的函數：
+- `#[abi(embed_v0)]` 是一個屬性宏，標記這是合約的 ABI（應用程式二進制介面）版本
+- `impl HelloStarknetImpl of super::IHelloStarknet<ContractState>` 表示這是 `IHelloStarknet` 介面的實現
+- `increase_balance` 函數：
+  - 檢查 `amount` 是否為零，若為零則拋出錯誤
+  - 讀取當前餘額，加上 `amount`，然後寫回儲存
+- `get_balance` 函數：
+  - 簡單地讀取並返回當前餘額
+
+## 特殊語法和概念
+
+1. `ref self: ContractState` vs `self: @ContractState`：
+   - `ref self` 表示可變引用，允許修改合約狀態
+   - `@self` 表示不可變引用，只能讀取不能修改
+
+2. `self.balance.read()` 和 `self.balance.write()`：
+   - 這些是與儲存互動的方法
+   - `read()` 從儲存中讀取值
+   - `write()` 將值寫入儲存
+
+3. `assert(amount != 0, 'Amount cannot be 0')`：
+   - 條件檢查，如果條件為假，則停止執行並返回錯誤訊息
+
+參考：
+
+[EIP-4844 的 Proof of Equivalence 機制介紹](https://medium.com/taipei-ethereum-meetup/eip-4844-proof-of-equivalence-how-does-it-work-e6-a9-9f-e5-88-b6-e4-bb-8b-e7-b4-b9-854224c43c83)
+
+[EIPS/eip-4844.md](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-4844.md)
+
+[docs.starknet](https://docs.starknet.io/quick-start/hellostarknet/)
+
+### 2025.03.15
+
+## 一、什麼是 Crypto Bridges？
+- **核心概念**：數位高速公路連接不同區塊鏈，解決資產跨鏈轉移問題
+- **運作原理**- 傳統方式：
+  - 鎖定原始資產 → 鑄造包裝代幣（如WETH）
+  - 反向操作需銷毀包裝代幣
+- **痛點**：速度慢（數小時~7天）、複雜流程、安全風險
+
+![image](https://github.com/user-attachments/assets/0877bae3-38d2-4422-8af8-a48a9701c300)
+
+## 二、為什麼需要加密橋？
+1. **跨鏈效用**
+   - 參與不同鏈的質押/NFT/DeFi（例：Optimism ETH → Polygon質押）
+2. **成本優化**
+   - L2手續費遠低於主網
+3. **流動性提升**
+   - 個人：快速資產調配
+   - 機構：穩定跨鏈市場
+4. **套利機會**
+   - 利用不同鏈間的價差
+5. **風險分散**
+   - 資產分佈多鏈降低單鏈風險
+
+## 三、加密橋類型
+| 類型          | 特點                                                                 | 風險                                                                 |
+|---------------|----------------------------------------------------------------------|----------------------------------------------------------------------|
+| **託管橋**    | 中心化管理（如WBTC）<br>操作簡單、有客服支援                         | 資產集中保管風險<br>需信任第三方                                     |
+| **非託管橋**  | 智能合約運作<br>資產自主控制                                         | 合約漏洞風險<br>操作較複雜                                           |
+| **Intents橋接** | 聲明目標→系統自動處理<br>（Across協議採用）                          | 中繼者承擔風險<br>2秒完成轉帳                                        |
+
+## 四、使用注意事項
+
+### Risks
+#### 1. 智能合約漏洞
+```solidity
+// 範例漏洞模式：缺乏重入保護
+function withdraw(uint amount) external {
+    require(balances[msg.sender] >= amount);
+    (bool success, ) = msg.sender.call{value: amount}("");
+    balances[msg.sender] -= amount; // 狀態更新在外部調用後
+}
+```
+- 典型案例：[Qubit Bridge 攻擊](https://certik.medium.com/)利用合約邏輯錯誤
+- 防護措施：採用[OpenZepplin ReentrancyGuard](https://docs.openzeppelin.com/contracts/4.x/api/security#ReentrancyGuard)
+
+#### 2. 包裝資產系統性風險
+- 雙鏈代幣錨定機制：
+  - 源鏈鎖倉 (如 Ethereum 鎖定 1000 ETH)
+  - 目標鏈鑄造 (如 BSC 生成 1000 BETH)
+- 崩潰情境：當跨鏈儲備金被盜時，BETH 將失去支撐
+
+#### 3. 信任模型梯度
+```mermaid
+graph LR
+    A[完全託管] -->|Binance Bridge| B(中心化風險)
+    C[多重簽名] -->|Polygon PoS| D(2/3簽名節點)
+    E[樂觀驗證] -->|Nomad| F(30分鐘挑戰期)
+    G[原生驗證] -->|NEAR Rainbow| H(輕節點驗證)
+```
+
+#### 4. 早期技術風險
+- 未經壓力測試場景：
+  - 極端網路壅塞 (如 NFT 鑄造高峰期)
+  - 跨鏈套利攻擊 (三明治攻擊變體)
+  - 治理代幣波動性衝擊
+
+### Trade-offs
+#### 互操作性三難困境矩陣
+| 維度              | 外部驗證橋           | 本地驗證橋          | 原生驗證橋          |
+|-------------------|----------------------|---------------------|---------------------|
+| 信任最小化        | △ (需多數誠實驗證者) | ◎ (原子交換機制)     | ○ (依賴底層鏈安全)  |
+| 延遲              | 5-30分鐘             | 即時確認            | 1小時+              |
+| Gas 成本          | $0.3-$1.5           | $0.1-$0.5          | $5-$20             |
+| 跨鏈功能          | 完整智能合約交互     | 資產交換            | 基礎資產轉移        |
+| 新鏈接入週期      | 2-4週                | 1-2週               | 3-6個月             |
+
+#### 關鍵技術抉擇
+1. **驗證機制選擇**
+   - Optimistic vs ZK Proofs：  
+     Nomad 採用 30 分鐘挑戰期 vs Polyhedra 的零知識證明即時驗證
+   - 節點激勵模型：  
+     Polygon PoS 的質押懲罰機制 vs Binance Bridge 的信譽背書
+
+2. **流動性碎片化解決方案**
+   - 聚合器模式 (Socket.tech)：  
+     ```javascript
+     const bestRoute = await findOptimalRoute({
+       fromChain: 1,
+       toChain: 137,
+       asset: 'USDC',
+       amount: '1000'
+     });
+     ```
+   - 流動性池鏡像 (Hop Protocol)：  
+     在每條鏈建立 Wrapped Token 儲備池
+
+3. **合規性與去中心化平衡**
+   - KYC 分層實施：  
+     ```solidity
+     function bridgeTransfer(address to, uint amount) external {
+         if (kycEnabled) {
+             require(kycRegistry[msg.sender], "KYC required");
+         }
+         _transferCrossChain(to, amount);
+     }
+     ```
+   - 監管沙盒機制：  
+     如 Circle CCTP 的合規資產傳輸協議
+
+#### 新興技術影響評估
+- 賬戶抽象錢包：  
+  實現跨鏈 Gas 費代付與批量交易
+- EIP-5006 標準化：  
+  統一跨鏈訊息格式降低整合成本
+- LayerZero 全鏈協議：  
+  採用超輕節點 (Ultra Light Node) 平衡安全與效率
+
+> **實務建議**：選擇跨鏈橋時應進行三維評估  
+> 1. 資產規模 < $10k：優先考慮聚合器 (如 Socket)  
+> 2. 機構用戶：採用多重簽名託管橋 (如 Fireblocks)  
+> 3. 開發者：首選原生驗證橋 (如 IBC 協議)
+
+## 五、操作步驟（以Across為例）
+1. 連接錢包
+2. 選擇來源鏈/目標鏈
+3. 輸入轉移金額
+4. 聲明轉移意圖（例："ETH從Optimism到Polygon"）
+5. 確認交易（無需多步驟批准）
+
+## 六、Across協議優勢
+🚀 **四大核心優勢**：
+- **極速**：平均2秒完成
+- **安全**：無資產鎖定 + 中繼者承擔風險
+- **低成本**：中位數轉帳$0.04
+- **直覺操作**：聲明目標即可，無需複雜流程
+
+## 七、常見問答
+**Q：加密橋安全嗎？**  
+> 取決於橋類型。Across採用Intents機制，資產不鎖定合約，中繼者承擔最終風險。
+
+**Q：轉帳失敗怎麼辦？**  
+> Across由中繼網絡保障成功率，異常情況由中繼者承擔損失。
+
+**Q：哪些代幣可橋接？**  
+> 主流代幣如ETH/USDC/WBTC，Across持續擴充支援資產。
+
+**Q：必須使用橋接嗎？**  
+> 需跨鏈操作時必要（如參與不同鏈的DeFi/NFT），否則資產將局限單一鏈。
+
+## Across
+
+### 1. Across 協議核心概念
+- **基於意圖 (Intents) 的跨鏈協議**  
+  與傳統橋接技術不同，Across 讓使用者「聲明預期結果」而非指定執行路徑，中繼器 (Relayer) 會競相以最優條件完成交易。
+
+- **三大核心優勢**  
+  **最快速度**：平均 1-2 分鐘完成跨鏈  
+  **最低成本**：比傳統橋接便宜 50-90%  
+  **無需安全妥協**：採用與底層鏈同級別的安全性
+
+### 2. 傳統橋接 vs Across 方案對比
+| 比較維度          | 傳統消息傳遞橋接                     | Across 基於意圖方案             |
+|-------------------|--------------------------------------|---------------------------------|
+| 交易速度          | 受限於鏈的最終性（數分鐘至數小時）    | 即時完成 (中繼器預支資金)       |
+| 成本結構          | 需支付 gas 費 + 協議費               | 僅支付動態計算的協議費          |
+| 安全模型          | 依賴多重簽名或外部驗證者             | 繼承底層鏈安全性                |
+| 實現複雜度        | 需處理跨鏈消息驗證                   | 僅需聲明意圖結果                |
+
+### 3. 技術架構三層設計 
+```mermaid
+graph TD
+    A[用戶端] -->|發送意圖| B[詢價機制]
+    B --> C{中繼器網路}
+    C -->|競價填充| D[結算層]
+    D -->|資金託管| E[目標鏈資產發放]
+    D -->|延遲驗證| F[中繼者補償]
+```
+
+#### 3.1 運作流程分解
+1. **意圖聲明**  
+   用戶指定「從 A 鏈轉 X 代幣到 B 鏈地址」的結果要求
+
+2. **動態競價**  
+   中繼器網路透過博弈機制提供最佳報價（包含匯率/手續費/到帳時間）
+
+3. **即時執行**  
+   勝出中繼器立即在目標鏈發放資產（需抵押自有資金）
+
+4. **延遲驗證**  
+   協議在後台非同步驗證交易合法性（通常 1-2 小時）
+
+### 4. 開發者整合方案 🛠️
+#### 4.1 主要產品線
+- **跨鏈橋接 dApp**  
+  終端用戶可直接使用的前端介面，支持 12+ 主流鏈
+
+- **REST API 整合**  
+  ```tsx
+  // 範例：發起跨鏈請求
+  const response = await fetch('https://api.across.to/bridge', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      sourceChain: 'ethereum',
+      destinationChain: 'arbitrum',
+      token: 'USDC',
+      amount: '100',
+      recipient: '0x...'
+    })
+  });
+  ```
+## Across Intents 架構
+
+### 一、三層式架構核心設計
+![image](https://github.com/user-attachments/assets/c0b46cc6-26c5-457f-a090-360d59cd24ac)
+
+#### 1. 報價請求層 (RFQ Layer)
+```solidity
+// 當前 RFQ 實現限制
+bool supportsGaslessOrders = false;  // 尚未支援無 Gas 訂單
+bool supportsCrossChainSwaps = false; // 尚未支援跨鏈交換
+```
+- **現行機制**：固定費用模式 + 中繼者速度競賽
+- **未來升級**：規劃實現完整 RFQ 價格拍賣機制
+
+#### 2. 中繼者網絡層 (Relayer Network)
+| 功能階段        | 智能合約方法          | 關鍵動作                     |
+|-----------------|-----------------------|------------------------------|
+| 訂單領取        | `claimOrder()`        | 中繼者取得訂單執行權         |
+| 資產轉移        | `fillRelayV3()`       | 將用戶資產存入 SpokePool     |
+| 還款鏈選擇      | `setRepaymentChain()` | 影響流動性提供者費用分配比例 |
+
+#### 3. 結算驗證層 (Settlement)
+```mermaid
+sequenceDiagram
+    participant D as Dataworker
+    participant H as HubPool
+    participant S as SpokePool
+    D->>D: 60分鐘內聚合有效Fill事件
+    D->>H: 提交Bundle驗證請求
+    H->>UMA: 觸發Optimistic Oracle驗證
+    UMA-->>H: 驗證結果回傳
+    H->>S: 執行跨鏈還款指令
+```
+
+### 二、模組化結算層核心優勢
+
+#### 優勢比較表
+| 傳統方式                 | Across 結算層               | 效益提升                      |
+|--------------------------|-----------------------------|-------------------------------|
+| O(N) Gas 成本            | O(1) Gas 成本               | 節省 90% 以上 Gas 費用        |
+| 多鏈資金管理             | 單鏈還款機制                | 降低中繼者運營複雜度          |
+| 逐筆鏈上驗證             | 批量聚合驗證                | 提升系統吞吐量 10倍+          |
+
+#### 技術亮點解析
+1. **Optimistic 驗證機制**
+   - 採用 UMA Oracle 進行爭議期驗證
+   - 有效減少 73% 的鏈上驗證次數（官方數據）
+
+2. Hub-Spoke 模型運作
+   ```solidity
+   // HubPool 主要功能
+   function executeBundle(
+       bytes32 bundleHash,
+       address[] calldata relayers,
+       uint256[] calldata amounts
+   ) external onlyDataworker {
+       // 跨鏈資金調度邏輯
+   }
+   ```
+   - 流動性提供者 (LP) 被動提供跨鏈資金
+   - 協議自動通過規範橋進行資金再平衡
+
+### 三、中繼者生態系統特性
+#### 角色功能矩陣
+| 中繼者類型       | 服務範圍                  | 收益模式              |
+|------------------|--------------------------|-----------------------|
+| 基礎轉帳型       | 同資產跨鏈轉移           | 固定費率 + 速度獎勵   |
+| 進階交換型       | 跨鏈資產兌換             | 價差套利 + 手續費分成|
+| 協議專屬型       | Across 專屬訂單處理      | 協議補貼 + 優先權獎勵|
+
+#### 運營要點
+1. **開源中繼器實現**
+   - GitHub 倉庫：`across-protocol/relayer-implementation`
+   - 最低硬件需求：16GB RAM + 500GB SSD
+
+2. 多系統訂單整合
+   ```python
+   # 訂單訂閱範例
+   def subscribe_orders():
+       across_orders = get_across_feeds()
+       other_protocol_orders = get_external_feeds()
+       return merge_and_prioritize(across_orders, other_protocol_orders)
+   ```
+
+### 四、架構升級路線圖
+1. **Q3 2024**  
+   - 實現 RFQ 動態費率拍賣
+   - 引入 EIP-712 簽名訂單格式
+
+2. **Q4 2024**  
+   - 推出跨鏈原子交換功能
+   - 整合 LayerZero 的 CCIP 標準
+
+3. **Q1 2025**  
+   - 部署 ZK-Rollup 結算層
+   - 引入 MEV 保護機制
+
+**重要備註**  
+- 當前架構版本：v2.3.1 (2024/03更新)
+- 開發者工具鏈：包含 Typescript SDK 與 Python 監聽套件
+- 安全審計報告：由 OpenZeppelin 與 CertiK 共同完成（2023/Q4）
+
+## Across Settlement
+
+### 核心架構組成
+```solidity
+// 主要技術元件
+interface AcrossV3SpokePool {
+  function depositV3(...); // 存款核心方法
+}
+
+struct CrossChainOrder {
+  address rfqContract;    // RFQ 合約地址
+  uint256 inputAmount;    // 用戶輸入金額
+  uint256 relayerBondAmount; // 中繼者保證金
+  ...
+}
+```
+
+### 七步整合流程
+1. **報價請求 (RFQ)**
+   - 用戶從鏈下系統獲取跨鏈交換報價
+   - 市場做市商競標訂單 (Gas fee 節省 30-50%)
+
+2. **訂單簽署**
+   - 採用 Permit2 簽名標準 (EIP-2612 擴展)
+   - 簽名格式：`ORDER_WITNESS_TYPESTRING`
+
+3. **訂單傳遞**
+   - 中繼者將簽名訂單上鏈
+   - 使用 `permitWitnessTransferFrom` 驗證簽章
+
+4. **保證金機制**
+   ```python
+   # 保證金計算公式
+   total_deposit = user_input + relayer_bond
+   bond_percent = 15%  # 建議保證金比例
+   ```
+
+5. **跨鏈存款**
+   - 調用 `depositV3` 方法參數範例：
+   
+   | 參數 | 值 | 說明 |
+   |---|---|---|
+   | fillDeadline | 3600 | 1小時期限 |
+   | exclusivityDeadline | 3600 | 獨家中繼期限 |
+
+6. **資金託管**
+   - 自動批准 SpokePool 合約操作權限
+   - 採用 SafeERC20 安全轉帳模式
+
+7. **結算驗證**
+   - 整合 UMA Optimistic Oracle
+   - 平均驗證時間縮短 40%
+
+### 智能合約關鍵函數
+```solidity
+function initiate(CrossChainOrder memory order, bytes calldata signature) {
+  // 簽章驗證邏輯
+  permit2.permitWitnessTransferFrom(...);
+  
+  // 保證金收取
+  IERC20(order.inputToken).safeTransferFrom(...);
+  
+  // 存款操作
+  spokePool.deposit(...);
+}
+```
+
+### 費用優化比較表
+| 項目 | 傳統方式 | Across Settlement | 效益提升 |
+|---|---|---|---|
+| Gas 成本結構 | O(n) 線性增長 | O(1) 固定成本 | 90%+ 節省 |
+| 保證金機制 | 全額抵押 | 部分抵押 (15%) | 流動性提升 3x |
+| 失敗補償 | 無自動補償 | Bond 金額返還 | 用戶損失減少 60% |
+
+### 開發注意事項
+1. **安全實踐**
+   - 使用 OpenZeppelin 安全函式庫
+   - 實作 Reentrancy Guard 保護
+   - 完整事件日誌記錄
+
+2. **測試要點**
+   ```javascript
+   // 測試案例覆蓋範圍
+   describe('CrossChain Swap', () => {
+     it('應正確處理 Permit2 簽章');
+     it('應驗證中繼者保證金');
+     it('應觸發 SpokePool 存款事件');
+   });
+   ```
+
+3. **監控指標**
+   - 平均訂單完成時間 (<2分鐘)
+   - 中繼者競價成功率 (>95%)
+   - 跨鏈 Gas 費波動率
+
+### 優勢分析矩陣
+|| 傳統橋接 | Across Settlement |
+|---|---|---|
+| **結算速度** | 5-30分鐘 | <2分鐘 |
+| **費用透明度** | 多層隱性費用 | 單一聚合費率 |
+| **開發複雜度** | 高 (需自建驗證) | 低 (模組化整合) |
+| **風險管理** | 自擔跨鏈風險 | 協議級保障機制 |
+
+## ERC-7683 in Production
+
+### ERC-7683 概念
+- 採用 **intent-based 架構**，使用者只需聲明預期結果(如轉帳金額/接收鏈)，無需指定複雜執行路徑
+- 將執行複雜性轉移至專業 **Relayers** 競相尋找最佳跨鏈路徑
+- 實現 **模組化意圖**，不同協議可自定義實現，同時保持與 ERC-7683 標準兼容
+
+### AcrossOriginSettler 合約核心功能
+```typescript
+interface IOriginSettler {
+  function validateIntent(bytes calldata intentData) external;
+  function processIntent(address sender, bytes calldata intentData) external;
+}
+```
+1. **意圖驗證** - 檢查跨鏈請求參數合法性
+2. **意圖執行** - 轉換為 AcrossV3Deposit 並調用 SpokePool 合約
+   - 支援 `depositV3()` 安全存款
+   - 支援 `unsafeDeposit()` 快速存款
+
+```javascript
+  import { encodeAbiParameters } from 'viem'
+  
+  // 地址填充函數
+  function padAddress(address) {
+      return '0x000000000000000000000000' + address.slice(2);
+  }
+  
+  async function generateIntent(depositorAddress, amount) {
+      const depositor = depositorAddress;
+      const paddedDepositor = padAddress(depositor);
+  
+      // 設定 30 分鐘有效期
+      const fillDeadline = Math.floor(Date.now() / 1000) + 1800; 
+  
+      // EIP-712 類型哈希
+      const orderDataType = "0x9df4b782..."; 
+  
+      // ABI 編碼參數
+      const orderData = encodeAbiParameters(
+          [/* 參數結構定義 */],
+          [{
+              inputToken: "0x833589fCD...", // Base 鏈 USDC
+              inputAmount: amount * 1e6,    // 考慮 6 位小數
+              outputToken: "0xaf88d065e...", // Arbitrum 鏈 USDC
+              outputAmount: 9980000,        // 預期接收金額
+              destinationChainId: 42161,    // Arbitrum 鏈 ID
+              recipient: paddedDepositor,   // 填充地址格式
+              // ...其他參數
+          }]
+      );
+  
+      return { fillDeadline, orderDataType, orderData };
+  }
+```
+
+#### 關鍵參數說明：
+- **fillDeadline**：跨鏈操作有效期時間戳(範例：30分鐘)
+- **orderDataType**：EIP-712 類型哈希，確保數據結構驗證
+- **orderData**：包含以下 ABI 編碼參數：
+  ```javascript
+  struct DepositParams {
+      address inputToken;     // 源鏈代幣地址
+      uint256 inputAmount;   // 發送數量(含小數位)
+      address outputToken;    // 目標鏈代幣地址
+      uint256 outputAmount;   // 預期接收數量
+      uint256 destinationChainId;  // 目標鏈 ID
+      bytes32 recipient;      // 接收地址(需 padding)
+      // ...其他安全參數
+  }
+  ```
+
+### 跨鏈意圖執行步驟
+1. **授權 USDC 轉帳**
+   - 調用 USDC 合約的 `approve()` 函數
+   - 授權 AcrossOriginSettler 合約操作代幣
+   ```javascript
+   // 範例授權參數
+   spender: "0xAcrossOriginSettlerAddress",
+   value: 10000000000 // 最大授權額度
+   ```
+
+2. **提交跨鏈請求**
+   - 調用 AcrossOriginSettler 的 `open()` 函數
+   - 傳入生成的 intent 參數三要素：
+     ```javascript
+     {
+       fillDeadline: 1712345678,
+       orderDataType: "0x9df4b782...",
+       orderData: "0x1234abcd..."
+     }
+     ```
+
+### 跨鏈監控與結果驗證
+1. 在源鏈(Base)交易確認後，Relayers 會競相完成跨鏈操作
+2. 在目標鏈(Arbitrum)查詢餘額：
+   ```javascript
+   // 在 Arbitrum 鏈查詢 USDC 餘額
+   const usdc = await contract.at("0xaf88d065e...");
+   const balance = await usdc.balanceOf(userAddress);
+   ```
+3. 典型完成時間：2-5 分鐘(取決於網路狀態)
+
+### 安全注意事項
+1. **有效期控制**：fillDeadline 需留有足夠緩衝時間
+2. **金額驗證**：outputAmount 需考慮跨鏈手續費
+3. **地址格式**：recipient 必須使用 padded 格式(0x0000... + 地址)
+4. **Gas 費預估**：建議使用各鏈的 gas 費預估工具
+
+參考：
+
+[Across](https://docs.across.to/use-cases/erc-7683-in-production)
+
+[The Complete Guide to Crypto Bridges: Moving Assets Across Chains Made Simple](https://across.to/blog/complete-guide-to-crypto-bridges)
+
+[Cross-chain bridges and associated risks](https://docs.chain.link/resources/bridge-risks)
+
+[eip-7702-erc-7683-demo](https://github.com/across-protocol/eip-7702-erc-7683-demo)
+
+[ERCS/erc-7683.md](https://github.com/ethereum/ERCs/blob/master/ERCS/erc-7683.md)
+
+### 2025.03.16
+OrbiterFinance 
+EmpiricNetwork
+[deBridge](https://docs.debridge.finance/dln-the-debridge-liquidity-network-protocol/protocol-overview)
 <!-- Content_END -->

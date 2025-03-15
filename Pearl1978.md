@@ -142,6 +142,16 @@ Dapp的上下游技术：
    BALANCER:BAL
    BANCOR:BNT
   3.资金池权重不同
+
+### 2025.03.14
+使用AMMS的相关风险
+1.价格滑点
+2.抢跑
+3.无常损失
+其他值得一提的协议：
+PANCAKESWAP
+TERRASWAP
+OX
  
   
   
