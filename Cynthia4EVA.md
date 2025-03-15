@@ -236,4 +236,26 @@ DeFi 的主要应用
 -收益聚合（Yield Farming）：用户将资金存入流动性池，以获取利息或奖励，如 Yearn Finance。
 -合成资产：如 Synthetix，允许用户创建与现实资产（如黄金、股票）挂钩的代币
 
+### 2025.03.15
+学习资料：https://github.com/lxdao-official/web3-general-manual/blob/main/web3_ecosystem/web3_landscape.md
+1. 协议层（Protocol Layer）
+这是 Web3 的基础，包括各种区块链网络，如比特币（BTC）、以太坊（Ethereum）、Solana、BNB 等。
+为解决区块链的可扩展性问题，出现了 Layer 2 解决方案和侧链，如 Optimism、Arbitrum、Polygon 等。
+2. 基础设施层（Infrastructure Layer） 这一层为 Web3 应用提供必要的服务和工具，包括：
+* 节点服务（Node Service）： 连接区块链网络和 DApp 的桥梁，提供读取和写入区块链数据的能力。主要提供商有 Alchemy、Infura、QuickNode 等。
+* 网络存储（Network Storage）： 提供去中心化存储服务，如 IPFS、Arweave、Filecoin 等，确保数据的安全性和持久性。
+* 数据服务（Data Service）： 对链上数据进行索引、分析和归档，提供开放 API，方便开发者使用。例如 Dune、TheGraph、Etherscan 等。
+3. 应用层（Application Layer） 这是直接面向用户的层级，涵盖各种去中心化应用和服务，包括：
+* 治理与 DAO（Governance & DAO）： 去中心化自治组织的平台，如 Snapshot、Tally、Boardroom、Aragon 等，帮助社区进行决策和管理。
+* 钱包（Wallet）： 管理加密资产的工具，如 MetaMask、GnosisSafe、Rainbow、Coinbase Wallet、WalletConnect 等。
+* 金融（Finance）： 去中心化金融平台，如 Uniswap、Compound、Aave、PancakeSwap 等，提供交易、借贷等金融服务。
+* 游戏（Game）： 基于区块链的游戏，如 Alien Worlds、Splinterlands 等，玩家可以在游戏中获得数字资产。
+* NFT 市场（NFT Marketplace）： 交易非同质化代币的平台，如 OpenSea、Blur 等，支持数字艺术品和收藏品的买卖。
+* 社交（Social）： 去中心化社交平台，如 Lens Protocol、Farcaster 等，用户掌握自己的数据和内容。
+* 创作与内容（Creator & Content）： 支持内容创作者的平台，如 Mirror、Sound 等，提供去中心化的发布和盈利渠道。
+4. 其他领域（Other Areas） 除了上述主要层级，还有一些关键领域支持 Web3 的发展：
+* 智能合约（Smart Contract）： Web3 应用的基础，需要使用编写代码来创造。目前，超过 95% 的 Solidity 代码都会使用 OpenZeppelin 的代码库。
+* 安全（Security）： 数字资产安全问题备受关注，许多公司提供服务和解决方案，如慢雾科技。此外，合约审计也是安全领域的重要部分，对区块链上的智能合约进行审查和评估，以确保其安全性、正确性和合规性。
+* 应用协议（Application Protocol）： 为了满足去中心化、多样化的需求，许多 DApp 从核心协议衍生出来，促进了生态的繁荣，如 Uniswap Protocol、Aave Protocol、Compound Protocol、Allo Protocol、Seaport 等。
+* 质押（Staking）： 作为区块链节点验证者质押代币，保护区块链安全，从而赚取代币。质押大致有三类：单独质押、质押即服务、联合质押。每一种质押都有大量参与者，涉及的领域包括计算机硬件、区块链协议、应用层 DeFi 等。
 <!-- Content_END -->
