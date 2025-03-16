@@ -5,6 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4d33d15e-cea0-46d9-a340-56ef261c868f" name="Changes" comment="常见术语介绍">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/debugzhao.md" beforeDir="false" afterPath="$PROJECT_DIR$/debugzhao.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -98,7 +99,8 @@
       <workItem from="1741259311761" duration="2822000" />
       <workItem from="1741357526017" duration="3708000" />
       <workItem from="1741436335189" duration="608000" />
-      <workItem from="1741583531600" duration="603000" />
+      <workItem from="1741583531600" duration="1828000" />
+      <workItem from="1741651502337" duration="2477000" />
     </task>
     <task id="LOCAL-00001" summary="init debugzhao.md">
       <option name="closed" value="true" />
