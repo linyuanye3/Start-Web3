@@ -1741,7 +1741,25 @@ struct CrossChainOrder {
    - 市場做市商競標訂單 (Gas fee 節省 30-50%)
 
 2. **訂單簽署**
-   - 採用 Permit2 簽名標準 (EIP-2612 擴展)
+   - 採用 Permit2 簽名標準 ([EIP-2612](https://github.com/ethereum/ercs/blob/master/ERCS/erc-2612.md) 擴展)
+```mermaid
+sequenceDiagram
+    participant U as 使用者
+    participant C as ERC20 合約
+    participant R as 中繼者
+    U->>U: 1. 簽署 Permit 訊息
+    Note right of U: 包含參數:<br/>owner/spender/value/<br/>nonce/deadline
+    U->>R: 2. 發送簽名+參數
+    R->>C: 3. 調用 permit(...v,r,s)
+    C->>C: 4.1 檢查 block.timestamp ≤ deadline
+    C->>C: 4.2 驗證 nonces[owner] == nonce
+    C->>C: 4.3 EIP-712 簽名驗證<br/>(包含 DOMAIN_SEPARATOR)
+    C->>C: 4.4 ecrecover 匹配 owner 地址
+    C->>C: 5. 更新 allowance[owner][spender] = value
+    C->>C: 6. nonces[owner] += 1
+    C-->>U: 7. 完成免 Gas 授權
+
+```
    - 簽名格式：`ORDER_WITNESS_TYPESTRING`
 
 3. **訂單傳遞**
@@ -1942,7 +1960,687 @@ interface IOriginSettler {
 [ERCS/erc-7683.md](https://github.com/ethereum/ERCs/blob/master/ERCS/erc-7683.md)
 
 ### 2025.03.16
+
+## DLN 協議 | deBridge Liquidity Network Protocol
+
+### 架構組成
+- **協定層 (Protocol Layer)**  
+  `DlnSource` 與 `DlnDestination` 智能合約，部署於每條支援的區塊鏈
+- **基礎設施層 (Infrastructure Layer)**  
+  由「求解器 (Solver)」執行鏈下訂單匹配與鏈上結算
+
+![image](https://github.com/user-attachments/assets/2b9595df-9f4b-4145-ac13-ad4eb5d206f0)
+
+
+### 核心流程圖解
+
+<img width="1213" alt="image" src="https://github.com/user-attachments/assets/e99714e1-fbbc-4646-ac28-2a2619c2be97" />
+
+### 訂單生命週期
+1. **訂單創建 (Order Creation)**  
+   - Maker 調用 `DlnSource.createOrder()` 並提供：
+     - 目標鏈 ID
+     - 預期接收代幣地址與數量
+     - 接收者地址
+   - 生成唯一訂單哈希 ID
+   - 源鏈代幣被鎖定
+
+![image](https://github.com/user-attachments/assets/afee4431-f95d-42c4-bfd5-e32c3af2ac22)
+
+2. **訂單履行 (Order Fulfillment)**  
+   - Solver 監聽訂單事件
+   - 競爭調用 `DlnDestination.fulfillOrder()`
+   - 需滿足條件：
+     ```tsx
+     if (order.status !== 'fulfilled' && 
+         solver.balance >= order.requiredAmount) {
+         executeSettlement();
+     }
+     ```
+![image](https://github.com/user-attachments/assets/e93c2449-17ff-43cd-a2c6-1b8fbc14c9cf)
+
+3. **資金解鎖 (Funds Unlocking)**  
+   - 首個成功履行者觸發 `DlnDestination.sendUnlock()`
+   - 通過 deBridge 發送跨鏈訊息
+   - 源鏈驗證訊息後解鎖代幣給 Solver
+     
+![image](https://github.com/user-attachments/assets/8a699f87-1f30-4de9-90a0-255b6dd21ac2)
+
+### 合約互動機制
+| 鏈類型 | 合約名稱       | 主要方法                     | 功能說明                     |
+|--------|----------------|------------------------------|------------------------------|
+| 源鏈   | DlnSource      | `createOrder()`              | 創建訂單並鎖定代幣           |
+|        |                | `processUnlockCommand()`     | 執行跨鏈解鎖指令             |
+| 目標鏈 | DlnDestination | `fulfillOrder()`             | 履行訂單並轉帳               |
+|        |                | `sendCancel()`               | 發起訂單取消指令             |
+
+[Fees and Supported Chains](https://docs.debridge.finance/the-debridge-messaging-protocol/fees-and-supported-chains)
+
+### 風險管理模組
+**Maker 風險**  
+僅存在於訂單創建到履行的秒級時間窗口，風險因子：
+- 源鏈重組 (Reorg)
+- 跨鏈訊息傳輸延遲
+
+**Solver 風險**  
+存在於訂單履行到解鎖期間，採用雙重防護：
+1. 自定義最終性確認規則  
+   ```tsx
+   // 示例：不同訂單規模的確認數策略
+   const requiredConfirmations = 
+     order.amount > 10000 ? 15 : 
+     order.amount > 1000 ? 7 : 3;
+   ```
+2. deBridge 驗證者防串謀機制  
+   - 委託質押 (Delegated Staking)
+   - 罰沒條件 (Slashing Conditions)
+
+![image](https://github.com/user-attachments/assets/ce649536-be6e-48db-90e6-e1a7a1c2fadc)
+
+### 進階功能模組
+- **閃電履行 (Pre-Broadcast Fulfillment)**  
+  Solver 可在源鏈交易確認前搶先履行，實現：
+  - 用戶端：即時資金到賬
+  - Solver 端：套利機會
+- **多鏈流動性聚合**  
+  透過 DLN 實現的流動性矩陣：
+  ```
+  [Source Chain] --X--> [Destination Chain]
+      ↓                     ↑
+  [Liquidity Pool] ← [Cross-chain Router]
+  ```
+
+### 技術參數參考
+| 參數名稱              | 典型值         | 可配置範圍       |
+|-----------------------|----------------|------------------|
+| 跨鏈訊息確認區塊數    | 7-15 blocks    | 依鏈安全模型調整 |
+| 訂單有效期            | 10 分鐘        | 1-60 分鐘        |
+| 最小套利利差          | 0.1%           | 0.05%-5%         |
+
+## deBridge Hooks 核心功能整理
+
+### 基本特性
+```mermaid
+graph TD
+    A[跨鏈訂單] --> B[附加 Hook]
+    B --> C{執行條件}
+    C -->|Success-required| D[全交易回滾]
+    C -->|Optional-success| E[轉入 Fallback]
+```
+
+### 主要應用場景
+- **資產分配**：跨鏈購買後自動分發至多錢包  
+  （例：Solana 賣 SOL → Ethereum 買 ETH 後分發 10 錢包）
+- **區塊鏈抽象**：代用戶執行質押/流動性操作  
+  （自動將買入資產存入 Aave/Curve）
+- **用戶引導**：跨鏈充值 Gas 費  
+  （購買 USDC 同時補充目標鏈 0.01 ETH Gas）
+- **條件觸發**：基於價格波動自動取消訂單
+
+## Hook 技術規格
+
+### 執行類型比較表
+| 特性               | 原子 Hook                          | 非原子 Hook                        |
+|--------------------|-----------------------------------|-----------------------------------|
+| **執行時機**        | 與訂單填充同步                    | 可延後執行                        |
+| **交易關聯性**      | 綁定同一交易                      | 獨立交易                          |
+| **失敗處理**        | 全交易回滾                        | 資產暫存中介合約                  |
+| **鏈支援**          | EVM 鏈全支援                     | Solana 強制使用                   |
+| **Gas 成本承擔方**  | 包含在訂單價差                    | 可設執行獎勵                      |
+
+### HookMetadata 結構
+```typescript
+interface HookMetadata {
+  executionType: 'atomic' | 'post-execution';
+  successPolicy: 'mandatory' | 'optional';
+  fallbackAddress: string;
+  rewardBps: number; // 執行獎勵比例
+}
+```
+
+## 執行流程
+1. **訂單創建**  
+   ```solidity
+   function createOrderWithHook(
+     address hookContract,
+     bytes calldata hookPayload
+   ) external payable;
+   ```
+2. **驗證階段**  
+   - DlnDestination 合約驗證訂單哈希匹配
+   - 檢查 Hook 字節碼有效性
+3. **資產鎖定**  
+   源鏈資產鎖定在 DlnSource 合約
+4. **填充執行**  
+   求解器調用 `fulfillOrder()` 觸發跨鏈
+5. **Hook 觸發**  
+   目標鏈 DlnExternalCallAdapter 代理執行
+
+## 安全機制
+
+### 信任模型
+```mermaid
+sequenceDiagram
+    User->>DLN: 簽署含 Hook 的訂單
+    DLN->>Solver: 廣播開放訂單
+    Solver->>DlnDestination: 調用 fulfillOrder()
+    DlnDestination->>Hook: 委託執行
+    Hook-->>DlnDestination: 回傳狀態
+    DlnDestination->>Solver: 釋放源鏈資產
+```
+
+### 關鍵防護措施
+- **哈希綁定**：Hook 數據參與訂單 ID 生成  
+  `orderId = keccak256(abi.encodePacked(..., hookHash))`
+- **權限隔離**：Hook 合約需獨立驗證簽名  
+  （DLN 不代為認證呼叫來源）
+- **沙盒執行**：Hook 在限制性代理合約中運行  
+  ```solidity
+  contract DlnExternalCallAdapter {
+    function executeHook(address target, bytes calldata payload) external {
+      // 禁止 delegatecall 與狀態修改
+    }
+  }
+  ```
+
+## 費用與激勵
+
+### 成本覆蓋模式比較
+| 模式                | 適用場景          | 優勢                 | 風險               |
+|---------------------|-----------------|---------------------|-------------------|
+| **價差內含**         | 原子 Hook       | 成本可預測           | 需精確 Gas 預估    |
+| **執行獎勵**         | 非原子 Hook     | 後支付彈性大         | 可能獎勵不足       |
+| **混合模式**         | 高價值操作       | 平衡成本與可靠性      | 設計複雜度高       |
+
+### 獎勵計算公式
+```math
+實際獎勵 = min(訂單輸出量 × (rewardBps ÷ 10000), 合約餘額)
+```
+
+## 失敗處理 SOP
+```flow
+st=>start: Hook 執行失敗
+e=>end: 流程結束
+op1=>operation: 檢查 successPolicy
+op2=>operation: 原子 Hook → 全回滾
+op3=>operation: 非原子 Hook → 轉入 fallback
+cond=>condition: success-required?
+
+st->op1->cond
+cond(yes)->op2->e
+cond(no)->op3->e
+```
+
+## 開發注意事項
+1. **EVM 參照實作**  
+   ```solidity
+   interface IDlnHook {
+     function onDlnOrderFulfilled(
+       bytes32 orderId,
+       address beneficiary,
+       uint256 amount
+     ) external returns (bool success);
+   }
+   ```
+2. **Solana 限制**  
+   - 僅支援 `success-required` + `non-atomic`
+   - 需通過 CPI 調用外部程式
+3. **測試建議**  
+   - 使用 `eth_call` 預執行模擬
+   - 邊界案例：超額獎勵/fallback 合約暫停
+
+## DLN 協定操作指南
+
+### 訂單創建流程
+```mermaid
+graph TD
+    A[資產預交換] --> B[計算合理報價]
+    B --> C[設置 DlnSource 授權]
+    C --> D[調用 createOrder]
+    D --> E[獲取 orderId]
+```
+
+#### 核心結構體定義
+```solidity
+struct OrderCreation {
+    address giveTokenAddress;   // 源鏈代幣地址
+    uint256 giveAmount;         // 提供數量
+    bytes takeTokenAddress;     // 目標鏈代幣地址(bytes格式)
+    uint256 takeAmount;         // 預期接收數量
+    uint256 takeChainId;        // 目標鏈ID
+    bytes receiverDst;          // 接收地址(bytes)
+    address givePatchAuthoritySrc; // 源鏈訂單修改權限
+    bytes orderAuthorityAddressDst; // 目標鏈取消權限
+}
+```
+
+### 訂單狀態追蹤
+#### 狀態代碼對照表
+| Status | 意義 | 觸發條件 |
+|--------|------|----------|
+| 0      | 待處理 | 初始狀態 |
+| 1      | 已完成 | 資金已發送 |
+| 2      | 解鎖中 | Taker 請求返還 |
+| 3      | 取消中 | 權限地址發起取消 |
+
+```mermaid
+stateDiagram-v2
+    [*] --> Pending: 0
+    Pending --> Fulfilled: 1
+    Pending --> Unlocking: 2
+    Pending --> Canceling: 3
+    Fulfilled --> [*]
+    Unlocking --> [*]
+    Canceling --> [*]
+```
+
+### 費用計算公式
+![費用公式](https://latex.codecogs.com/svg.latex?%5Ctext%7BProtocol%20Fee%7D%20%3D%20%5Ctext%7BglobalFixedNativeFee%7D%20%5Ctimes%20%5Ctext%7BNative%20Token%20Price%7D)
+
+```
+實際成本 = (giveAmount × 0.08%)+ 6 Gas
+```
+
+### 取消流程代碼範例
+```solidity
+function cancelOrderExample() external payable {
+    uint protocolFee = IDebridgeGate(DlnDestination(dlnDestinationAddress).deBridgeGate())
+        .globalFixedNativeFee();
+    uint executionFee = 0.03 ether; // 範例值
+    
+    DlnDestination(dlnDestinationAddress).sendEvmOrderCancel{value: protocolFee + executionFee}(
+        order,
+        0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045,
+        executionFee
+    );
+}
+```
+
+### 事件監聽重點
+```solidity
+event CreatedOrder(   // 訂單創建事件
+    Order order,
+    bytes32 orderId,
+    uint256 nativeFixFee
+);
+
+event FulfilledOrder( // 訂單完成事件
+    bytes32 orderId,
+    address taker
+);
+
+event SentOrderCancel( // 取消請求事件
+    bytes32 orderId,
+    bytes32 submissionId
+)
+```
+
+### 跨鏈架構圖示
+```mermaid
+sequenceDiagram
+    participant S as 源鏈
+    participant D as 目標鏈
+    S->>D: 創建訂單(createOrder)
+    D->>D: 狀態標記為0
+    D->>S: 資產鎖定
+    D->>D: 求解器fulfillOrder
+    D->>D: 狀態更新為1
+    D->>S: 發送解鎖請求(當status=2/3)
+```
+
+### 重要參數對照
+| 參數名稱 | 類型 | 範例值 | 說明 |
+|---------|------|--------|-----|
+| takeChainId | uint256 | 56 | BNB Chain ID |
+| giveAmount | uint256 | 25000000000 | 25,000 USDC(6 decimals) |
+| globalFixedNativeFee | uint256 | 1000000000000000 | 0.001 ETH |
+
+## deBridge 質押與罰沒機制解析
+
+### 核心組成架構
+- **`DelegatedStaking` 智能合約**  
+  實現質押邏輯與自動化罰沒機制
+- **雙層質押模式**：
+  1. Validator 自行質押資產
+  2. Delegator 委託資產給 Validator
+
+### 驗證者責任體系
+
+1. **財務擔保機制**：
+   - 偽造/審查消息觸發 Slashing
+   - 罰沒資金用於賠償受損用戶
+2. **收益分配控制**：
+   - 透過 `profitSharingBPS` 參數設定委託人收益比例
+   - 治理設定最低分配比例防止零分成
+
+![image](https://github.com/user-attachments/assets/13697cfc-2fcf-4443-9b1c-a6933e9095fb)
+
+### 資產管理規則
+| 項目                | 機制說明                     |
+|--------------------|----------------------------|
+| 質押資產白名單       | 由治理合約動態管控           |
+| 價值穩定策略         | 混合質押 ETH + 穩定幣對沖    |
+| 資產估值            | 鏈上預言機即時價格喂送       |
+
+### 冷卻期機制
+```mermaid
+graph TD
+    A[操作類型] -->|Unstake| B(14天 → 7天)
+    A -->|Transfer Stake| C(2天)
+    B --> D[治理保留追溯罰沒權]
+    C --> E[跨驗證者資產追蹤]
+```
+
+### 協議費用分配流程
+```solidity
+// 偽代碼範例
+function processFees(uint256 totalFees) public {
+    uint256 treasuryShare = totalFees / 2;
+    uint256 validatorRewards = convertToETH(totalFees - treasuryShare);
+    
+    treasury.transfer(treasuryShare); // 50% 進入金庫
+    distributeToValidators(validatorRewards); // 50% 分配給驗證者群組
+}
+```
+
+### 安全防護機制
+ 
+1. **雙重風險承擔**  
+   - 驗證者需承擔「聲譽風險」與「財務責任」，若驗證偽造/審查交易，其抵押品將被罰沒，用於賠償受損使用者。
+   - 抵押來源包含「自持流動性」和「委託人質押」兩種管道。
+
+2. **委託質押規則**  
+   - 僅允許ETH/USDT/USDC等穩定資產質押，透過預言機計算美元價值
+   - 解質押需14天冷卻期（後縮至7天），防止投機套利
+   - 轉移驗證者需2天冷卻，期間仍受罰沒約束
+
+3. **費用分配機制**  
+   - 每筆交易手續費50%入國庫，50%轉ETH分配給驗證者
+   - 驗證者設定`profitSharingBPS`參數決定與委託人收益比例
+   - 治理設最低分潤比例，避免驗證者獨佔收益
+
+4. **治理監管權限**  
+   - 可凍結質押/解質押流程
+   - 具備跨驗證者的罰沒執行權
+   - 動態調整資產白名單與參數閾值
+
+# DLN API 訂單創建交易
+
+## EVM 鏈交易提交流程
+
+### 1. 交易結構解析
+```javascript
+{
+  "tx": {
+    "to": "0xeF4fB24...",  // 智能合約交互地址
+    "data": "0xfbe16ca7...", // 包含跨鏈指令的編碼數據
+    "value": "5000000000000000" // 固定手續費（單位：wei）
+  }
+}
+```
+
+### 2. 關鍵參數說明
+| 參數 | 數值範例 | 作用機制 |
+|------|----------|----------|
+| `value` | 0.005 BNB | 固定支付給協議的基礎費用，與交易代幣類型無關 |
+| `estimation.srcChainTokenIn.amount` | 1000000 | ERC-20代幣交易需預先授權的最低金額 |
+
+### 3. 操作步驟
+1. **授權檢查**  
+   ERC-20交易需先執行：
+   ```solidity
+   tokenContract.approve(tx.to, amount)
+   ```
+2. **簽名廣播**  
+   使用錢包簽署後發送至指定鏈節點
+3. **合約組合應用**  
+   可將`tx`數據嵌入自定義合約進行批量交易處理
+
+## Solana 鏈特殊處理
+
+### 1. 交易封裝格式
+```typescript
+const tx = VersionedTransaction.deserialize(
+  Buffer.from(hexData, 'hex')
+)
+```
+
+### 2. 優先級費用調整
+```typescript
+function updatePriorityFee(tx, computeUnitPrice, computeUnitLimit) {
+  // 修改CU價格參數
+  const encodedPrice = encodeNumberToArrayLE(computeUnitPrice, 8)
+  tx.message.compiledInstructions[1].data.set(encodedPrice, 1)
+  
+  // 調整CU限制參數
+  if(computeUnitLimit) {
+    const encodedLimit = encodeNumberToArrayLE(computeUnitLimit, 4)
+    tx.message.compiledInstructions[0].data.set(encodedLimit, 1)
+  }
+}
+```
+*建議參考[Triton Fee API](https://docs.triton.one/chains/solana/improved-priority-fees-api)實時獲取最佳參數*
+
+## 實際應用場景
+
+### 場景1：跨鏈DEX整合
+```typescript
+// 在DApp中嵌入交易生成
+async function createCrossChainSwap() {
+  const apiResponse = await fetchDLNOrder()
+  const signedTx = await wallet.signTransaction(apiResponse.tx)
+  await broadcastToChain(signedTx)
+}
+```
+
+### 場景2：機構級路由優化
+```solidity
+// 智能合約批量處理
+function executeBatchOrders(Order[] calldata orders) external {
+  for(uint i=0; i<orders.length; i++) {
+    (bool success, ) = orders[i].to.call{value: orders[i].value}(orders[i].data)
+    require(success, "Order failed")
+  }
+}
+```
+
+## 注意事項
+
+1. **Gas估算風險**  
+   EVM鏈需預留至少20%的Gas費緩衝區，防止區塊擁堵導致交易失敗
+
+2. **Solana區塊更新**  
+   發送前務必更新`recentBlockhash`：
+   ```typescript
+   const { blockhash } = await connection.getLatestBlockhash()
+   tx.message.recentBlockhash = blockhash
+   ```
+
+3. **治理干預條款**  
+   當檢測到以下情況時，治理層可凍結交易：
+   - 單日交易失敗率 >15%
+   - 跨鏈價差偏離市場均值 >5%
+
+4. **錯誤代碼處理**  
+   | 代碼 | 解決方案 |
+   |------|----------|
+   | ERR-507 | 重新獲取最新API響應 |
+   | ERR-219 | 手動刷新代幣授權 |
+
+Example:
+```typescript
+import { VersionedTransaction, Connection, clusterApiUrl, Keypair } from "@solana/web3.js";
+
+function encodeNumberToArrayLE(num: number, arraySize: number): Uint8Array {
+  const result = new Uint8Array(arraySize);
+  for (let i = 0; i < arraySize; i++) {
+    result[i] = Number(num & 0xff);
+    num >>= 8;
+  }
+
+  return result;
+}
+
+function updatePriorityFee(tx: VersionedTransaction, computeUnitPrice: number, computeUnitLimit?: number) {
+  const computeBudgetOfset = 1;
+  const computeUnitPriceData = tx.message.compiledInstructions[1].data;
+  const encodedPrice = encodeNumberToArrayLE(computeUnitPrice, 8);
+  for (let i = 0; i < encodedPrice.length; i++) {
+    computeUnitPriceData[i + computeBudgetOfset] = encodedPrice[i];
+  }
+
+  if (computeUnitLimit) {
+    const computeUnitLimitData = tx.message.compiledInstructions[0].data;
+    const encodedLimit = encodeNumberToArrayLE(computeUnitLimit, 4);
+    for (let i = 0; i < encodedLimit.length; i++) {
+      computeUnitLimitData[i + computeBudgetOfset] = encodedLimit[i];
+    }
+  }
+}
+
+const wallet = new Keypair(); // your actual wallet here
+const connection = new Connection(clusterApiUrl("mainnet-beta")); // your actual connection here
+const tx = VersionedTransaction.deserialize(Buffer.from(tx.data.slice(2), "hex"));
+
+// make sure to set correct CU price & limit for the best UX 
+updatePriorityFee(tx, NEW_CU_PRICE, NEW_CU_LIMIT);
+const { blockhash } = await connection.getLatestBlockhash();
+tx.message.recentBlockhash = blockhash; // Update blockhash!
+tx.sign([wallet]); // Sign the tx with wallet
+connection.sendTransaction(tx);
+```
+
+### 1. 編碼函式
+```typescript
+function encodeNumberToArrayLE(num: number, arraySize: number): Uint8Array {
+  const result = new Uint8Array(arraySize)
+  for (let i = 0; i < arraySize; i++) {
+    result[i] = Number(num & 0xff)
+    num >>= 8
+  }
+  return result
+}
+```
+▸ **功能說明**  
+將數字轉換為小端序(Little-Endian)字節陣列，用於 Solana 計算預算指令參數編碼
+
+▸ 參數對照表  
+| 參數 | 類型 | 範例值 | 作用 |
+|------|------|--------|------|
+| num | number | 50000 | 要編碼的數值 |
+| arraySize | number | 4/8 | 輸出字節長度 (4=32位元 / 8=64位元) |
+
+### 2. 費用更新函式
+```typescript
+function updatePriorityFee(
+  tx: VersionedTransaction,
+  computeUnitPrice: number,
+  computeUnitLimit?: number
+) {
+  // 修改計算單價指令
+  const computeUnitPriceData = tx.message.compiledInstructions[1].data
+  const encodedPrice = encodeNumberToArrayLE(computeUnitPrice, 8)
+  computeUnitPriceData.set(encodedPrice, 1) // 從第1字節開始寫入
+
+  // 可選修改計算上限
+  if (computeUnitLimit) {
+    const computeUnitLimitData = tx.message.compiledInstructions[0].data
+    const encodedLimit = encodeNumberToArrayLE(computeUnitLimit, 4)
+    computeUnitLimitData.set(encodedLimit, 1)
+  }
+}
+```
+▸ 指令索引對應表  
+| 索引 | 指令類型 | 數據結構 |
+|------|----------|----------|
+| 0 | ComputeBudget setComputeUnitLimit | u32(4 bytes) |
+| 1 | ComputeBudget setComputeUnitPrice | u64(8 bytes) |
+
+## 完整步驟說明 (Step-by-Step Process)
+
+```mermaid
+graph TD
+    A[取得原始交易數據] --> B[反序列化交易物件]
+    B --> C{是否需要調整費用?}
+    C -->|是| D[呼叫updatePriorityFee]
+    C -->|否| E[直接簽名]
+    D --> F[更新區塊哈希]
+    F --> G[錢包簽章]
+    G --> H[廣播交易]
+```
+
+### 關鍵操作細節：
+1. **區塊哈希更新必要性**  
+   ```typescript
+   const { blockhash } = await connection.getLatestBlockhash()
+   tx.message.recentBlockhash = blockhash
+   ```
+   - 防止使用過期區塊哈希導致交易失效
+   - 建議在廣播前 15 秒內更新
+
+2. **計算單元參數建議值**  
+   | 網路狀態 | ComputeUnitPrice (microLamports) | ComputeUnitLimit |
+   |----------|----------------------------------|------------------|
+   | 低負載 | 5,000-10,000 | 200,000 |
+   | 正常 | 10,000-50,000 | 400,000 |
+   | 高擁堵 | 50,000-200,000+ | 600,000+ |
+
+## 實際應用場景 (Use Cases)
+
+### 案例 1：DEX 閃電交易
+```typescript
+// 監控內存池並動態調整費用
+async function sendPrioritySwap() {
+  const mempoolStats = await fetchMempoolStats()
+  const dynamicPrice = calculateDynamicFee(mempoolStats)
+  
+  updatePriorityFee(tx, dynamicPrice, 800000)
+  await updateBlockhash()
+  return connection.sendTransaction(tx)
+}
+```
+
+### 案例 2：NFT 批量鑄造
+```typescript
+// 批次交易費用漸進調整
+for (let i = 0; i < batchTxs.length; i++) {
+  const backoffPrice = basePrice * (1 + i * 0.2)
+  updatePriorityFee(batchTxs[i], backoffPrice)
+  await sendWithRetry(batchTxs[i])
+}
+```
+
+## 注意事項 (Critical Notes)
+
+1. **數據偏移校驗**  
+   ```diff
+   - const computeBudgetOfset = 1
+   + const computeBudgetOffset = 1  // 修正拼寫錯誤
+   ```
+   錯誤偏移量會導致指令參數解析失敗
+
+2. **費用計算公式**  
+   總費用 = (ComputeUnitPrice * ComputeUnitLimit) / 1,000,000  
+   範例：50,000 μLamports * 400,000 CU = 20,000 Lamports
+
+3. **版本相容性檢查**  
+   | web3.js 版本 | 支援功能 |
+   |--------------|----------|
+   | ≥1.34.0 | VersionedTransaction |
+   | <1.30.0 | 需改用 LegacyTransaction |
+
+4. **錯誤代碼處理**  
+   | 錯誤碼 | 解決方案 |
+   |--------|----------|
+   | TransactionExpiredBlockhash | 重新取得最新區塊哈希 |
+   | InsufficientPriorityFee | 提高 25% 後重試 |
+
+參考：
+
+[deBridge](https://docs.debridge.finance/dln-the-debridge-liquidity-network-protocol/protocol-overview)
+
+### 2025.03.17
+
 OrbiterFinance 
 EmpiricNetwork
-[deBridge](https://docs.debridge.finance/dln-the-debridge-liquidity-network-protocol/protocol-overview)
 <!-- Content_END -->
