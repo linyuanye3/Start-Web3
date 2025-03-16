@@ -14,10 +14,14 @@ timezone: UTC+8
 <!-- Content_START -->
 
 
+### 2025.03.16
+#### 区块链作恶方式（https://github.com/slowmist/Knowledge-Base/blob/master/mindmaps/evil_blockchain.png）
+#### 黑手册(DarkHandBook) （https://github.com/evilcos/darkhandbook）
+
+
 ### 2025.03.15
 #### 区块链黑暗森林自救手册（https://github.com/slowmist/Blockchain-dark-forest-selfguard-handbook/blob/main/README_CN.md）
 两大安全法则：零信任、持续验证、做好隔离    
-
 
 
 ### 2025.03.14
