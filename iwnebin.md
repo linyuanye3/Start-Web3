@@ -16,18 +16,18 @@ timezone: UTC+8
 
 ### 2025.03.16
 #### 区块链作恶方式（https://github.com/slowmist/Knowledge-Base/blob/master/mindmaps/evil_blockchain.png）
-#### 黑手册(DarkHandBook) （https://github.com/evilcos/darkhandbook）
+#### 黑手册(DarkHandBook) （https://github.com/evilcos/darkhandbook）  
 
 
 ### 2025.03.15
 #### 区块链黑暗森林自救手册（https://github.com/slowmist/Blockchain-dark-forest-selfguard-handbook/blob/main/README_CN.md）
-两大安全法则：零信任、持续验证、做好隔离    
+两大安全法则：零信任、持续验证、做好隔离      
 
 
 ### 2025.03.14
 #### Ordinals铭文
 UTXO ：在比特币区块链中，所有的余额都是存储在一个名为“未花费交易输出”（Unspent Transaction Output, UTXO）的列表中。
-比特币总量是2100万个，每个比特币包含10^8个聪(Satoshi, Sat)。因此，比特币网络上一共有2100万*10^8个聪。Ordinals协议将这些聪区分出来，为每个聪进行唯一编号。  
+比特币总量是2100万个，每个比特币包含10^8个聪(Satoshi, Sat)。因此，比特币网络上一共有2100万*10^8个聪。Ordinals协议将这些聪区分出来，为每个聪进行唯一编号。    
 
 
 ### 2025.03.13
