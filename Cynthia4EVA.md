@@ -259,7 +259,7 @@ DeFi 的主要应用
 * 应用协议（Application Protocol）： 为了满足去中心化、多样化的需求，许多 DApp 从核心协议衍生出来，促进了生态的繁荣，如 Uniswap Protocol、Aave Protocol、Compound Protocol、Allo Protocol、Seaport 等。
 * 质押（Staking）： 作为区块链节点验证者质押代币，保护区块链安全，从而赚取代币。质押大致有三类：单独质押、质押即服务、联合质押。每一种质押都有大量参与者，涉及的领域包括计算机硬件、区块链协议、应用层 DeFi 等。
 
-### 2025.03.16
+### 2025.03.17
 学习资料：https://github.com/lxdao-official/web3-general-manual/blob/main/web3_ecosystem/GameFi.md
 什么是 GameFi？
 GameFi，即“游戏金融”，是将区块链技术与游戏结合起来的一种新模式。它让玩家不仅能享受游戏乐趣，还能通过玩游戏赚取加密货币或获得以 NFT 形式存在的数字资产。
@@ -269,5 +269,5 @@ GameFi，即“游戏金融”，是将区块链技术与游戏结合起来的�
 融合 DeFi 元素： GameFi 借鉴去中心化金融的理念，让玩家可以利用游戏资产进行质押、借贷等操作，进一步增强经济激励。
 
 
-### 2025.03.17
+### 2025.03.18
 <!-- Content_END -->
