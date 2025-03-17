@@ -14,6 +14,16 @@ timezone: UTC+8
 <!-- Content_START -->
 
 
+### 2025.03.17
+#### MyFirstScam
+##### 钓鱼攻击 phishing attack
+防范方法：警惕链接；安全工具；风险隔离  
+##### 恶意签名攻击   
+防范方法：警惕签名；安全工具；  
+##### 盗取私钥  
+防范方法：警惕社工手段；养成安全上网习惯；使用冷钱包    
+
+
 ### 2025.03.16
 #### 区块链作恶方式（https://github.com/slowmist/Knowledge-Base/blob/master/mindmaps/evil_blockchain.png）
 #### 黑手册(DarkHandBook) （https://github.com/evilcos/darkhandbook）  
