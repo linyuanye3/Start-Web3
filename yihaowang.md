@@ -219,4 +219,21 @@ DAO做去麼公做
 - 決定協議的長期路線圖
 - 制定協議的分成
 
+### 2025.03.17
+#### DeFi
+什麼是 DeFi: DeFi（去中心化金融）是一種基於區塊鏈技術，特別是以太坊（Ethereum）等智能合約平台的金融系統，旨在去除傳統銀行和金融機構的中介角色，讓任何人都可以直接參與金融活動，如借貸、交易、保險、穩定幣、衍生品等
+
+DeFi 主要應用
+- 去中心化交易所（DEX, Decentralized Exchange）
+- 去中心化借貸（Lending & Borrowing）
+- 穩定幣（Stablecoins）
+- 流動性挖礦 & 收益聚合（Yield Farming & Aggregators）
+- 衍生品與保險（Derivatives & Insurance）
+  
+DeFi 的未來
+1. Layer 2 擴展（如 Optimism、Arbitrum）降低手續費，提高交易速度
+2. 合規化與監管，可能需要與傳統金融（CeFi）合作
+3. 更安全的智能合約，減少駭客攻擊與漏洞風險
+4. 跨鏈互通性，例如 Polkadot、Cosmos 等讓不同區塊鏈資產互相轉移
+
 <!-- Content_END -->
