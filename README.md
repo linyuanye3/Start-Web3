@@ -153,14 +153,14 @@ How to DeFi [How to DeFi 简介 | How to DeFi: Advanced（中文版） ](https:/
 | [zhsama](https://github.com/IntensiveCoLearning/Start-Web3/blob/main/zhsama.md) | ⭕️ | ⭕️ | ❌ | | | | | | | | | | | | | | | | | | |
 | [klora-sun](https://github.com/IntensiveCoLearning/Start-Web3/blob/main/klora-sun.md) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ⭕️ | ⭕️ | ✅ | | | | | | |
 | [lucky-ti](https://github.com/IntensiveCoLearning/Start-Web3/blob/main/lucky-ti.md) | ⭕️ | ⭕️ | ❌ | | | | | | | | | | | | | | | | | | |
-| [Amyazeng1128](https://github.com/IntensiveCoLearning/Start-Web3/blob/main/Amyazeng1128.md) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |   | | | | | | |
+| [Amyazeng1128](https://github.com/IntensiveCoLearning/Start-Web3/blob/main/Amyazeng1128.md) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | | | | | | |
 | [JacksonStack](https://github.com/IntensiveCoLearning/Start-Web3/blob/main/JacksonStack.md) | ✅ | ✅ | ✅ | ✅ | ✅ | ⭕️ | ⭕️ | ✅ | ✅ | ✅ | ✅ | ✅ | ⭕️ | ⭕️ |   | | | | | | |
 | [Lunbn](https://github.com/IntensiveCoLearning/Start-Web3/blob/main/Lunbn.md) | ✅ | ✅ | ✅ | ✅ | ⭕️ | ⭕️ | ❌ | | | | | | | | | | | | | | |
 | [jjeejj](https://github.com/IntensiveCoLearning/Start-Web3/blob/main/jjeejj.md) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | | | | | | |
 | [euphoria-august](https://github.com/IntensiveCoLearning/Start-Web3/blob/main/euphoria-august.md) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ⭕️ | ⭕️ | ❌ | | | | | | | | | |
 | [yyhatb](https://github.com/IntensiveCoLearning/Start-Web3/blob/main/yyhatb.md) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |   | | | | | | |
 | [hyanworkspace](https://github.com/IntensiveCoLearning/Start-Web3/blob/main/hyanworkspace.md) | ⭕️ | ⭕️ | ✅ | ✅ | ✅ | ✅ | ❌ | | | | | | | | | | | | | | |
-| [Cynthia4EVA](https://github.com/IntensiveCoLearning/Start-Web3/blob/main/Cynthia4EVA.md) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ⭕️ |   | | | | | | |
+| [Cynthia4EVA](https://github.com/IntensiveCoLearning/Start-Web3/blob/main/Cynthia4EVA.md) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ⭕️ | ✅ | | | | | | |
 | [Rae-jia](https://github.com/IntensiveCoLearning/Start-Web3/blob/main/Rae-jia.md) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | | | | | | |
 | [9339292](https://github.com/IntensiveCoLearning/Start-Web3/blob/main/9339292.md) | ✅ | ⭕️ | ⭕️ | ❌ | | | | | | | | | | | | | | | | | |
 | [NULL707](https://github.com/IntensiveCoLearning/Start-Web3/blob/main/NULL707.md) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | | | | | | |
@@ -205,7 +205,7 @@ How to DeFi [How to DeFi 简介 | How to DeFi: Advanced（中文版） ](https:/
 | [Slienfore](https://github.com/IntensiveCoLearning/Start-Web3/blob/main/Slienfore.md) | ✅ | ⭕️ | ⭕️ | ❌ | | | | | | | | | | | | | | | | | |
 | [sysy-sysy](https://github.com/IntensiveCoLearning/Start-Web3/blob/main/sysy-sysy.md) | ⭕️ | ⭕️ | ❌ | | | | | | | | | | | | | | | | | | |
 | [joycexingji-web3](https://github.com/IntensiveCoLearning/Start-Web3/blob/main/joycexingji-web3.md) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ⭕️ | ✅ | ✅ | ✅ | ✅ | ⭕️ | ✅ |   | | | | | | |
-| [Pearl1978](https://github.com/IntensiveCoLearning/Start-Web3/blob/main/Pearl1978.md) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |   | | | | | | |
+| [Pearl1978](https://github.com/IntensiveCoLearning/Start-Web3/blob/main/Pearl1978.md) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | | | | | | |
 | [AdamLeeeee](https://github.com/IntensiveCoLearning/Start-Web3/blob/main/AdamLeeeee.md) | ✅ | ✅ | ✅ | ✅ | ✅ | ⭕️ | ⭕️ | ✅ | ⭕️ | ⭕️ | ❌ | | | | | | | | | | |
 | [StarryDeserts](https://github.com/IntensiveCoLearning/Start-Web3/blob/main/StarryDeserts.md) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ⭕️ | ⭕️ | ✅ | ✅ | ✅ |   | | | | | | |
 | [YunaQuinn](https://github.com/IntensiveCoLearning/Start-Web3/blob/main/YunaQuinn.md) | ⭕️ | ⭕️ | ❌ | | | | | | | | | | | | | | | | | | |
@@ -222,6 +222,11 @@ How to DeFi [How to DeFi 简介 | How to DeFi: Advanced（中文版） ](https:/
 | [L-sage](https://github.com/IntensiveCoLearning/Start-Web3/blob/main/L-sage.md) | ✅ | ✅ | ⭕️ | ✅ | ⭕️ | ✅ | ✅ | ✅ | ✅ | ✅ | ⭕️ | ✅ | ⭕️ | ✅ |   | | | | | | |
 | [Ullllllla](https://github.com/IntensiveCoLearning/Start-Web3/blob/main/Ullllllla.md) | ⭕️ | ⭕️ | ✅ | ❌ | | | | | | | | | | | | | | | | | |
 <!-- END_COMMIT_TABLE -->
+
+
+
+
+
 
 
 
