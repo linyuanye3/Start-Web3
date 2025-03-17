@@ -2641,6 +2641,41 @@ for (let i = 0; i < batchTxs.length; i++) {
 
 ### 2025.03.17
 
+## MakerDAO 協議概述
+
+*   **核心概念**: Maker 協議是一個去中心化平台，允許使用者透過抵押加密資產來生成穩定幣 Dai。
+*   **目標**: 為加密貨幣經濟帶來穩定性，並為所有人提供一個參與全球金融市場的開放平台。
+*   **雙代幣系統**:
+    *   **Dai**: 與美元掛鉤的穩定幣，由加密資產超額抵押擔保。
+    *   **MKR**: 治理代幣，持有者可參與 Maker 協議的決策，維護系統並管理 Dai。
+
+## Multi Collateral Dai (MCD) 新功能
+
+*   **多抵押品類型**: 接受多種基於以太坊的資產作為抵押品 (初期支持 ETH 和 BAT)，需經 MKR 持有者批准並設定風險參數。
+*   **更強的掛鉤機制**: MKR 作為最後的擔保手段，確保 Dai 的穩定性。
+*   **穩定費**: 每個區塊支付穩定費，而非在償還 Dai 時支付。
+*   **治理機制不變**: MKR 持有者繼續負責治理決策。
+
+## Maker 協議智能合約模組系統
+
+*   系統架構圖
+
+![image](https://github.com/user-attachments/assets/40d35bf9-909f-487e-bbe7-d1879dd98c2a)
+
+參考：
+
+[DeFi應用你該知道哪些？帶你從著名項目MakerDAO、Uniswap、Compound、AAVE開始認識起](https://marserendipity.medium.com/defi%E6%87%89%E7%94%A8%E4%BD%A0%E8%A9%B2%E7%9F%A5%E9%81%93%E5%93%AA%E4%BA%9B-%E5%B8%B6%E4%BD%A0%E7%9C%8B%E6%87%82makerdao-uniswap-compound%E5%8F%8Aaave%E7%AD%89%E8%91%97%E5%90%8D%E9%A0%85%E7%9B%AE-9bf49680d24f)
+
+[docs.makerdao](https://docs.makerdao.com/)
+
+[docs.uniswap](https://docs.uniswap.org/)
+
+[compound.finance](https://compound.finance/docs)
+
+[compound-developers](https://github.com/compound-developers/compound-3-developer-faq?tab=readme-ov-file)
+
+### 2025.03.18
+
 OrbiterFinance 
 EmpiricNetwork
 <!-- Content_END -->
