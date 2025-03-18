@@ -14,6 +14,12 @@ timezone: UTC+8
 <!-- Content_START -->
 
 
+### 2025.03.18
+#### MyFirstScam
+##### 貔貅盘
+特点：合约不开源；
+
+
 ### 2025.03.17
 #### MyFirstScam
 ##### 钓鱼攻击 phishing attack
