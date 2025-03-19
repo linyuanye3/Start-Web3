@@ -4,10 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4d33d15e-cea0-46d9-a340-56ef261c868f" name="Changes" comment="常见术语介绍">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/debugzhao.md" beforeDir="false" afterPath="$PROJECT_DIR$/debugzhao.md" afterDir="false" />
-    </list>
+    <list default="true" id="4d33d15e-cea0-46d9-a340-56ef261c868f" name="Changes" comment="常见术语介绍" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -22,12 +19,12 @@
     &quot;assignee&quot;: &quot;debugzhao&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings">{
-  &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/IntensiveCoLearning/Start-Web3.git&quot;,
-    &quot;accountId&quot;: &quot;65a9f609-8508-4762-83cc-bf6055dfb32e&quot;
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/IntensiveCoLearning/Start-Web3.git",
+    "accountId": "5597baa8-8e7a-407b-932e-a686ab3b71fb"
   }
-}</component>
+}]]></component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 3
 }</component>
@@ -76,8 +73,7 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-9823dce3aa75-fdfe4dae3a2d-intellij.indexing.shared.core-IU-243.21565.193" />
-        <option value="bundled-js-predefined-d6986cc7102b-e768b9ed790e-JavaScript-IU-243.21565.193" />
+        <option value="bundled-js-predefined-1d06a55b98c1-0b3e54e931b4-JavaScript-WS-241.18034.50" />
       </set>
     </attachedChunks>
   </component>
@@ -101,6 +97,7 @@
       <workItem from="1741436335189" duration="608000" />
       <workItem from="1741583531600" duration="1828000" />
       <workItem from="1741651502337" duration="2477000" />
+      <workItem from="1742307871114" duration="1510000" />
     </task>
     <task id="LOCAL-00001" summary="init debugzhao.md">
       <option name="closed" value="true" />
@@ -117,11 +114,38 @@
     <option name="version" value="3" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
+    <option name="RECENT_FILTERS">
+      <map>
+        <entry key="User">
+          <value>
+            <list>
+              <RecentGroup>
+                <option name="FILTER_VALUES">
+                  <option value="*" />
+                </option>
+              </RecentGroup>
+            </list>
+          </value>
+        </entry>
+      </map>
+    </option>
     <option name="TAB_STATES">
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="user">
+                    <value>
+                      <list>
+                        <option value="*" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
           </value>
         </entry>
       </map>
