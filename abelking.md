@@ -583,6 +583,120 @@ DAO 的生态分类
  • Gitcoin DAO：支持开源项目的资助平台 DAO。
  • Optimism Collective：通过公共产品资金池支持 Optimism 网络上的建设者。
 
+### 2025.03.18
+
+Web3主要生态
+
+1. 基础设施层（Infra Layer）
+
+ 提供区块链运行、交互的底层技术与工具
+
+ • 公链（Layer 1）：以太坊、Solana、BNB Chain、Avalanche、Sui、Aptos、NEAR、Cosmos、Polkadot、Bitcoin
+ • 扩展方案（Layer 2）：Arbitrum、Optimism、zkSync、StarkNet、Linea、Polygon zkEVM、Scroll
+ • 预言机：Chainlink、Pyth、Band Protocol
+ • 跨链桥：Wormhole、LayerZero、Axelar、Synapse
+ • 节点服务/基础开发：Infura、Alchemy、The Graph、Moralis、Pocket Network
+ • 钱包：MetaMask、Trust Wallet、Safe（原 Gnosis Safe）、Rabby、Phantom（Solana）
+
+2. DeFi 生态（Decentralized Finance）
+
+ 去中心化的金融产品与协议
+
+ • DEX（去中心化交易所）：Uniswap、SushiSwap、Curve、PancakeSwap、Balancer、Trader Joe
+ • 借贷协议：Aave、Compound、Venus、Radiant
+ • 稳定币：DAI（MakerDAO）、USDC、USDT、FRAX、LUSD
+ • 合成资产/衍生品：Synthetix、GMX、dYdX、Perpetual Protocol
+ • 收益聚合器：Yearn Finance、Beefy、Convex、AutoFarm
+ • 保险协议：Nexus Mutual、InsurAce
+
+3. DAO 生态
+
+ 去中心化自治组织及相关工具
+
+ • 典型 DAO：MakerDAO、Aave DAO、Uniswap DAO、Gitcoin DAO、Optimism Collective、PleasrDAO
+ • DAO 工具：Snapshot（无 gas 投票）、Tally、Aragon、Gnosis Safe、多签工具（SafeSnap）、Zodiac 模块、Discourse 论坛
+
+
+4. NFT 生态
+
+ 以数字资产、艺术品、虚拟物品等为核心
+
+ • NFT 市场：OpenSea、Blur、Magic Eden、LooksRare、X2Y2
+ • NFT 基础设施：Manifold、Zora、Reservoir、Rarible Protocol
+ • NFT 协议：ERC-721、ERC-1155、BRC-20（比特币生态）、Ordinals、Runes
+ • NFT 项目：BAYC、Azuki、Doodles、CloneX、Pudgy Penguins、Moonbirds
+
+5. GameFi & 元宇宙
+
+ 区块链游戏、虚拟世界、Web3 游戏公会
+
+ • 链游平台/游戏：Axie Infinity、StepN、Illuvium、Big Time、Pixels
+ • 元宇宙平台：Decentraland、The Sandbox、Otherside
+ • 游戏公会 DAO：Yield Guild Games (YGG)、Merit Circle、GuildFi、Avocado DAO
+
+6. Web3 社交 & 内容创作
+
+ 去中心化社交协议、内容平台
+
+ • 去中心化社交协议：Lens Protocol、Farcaster、CyberConnect、Mastodon
+ • Web3 创作平台：Mirror（去中心化博客）、Paragraph、Showtime（NFT 创作与展示）
+ • Token Gated 社群：Guild.xyz、Collab.Land
+
+7. 隐私与身份
+
+ 去中心化身份、隐私保护协议
+
+ • 去中心化身份 DID：ENS（以太坊域名服务）、Lens Profile、Space ID、Unstoppable Domains
+ • 隐私协议：Tornado Cash、Aztec Network、Railgun、Noir（zk 编程语言）
+ • SBT（灵魂绑定代币）：Galxe（链上成就证明）、zkPass、Gitcoin Passport
+
+8. 公共物品 & 捐赠
+
+ 支持 Web3 公共基础设施建设
+
+ • Gitcoin：最大的 Web3 公共物品资助平台（采用二次方资助机制）
+ • Optimism RetroPGF：Optimism 网络的“Retroactive Public Goods Funding”计划，定期向贡献者空投资助
+ • clr.fund：小型公共物品资助平台
+
+⸻
+
+9. 新兴领域
+ • RWA（Real World Assets）：将现实世界资产（如房产、债券）代币化
+ • 项目：Centrifuge、Maple、Ondo Finance、MakerDAO（RWA 资产支持 DAI）
+ • AI + Web3：AI 数据标注 DAO、AI 生成 NFT、AI 训练数据市场
+ • 项目：Gensyn、Bittensor、Fetch.ai、Numerai
+ • DePIN（去中心化物理基础设施）：用代币激励建立分布式物理网络
+ • 项目：Helium（去中心化无线网络）、Filecoin（去中心化存储）、Akash（去中心化云服务）
+
+总结
+
+Web3 生态像一个“多层宇宙”，各个赛道之间彼此连接、互相赋能，同时也不断拓展新的子领域。
+
+### 2025.03.19
+
+1. 什么是“铭文”？
+
+大白话说，铭文就是把图片、文字、音频等信息，直接刻在比特币链上的某一个聪（satoshi）里。
+
+“聪”是什么？
+ • 1 个比特币 = 1 亿个聪（satoshi）。
+ • 所以，“铭文”就是选中某一个聪，把你想写的内容**“刻”在它身上，这个聪就变成了带有内容的聪**，有点像“带二维码的硬币”或者“有图案的纪念币”。
+
+2. 它怎么做到的？
+
+比特币以前只能转账、记账，后来有了一个叫Taproot的升级，让比特币能处理更复杂的数据。
+
+聪明人就利用这个升级，把文件（图片、文字、代码）塞进了比特币交易的“备注”里，这样这些数据就永久写在了比特币的区块链上，永远不会丢。
+这个“刻字”的过程就叫铭刻（inscription）。
+
+3. 和传统 NFT 的区别
+ • 传统 NFT（比如以太坊上的 NFT）通常是**“链上有证书，内容在链下”**，你的图片很多时候是放在 IPFS 或服务器上，链上只有链接和 ownership 记录。
+ • 比特币铭文是**“链上直接刻内容”**，图片、文字、视频都直接放在区块链上，彻底去中心化、不可删除，链上就能看见原始内容。
+
+4. 为什么有价值？
+ • 基于比特币链的安全性：比特币是最老、最安全的链之一，铭文天然享受比特币的安全保障。
+ • 早期红利：这玩意是 2023 年才火起来的，很多人觉得这是比特币 NFT 的“创世”阶段，具有“老牌”意义。
+ • 稀缺性：铭文是直接消耗比特币区块空间，存铭文需要花比特币，空间有限，稀缺性天然存在。
 
 
 笔记内容
