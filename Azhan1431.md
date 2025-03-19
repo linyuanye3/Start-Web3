@@ -845,6 +845,137 @@ DeFi（Decentralized Finance，去中心化金融）是一种基于区块链技�
 - **合规化**：监管机构可能加强对 DeFi 的管理，稳定币或面临更严格审查。
 - **去中心化衍生品**：更多 DeFi 平台会推出期权、期货等衍生品交易。
 
+### 20225.03.19
+
+Web3生态：
+
+#### **1. 协议层（Protocol Layer）**
+
+##### **区块链网络（Blockchain Network）**
+
+区块链网络是 Web3 生态的基础，每条链可形成独立生态。主要区块链包括：
+
+- **公链**：BTC、Ethereum、Solana、BNB
+- **扩容方案**（L2/侧链）：Optimism、Arbitrum、Polygon、Base
+
+##### **跨链桥（Blockchain Bridges）**
+
+连接不同区块链的技术，提升跨链资产的流动性。例如：
+
+- Across Protocol
+- Synapse Protocol
+- Stargate
+
+#### **2. 基础设施（Infrastructure）**
+
+##### **节点服务（Node Service）**
+
+提供区块链数据的读写支持，如：
+
+- Alchemy
+- Infura
+- QuickNode
+
+##### **网络存储（Network Storage）**
+
+去中心化存储服务商，如：
+
+- **IPFS**（分布式存储协议）
+- **Arweave**（永久存储）
+- **Filecoin**（激励层）
+
+##### **数据服务（Data Service）**
+
+提供链上数据索引、分析和 API，如：
+
+- **Dune**（链上数据分析平台）
+- **The Graph**（去中心化数据索引协议）
+- **Etherscan**（区块链浏览器）
+
+#### **3. 应用层（Application Layer）**
+
+面向最终用户的 Web3 产品和服务，涵盖多个领域。
+
+##### **治理 & DAO（Governance & DAO）**
+
+提供去中心化治理工具，如：
+
+- Snapshot（投票平台）
+- Tally（治理仪表盘）
+- Boardroom（DAO 管理工具）
+- Aragon（DAO 创建平台）
+
+##### **钱包（Wallet）**
+
+管理加密资产、签署交易，如：
+
+- MetaMask
+- Gnosis Safe
+- Rainbow
+- Coinbase Wallet
+- WalletConnect
+
+##### **DeFi & 金融（Finance）**
+
+去中心化金融（DeFi）协议，如：
+
+- **DEX（去中心化交易所）**：Uniswap、PancakeSwap
+- **借贷协议**：Compound、Aave
+
+##### **游戏（GameFi）**
+
+区块链游戏，如：
+
+- Alien Worlds
+- Splinterlands
+
+##### **NFT 交易市场（NFT Marketplace）**
+
+支持 NFT 交易，如：
+
+- OpenSea
+- Blur
+
+##### **社交（Social）**
+
+去中心化社交协议，如：
+
+- Lens Protocol
+- Farcaster
+
+##### **创作 & 内容（Creator & Content）**
+
+支持内容创作和 NFT 发行，如：
+
+- Mirror（去中心化写作平台）
+- Sound（音乐 NFT 平台）
+
+#### **4. 其它领域（Others）**
+
+##### **智能合约（Smart Contract）**
+
+智能合约是 Web3 应用的基础：
+
+- **开发**：Solidity 及 OpenZeppelin 代码库
+- **安全**：审计与安全公司，如慢雾科技
+
+##### **应用协议（Application Protocol）**
+
+Web3 核心协议，如：
+
+- Uniswap Protocol（去中心化交易协议）
+- Aave Protocol（去中心化借贷协议）
+- Compound Protocol（算法借贷协议）
+- Seaport（OpenSea 交易协议）
+
+##### **质押（Staking）**
+
+质押代币以获取收益，主要模式包括：
+
+1. **单独质押**
+2. **质押即服务（SaaS）**
+3. **联合质押（Staking Pools）**
+
 ### 2025.07.11
 
 笔记内容
