@@ -161,5 +161,8 @@ timezone: UTC+8
       7. 内容
       8. 等等
 
+### 2025.03.19
+
+1. Web3 骗术 1： 钓鱼网站攻击，不停的请求交易 （转账或者授权）。需要警惕链接。未知项目用钱包。 可以看看视频学习一下 https://www.youtube.com/watch?v=NJ7YPHtEaJA&list=PLixFNij3zCfIdhoZSFA128hhO5h1pAKf9&index=1&ab_channel=LXDAO
 
 <!-- Content_END -->
