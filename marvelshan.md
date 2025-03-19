@@ -2676,6 +2676,263 @@ for (let i = 0; i < batchTxs.length; i++) {
 
 ### 2025.03.18
 
-OrbiterFinance 
-EmpiricNetwork
+## **Uniswap**
+
+### **協定概述**
+- **Uniswap** 是一個點對點系統，專為在 **Ethereum** 區塊鏈上交換加密貨幣（ERC-20 代幣）而設計。
+- 協定以一組持久的、不可升級的智能合約實現，重點在於抗審查、安全性和自我託管，無需信任的中介。
+
+### **版本**
+- **目前有四個版本**：
+  - **v1** 和 **v2**：開源，根據 GPL 許可。
+  - **v3**：引入集中流動性，開源且有小幅修改。
+  - **v4**：引入單例池架構和鉤子系統，實現前所未有的協定定製，使用雙許可證結構。
+
+## **Uniswap 協定與傳統市場的比較**
+
+### **Order book VS AMM**
+- **傳統市場**：使用中央限價訂單簿，買賣雙方依據價格水平創建訂單。
+- **Uniswap**：採用自動做市商（AMM），用兩種資產的流動性池取代訂單簿，通過交易資產來改變價格，直接與流動性池進行交易。
+
+### **無需許可的系統**
+- **設計理念**：Uniswap 協定基於 **Ethereum** 的核心原則，強調無需許可和不可變性。
+- **無需許可**：任何人都可以使用協定的服務，無需擔心地理、財富或年齡限制。
+- **不可變性**：協定無法升級或修改，確保其行為的透明性和可靠性。
+
+## **Uniswap 協定的優勢**
+1. **抗審查**：無需中介，避免選擇性限制。
+2. **安全性**：基於智能合約，確保交易的安全性和透明性。
+3. **自我託管**：用戶完全掌握自己的資產，無需依賴第三方。
+4. **資本效率**：v3 引入集中流動性，提高資金利用率。
+5. **定製化**：v4 的單例池架構和鉤子系統，允許高度定製的協定行為。
+
+## Compile a Basic Hook Contract
+
+```solidity
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.24;
+
+import {BaseHook} from "v4-periphery/src/utils/BaseHook.sol";
+
+import {Hooks} from "v4-core/src/libraries/Hooks.sol";
+import {IPoolManager} from "v4-core/src/interfaces/IPoolManager.sol";
+import {PoolKey} from "v4-core/src/types/PoolKey.sol";
+import {PoolId, PoolIdLibrary} from "v4-core/src/types/PoolId.sol";
+import {BalanceDelta} from "v4-core/src/types/BalanceDelta.sol";
+import {BeforeSwapDelta, BeforeSwapDeltaLibrary} from "v4-core/src/types/BeforeSwapDelta.sol";
+
+contract CounterHook is BaseHook {
+    using PoolIdLibrary for PoolKey;
+
+    // NOTE: ---------------------------------------------------------
+    // state variables should typically be unique to a pool
+    // a single hook contract should be able to service multiple pools
+    // ---------------------------------------------------------------
+
+    mapping(PoolId => uint256 count) public beforeSwapCount;
+    mapping(PoolId => uint256 count) public afterSwapCount;
+
+    mapping(PoolId => uint256 count) public beforeAddLiquidityCount;
+    mapping(PoolId => uint256 count) public beforeRemoveLiquidityCount;
+
+    constructor(IPoolManager _poolManager) BaseHook(_poolManager) {}
+
+    function getHookPermissions() public pure override returns (Hooks.Permissions memory) {
+        return Hooks.Permissions({
+            beforeInitialize: false,
+            afterInitialize: false,
+            beforeAddLiquidity: true,
+            afterAddLiquidity: false,
+            beforeRemoveLiquidity: true,
+            afterRemoveLiquidity: false,
+            beforeSwap: true,
+            afterSwap: true,
+            beforeDonate: false,
+            afterDonate: false,
+            beforeSwapReturnDelta: false,
+            afterSwapReturnDelta: false,
+            afterAddLiquidityReturnDelta: false,
+            afterRemoveLiquidityReturnDelta: false
+        });
+    }
+
+    // -----------------------------------------------
+    // NOTE: see IHooks.sol for function documentation
+    // -----------------------------------------------
+
+    function _beforeSwap(address, PoolKey calldata key, IPoolManager.SwapParams calldata, bytes calldata)
+        internal
+        override
+        returns (bytes4, BeforeSwapDelta, uint24)
+    {
+        beforeSwapCount[key.toId()]++;
+        return (BaseHook.beforeSwap.selector, BeforeSwapDeltaLibrary.ZERO_DELTA, 0);
+    }
+
+    function _afterSwap(address, PoolKey calldata key, IPoolManager.SwapParams calldata, BalanceDelta, bytes calldata)
+        internal
+        override
+        returns (bytes4, int128)
+    {
+        afterSwapCount[key.toId()]++;
+        return (BaseHook.afterSwap.selector, 0);
+    }
+
+    function _beforeAddLiquidity(
+        address,
+        PoolKey calldata key,
+        IPoolManager.ModifyLiquidityParams calldata,
+        bytes calldata
+    ) internal override returns (bytes4) {
+        beforeAddLiquidityCount[key.toId()]++;
+        return BaseHook.beforeAddLiquidity.selector;
+    }
+
+    function _beforeRemoveLiquidity(
+        address,
+        PoolKey calldata key,
+        IPoolManager.ModifyLiquidityParams calldata,
+        bytes calldata
+    ) internal override returns (bytes4) {
+        beforeRemoveLiquidityCount[key.toId()]++;
+        return BaseHook.beforeRemoveLiquidity.selector;
+    }
+}
+```
+
+## **合約概述**
+- **CounterHook** 是一個基於 **Uniswap v4** 的鉤子合約，用於在特定操作（如交換、添加流動性、移除流動性）前後執行自定義邏輯。
+- 該合約繼承自 **BaseHook**，並實現了多個鉤子函數，用於記錄每個池子的操作次數。
+
+## **合約結構**
+
+### **1. 引入依賴**
+- 合約引入了多個 Uniswap v4 的核心和週邊合約，包括：
+  - **BaseHook**：鉤子的基礎合約。
+  - **Hooks**：定義鉤子權限的庫。
+  - **IPoolManager**：Pool Manager 的接口。
+  - **PoolKey** 和 **PoolId**：用於管理池子的鍵和 ID。
+  - **BalanceDelta** 和 **BeforeSwapDelta**：用於處理交換前後的數據。
+
+### **2. 狀態變量**
+- 合約定義了多個 `mapping` 來記錄每個池子的操作次數：
+  - `beforeSwapCount`：記錄每個池子在交換前的操作次數。
+  - `afterSwapCount`：記錄每個池子在交換後的操作次數。
+  - `beforeAddLiquidityCount`：記錄每個池子在添加流動性前的操作次數。
+  - `beforeRemoveLiquidityCount`：記錄每個池子在移除流動性前的操作次數。
+
+### **3. 構造函數**
+- **`constructor(IPoolManager _poolManager)`**：
+  - 初始化合約，並將 `_poolManager` 傳遞給 `BaseHook`。
+
+### **4. 鉤子權限**
+- **`getHookPermissions()`**：
+  - 返回一個 `Hooks.Permissions` 結構，定義了合約在哪些操作前後可以執行自定義邏輯。
+  - 例如：
+    - `beforeSwap` 和 `afterSwap` 為 `true`，表示合約可以在交換前後執行邏輯。
+    - `beforeAddLiquidity` 和 `beforeRemoveLiquidity` 為 `true`，表示合約可以在添加或移除流動性前執行邏輯。
+
+### **5. 鉤子函數**
+- **`_beforeSwap()`**：
+  - 在交換前執行，記錄交換次數並返回 `BaseHook.beforeSwap.selector`。
+- **`_afterSwap()`**：
+  - 在交換後執行，記錄交換次數並返回 `BaseHook.afterSwap.selector`。
+- **`_beforeAddLiquidity()`**：
+  - 在添加流動性前執行，記錄操作次數並返回 `BaseHook.beforeAddLiquidity.selector`。
+- **`_beforeRemoveLiquidity()`**：
+  - 在移除流動性前執行，記錄操作次數並返回 `BaseHook.beforeRemoveLiquidity.selector`。
+
+## **合約功能**
+1. **記錄操作次數**：
+   - 合約通過 `mapping` 記錄每個池子的操作次數，可用於監控和分析池子的使用情況。
+2. **自定義邏輯**：
+   - 合約可以在特定操作前後執行自定義邏輯，例如更新狀態變量或觸發其他合約。
+3. **多池子支持**：
+   - 合約設計為支持多個池子，每個池子的操作次數獨立記錄。
+
+## **使用場景**
+- **監控池子活動**：
+  - 通過記錄操作次數，開發者可以監控池子的使用情況，並進行數據分析。
+- **自定義業務邏輯**：
+  - 開發者可以在鉤子函數中實現自定義邏輯，例如動態調整費用或觸發其他合約。
+
+## **使用 Anvil 本地節點**
+
+### **啟動 Anvil**
+1. 啟動本地節點：
+   ```bash
+   anvil
+   ```
+2. **部署合約**：
+   ```bash
+   forge script script/Anvil.s.sol --rpc-url http://localhost:8545 --private-key <test_wallet_private_key> --broadcast
+   ```
+3. **測試合約**：
+   ```bash
+   forge test --rpc-url 127.0.0.1:8545
+   ```
+
+## **Seaport**
+
+### **1. 概述**
+- **Seaport** 是一種市場協定，用於安全有效地在區塊鏈上買賣 NFT。
+- Seaport 由 OpenSea 於 2022 年開發，是 NFT 交易最常用的協定。
+- OpenSea 網站的所有訂單都使用 Seaport 協定。
+
+### **2. 運作原理**
+- **訂單組成**：
+  - 每個 Seaport 訂單包含兩個主要部分：`offer` 和 `consideration`。
+    - `offer`：我願意放棄的（ETH / ERC20 / ERC721 / ERC1155）。
+    - `consideration`：回報要求（ETH / ERC20 / ERC721 / ERC1155）。
+
+---
+
+### **3. 範例**
+1. **Offer 範例**：
+   - 如果您想在 NFT 上放置 1 個 WETH 的報價，`offer` 結構如下：
+     ```json
+     {
+       itemType: ItemType.FULL_OPEN,
+       address: 0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2,
+       identifierOrCriteria: 0,
+       startAmount: 1000000000000000,
+       endAmount: 1000000000000000
+     }
+     ```
+   - `address` 和 `identifierOrCriteria` 表示提供的代幣（如 WETH）。
+   - `startAmount` 和 `endAmount` 表示您願意支付的代幣數量。
+
+2. **Consideration 範例**：
+   - 如果感興趣的 NFT 是 [Cool Cats #1](https://opensea.io/assets/ethereum/0x1a92f7381b9f03921564a437210bb9396471050c/1)，`consideration` 結構如下：
+     ```json
+     {
+       itemType: ItemType.FULL_OPEN,
+       address: 0x1a92f7381b9f03921564a437210bb9396471050c,
+       identifierOrCriteria: 1,
+       startAmount: 1,
+       endAmount: 1,
+       recipient: <your_address>
+     }
+     ```
+   - `address` 是 NFT 合約地址，`identifierOrCriteria` 是 NFT 的 tokenId。
+
+### **4. 與 OpenSea 網站的整合**
+1. **生成訂單**：
+   - 當您在 OpenSea 網站上放置報價時，OpenSea 會生成一個包含 `offer` 和 `consideration` 的 Seaport 訂單。
+   - 您需要簽署該訂單，訂單將直接提交到 Seaport 合約。
+
+2. **監聽事件**：
+   - OpenSea 不斷監聽和存儲 Seaport 協定上的事件。
+   - 當 NFT 所有者登錄時，他們會看到該報價。
+
+3. **完成交易**：
+   - 如果 NFT 所有者接受報價，OpenSea 會生成一個「反清單」並提交到 Seaport。
+   - Seaport 確保買賣雙方收到預期的物品，並完成交易。
+
+### **5. 總結**
+- Seaport 是 OpenSea 的核心協定，用於安全、高效地處理 NFT 交易。
+- 通過 `offer` 和 `consideration` 結構，Seaport 確保交易的透明性和可靠性。
+
+### 2025.03.19 
+
 <!-- Content_END -->
