@@ -502,7 +502,7 @@ Dune, theGraph,etherscan
 
 应用层在整个 Web3 生态占比是最大的，直接面向用户。
 
-#### 治理 & DAO （Govern）
+治理 & DAO （Govern）
 
 Snapshot、Tally、Boardroom、Aragon
 
