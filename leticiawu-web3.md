@@ -1498,6 +1498,50 @@ timezone: UTC+8
 ### 2025.03.20
 **Web3 生态简介**
 - 
+
+**Web3 生态**
+- 以**分层设计**的视角来理解 Web3 生态
+  - 分层设计（Layered Architecture） 是一种**结构化的方法**，将复杂系统按照不同功能层级进行拆分，使**各层之间相互独立但协同运作**。
+
+✔ 分层
+1. 协议层（Protocol layer）
+  - **区块链网络**（Layer 1 & Layer 2）：Web3 的基础，代表性公链包括 BTC、ETH、Solana、BNB，扩容方案如 Optimism、Arbitrum、Polygon。
+  - **跨链桥**（Blockchain Bridges）：连接不同区块链，实现资产互通，如 Across Protocol、Synapse、Stargate。
+
+2. 基础设施（Infrastructure）
+  - **节点服务**：提供 DApp 连接区块链的桥梁，如 Alchemy、Infura、QuickNode。
+  - **网络存储**：去中心化存储解决方案，如 IPFS、Arweave、Filecoin。
+  - **数据服务**：链上数据索引、分析和提供 API，如 Dune、TheGraph、Etherscan。
+
+3. 应用层（Application layer）
+  - **治理 & DAO**：去中心化治理工具，如 Snapshot、Tally、Boardroom、Aragon。
+  - **钱包（Wallet）**：管理数字资产，如 MetaMask、Gnosis Safe、Rainbow、Coinbase、WalletConnect。
+  - **金融（Finance）**：DeFi 交易和借贷协议，如 Uniswap、Compound、Aave、PancakeSwap。
+  - **游戏（Game）**：区块链游戏，如 Alien Worlds、Splinterlands。
+  - **NFT**：数字资产交易市场，如 OpenSea、Blur。
+  - **社交（Social）**：去中心化社交协议，如 Lens Protocol、Farcaster。
+  - **创作 & 内容（Creator & Content）**：Web3 内容创作平台，如 Mirror、Sound。
+
+4. 其它领域（Others）
+  - “其他领域” 的项目并非 Web3 生态的边缘内容，而是因其**具有跨层属性、标准化特性或广泛生态影响力**。
+  - **智能合约（Smart Contract）**
+    - 作为**协议、基础设施和应用层的核心组件**，智能合约提供**编程标准、安全审计、自动化执行**能力。
+    - **OpenZeppelin**是智能合约的标准代码库，**慢雾科技**提供安全审计服务，确保合约安全。
+    - 强调点：智能合约不仅是应用程序的执行逻辑，也是**Web3 安全和标准化开发**的基础。
+  
+  - **应用协议（Application Protocol）**
+    - 应用协议介于**基础设施与应用层之间**，提供**核心金融、交易、治理等功能**，使 DApp 可复用关键机制。
+    - 例如**Uniswap Protocol（AMM 机制）、Aave Protocol（去中心化借贷）、Seaport（NFT 交易协议）**，它们不是单一 DApp，而是支撑多个 DeFi / NFT 生态的重要组件。
+    - 强调点：应用协议是**DApp 赖以运行的基础协议**，影响力接近 Layer1/L2。
+  - **质押（Staking）**
+    - 质押不仅影响**协议层（PoS 共识机制）**，也涉及**金融、硬件、流动性管理**，具有**跨层影响力**。
+    - 主要模式：
+      - **单独质押**（Solo Staking）：个人运行节点，如 ETH 2.0 质押 32 ETH。
+      - **质押即服务**（Staking as a Service）：用户委托机构（如 Lido）运行节点。
+      - **联合质押**（Liquid Staking）：获得流动性质押代币（如 stETH），可继续参与 DeFi。
+      - 强调点：质押不仅影响 Layer1/Layer2 的**安全性**，还涉及**金融模式、硬件运营、去中心化治理**。
+     
+
 ### 2025.03.21
 **黑暗森林手册，进入 web3 必读 区块链安全问题**
 - 
