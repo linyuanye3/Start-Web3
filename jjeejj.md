@@ -161,5 +161,15 @@ timezone: UTC+8
       7. 内容
       8. 等等
 
+### 2025.03.19
+
+1. Web3 骗术 1： 钓鱼网站攻击，不停的请求交易 （转账或者授权）。需要警惕链接。未知项目用钱包。 可以看看视频学习一下 https://www.youtube.com/watch?v=NJ7YPHtEaJA&list=PLixFNij3zCfIdhoZSFA128hhO5h1pAKf9&index=1&ab_channel=LXDAO
+
+### 2025.03.20
+
+1. GameFi
+   1. 是由 Game 游戏 和 Finance 金融 2 个词结合起来的。 为玩家提供边玩游戏边赚钱的区块链游戏，也叫链游。
+   2. 充分利用了 NFT 的唯一性。玩法新颖：Play to earn、Run to earn、Learn to earn
+   3.  如果做一块 链游：核心就是玩法，把玩法和经济模型确定好在进行开发
 
 <!-- Content_END -->
