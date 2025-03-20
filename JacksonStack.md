@@ -410,6 +410,51 @@ NFT 由于其独特性而很容易被炒作。为避免不必要的损失，建�
 - 认为这个 NFT 项目具有什么样的价值？纪念品的价值？作为艺术品的价值？作为乐器的价值？社区的价值？
 - 愿意为此支付多少费用？
 
+### 2025.03.19
+DeFi是Decentralized Financial(去中心化金融)一词的缩写，是指建立在区块链（Ethereum为主）上的数字资产、金融智能合约、协议和去中心化应用（DApps）。  
+DeFi与CeFi（以中心化交易所为代表）的本质不同，在于你所参与的一切都是真实发生的。每一次交易、每一笔借款、流动池里的存币、钱包里的资产，这些都是真实存在于链上，而不是交易所的一条数据库记录。  
+DeFi的主要应用包括交易所、稳定币、存借贷、理财、金融衍生品、支付、期货合约、跨链支付、预言机等业务，更新兴的还有彩票、拍卖、预测等等。  
+DeFi有庞大的产品和服务内容，但你也可能会发现他们过于分散化了，因此也催生了一些聚合类应用，如交易聚合、理财策略代理、资产清单等等。  
+DeFi的收益来源主要有以下几个方向：  
+1、从交易中获取币价波动收益  
+2、抵押资产存借贷获得利息收益  
+3、为DEX提供流动性（Liquidity mining）获取收益  
+4、理财策略（Yield 2arming）收益  
+5、其他意外之财（彩票、拍卖、IDO等）   
+参与DeFi就是要使用生态的各类应用，钱包、交易所、存借贷、挖矿、看数据  
+钱包：  
+imtoken：https://token.im  
+meet.one：https://meet.one  
+mykey：https://mykey.org  
+metamask：https://metamask.io  
+  
+交易：  
+1inch：https://1inch.exchange    
+Uniswap：https://app.uniswap.org/#/swap   
+Curve：https://www.curve.fi  
+ 
+存借贷：  
+Maker：https://oasis.app  
+Compound：https://app.compound.finance  
+Aave：https://app.aave.com/home  
+
+看数据：  
+排名：https://defipulse.com  
+数据分析：https://www.tokenterminal.xyz  
+图标：https://www.duneanalytics.com  
+地址信息：https://etherscan.io  
+市值：https://defimarketcap.io  
+工具：  
+YF信息总览：https://yieldfarming.info  
+YFI：https://ygov.finance  
+zapper.fi：https://www.zapper.fi/invest  
+
+项目：  
+保险：https://nexusmutual.io   
+衍生品：https://synthetix.io  
+创新稳定币：https://www.ampleforth.org  
+  
+LONG BTC, LONG ETH, LONG DEFI!  
 ### 2025.03.20
 Web3 生态  
 分层  
