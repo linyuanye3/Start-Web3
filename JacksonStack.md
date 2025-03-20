@@ -410,5 +410,31 @@ NFT 由于其独特性而很容易被炒作。为避免不必要的损失，建�
 - 认为这个 NFT 项目具有什么样的价值？纪念品的价值？作为艺术品的价值？作为乐器的价值？社区的价值？
 - 愿意为此支付多少费用？
 
+### 2025.03.20
+Web3 生态  
+分层  
+> All problems in computer science can be solved by another level of indirection, except for the problem of too many layers of indirection.计算机科学中的所有问题都可以通过另一个层次的间接来解决，除了间接层过多的问题。
+- 协议层（Protocol layer）
+  - 区块链网络 （Blockchain network）
+    区块链网络也称为链，是构建整个 Web3 生态的基础。一条链可以是一个相对独立的生态，我们比较熟悉的有 BTC、Ethereum、Solana, BNB 等。 基于以太坊生态，对公链进行扩容，出现了一些的 L2 和侧链，比如 Optimism、Arbitrum、Polygon 等。
+  - 跨链桥（Blockchain bridges） 是一种连接不同区块链网络的技术或协议，允许数字资产或数据在这些不同的区块链之间传输和互操作。它们充当了区块链之间的桥梁，以确保跨链资产的互通性和流动性。 across protocol，synapse protocol， stargate
+- 基础设施（Infrastructure）
+  - 节点服务（Node service） 节点服务是连接区块链网络和 DApp 的桥梁，可以为一个提供读和写数据到区块链网络的服务器。 alchemy infura quicknode:
+  - 网络存储（Network storage）是指提供去中心化存储的服务商，有 IPFS、Arweave、Filecoin 等。
+  - 数据服务（Data service） 区块链上有大量的原始数据是无法直接使用的，有一些平台提供将链上数据进行索引、分析、归档等处理，提供开放 API。 Dune、theGraph ；etherscan：提供以太坊区块链信息浏览、数据分析、智能合约交互和验证等服务。
+- 应用层（Application layer） 应用层在整个 Web3 生态占比是最大的，直接面向用户。
+  - 治理 & DAO （Govern）Snapshot、Tally、Boardroom、Aragon
+  - 钱包（Wallet） MetaMask、GnosisSafe、Rainbow、Coinbase、WalletConnect
+  - 金融（Finance） Uniswap、Compound、PancakeSwap
+  - 游戏（Game） Alien Worlds、Splinterlands
+  - NFT OpenSea、Blur
+  - 社交（Social）Lens Protocol、Farcaster
+  - 创作&内容（Creator & Content）Mirror，Sound
 
+其它领域（Others）
+- 智能合约（Smart Contract）
+- 应用协议 （Application Protocol）
+为了满足去中心化、多样化的需求，有不少 DApp 是从核心协议衍生出来的，也是生态繁荣的表现，比如 Uniswap Protocol、Aave Protocol、Compound Protocol、Allo Protocol、Seaport等。
+- 质押（Staking）
+作为区块链节点验证者质押代币，保护区块链安全，从而赚取代币。质押大概有3类，单独质押、质押即服务、联合质押，每一种质押都有大量参与者，其涉及到的领域有电脑硬件、区块链协议、应用层 DeFi 等。
 <!-- Content_END -->
