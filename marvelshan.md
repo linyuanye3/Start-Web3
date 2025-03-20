@@ -2934,5 +2934,11 @@ contract CounterHook is BaseHook {
 - 通過 `offer` 和 `consideration` 結構，Seaport 確保交易的透明性和可靠性。
 
 ### 2025.03.19 
+### 2025.03.20
 
+[docs.brahma.fi](https://docs.brahma.fi/brahma-agents-or-built-with-console-kit/morpho-agent)
+
+[framework.freysa.ai](https://framework.freysa.ai/overview)
+
+### 2025.03.19 
 <!-- Content_END -->
