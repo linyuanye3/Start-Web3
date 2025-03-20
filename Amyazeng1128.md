@@ -525,9 +525,26 @@ PMF 的作用在于：
 加密货币: 用于激励科研人员参与评审、贡献数据、参与社区等。
 去中心化出版平台: 利用区块链技术构建开放获取的出版平台，降低出版成本，加速知识传播
 
+### 2025.03.20
+·EVM：以太坊虚拟机。它是以太坊区块链的核心组成部分，可以被认为是以太坊网络中所有智能合约运行的运行时环境
 
+·哪些公链支持EVM：
+BNB Chain (原 Binance Smart Chain): 这是一个与以太坊高度兼容的区块链，拥有庞大的用户基础和活跃的 DeFi 生态
+Polygon (原 Matic Network): Polygon PoS 侧链是一个 Layer 2 扩展方案，但其自身也是一个独立的 EVM 兼容链 
+Avalanche: Avalanche 的 C-Chain 是一个 EVM 兼容的智能合约链
+Fantom: Fantom Opera 网络是一个高性能的 EVM 兼容链
+Cronos: 由 Crypto.com 推出的 EVM 兼容链
+Arbitrum: 一个流行的以太坊 Layer 2 Rollup 方案，其执行环境与 EVM 高度兼容
+Optimism: 另一个主要的以太坊 Layer 2 Optimistic Rollup 方案，也与 EVM 兼容
+……
 
-
+·EVM公链的优势
+庞大的开发者社区和人才库
+丰富的开发工具和基础设施
+广泛的应用生态系统
+降低迁移成本
+用户熟悉度和较低的学习成本
+吸引流动性
 
 
 
