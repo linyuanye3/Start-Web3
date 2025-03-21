@@ -173,9 +173,7 @@ ICO 的全称都错了，这个页面真是够呛。
 
 ### 2025.03.10
 
-**区块链**：一个分布式的账本或数据库。
-
-blockchain：数据以 区块(block) 为单位产生和存储，按照时间顺序首尾相连形成 链式(chain) 结构，同时通过密码学保证不可篡改、不可伪造及数据传输访问安全的去中心化分布式账本。
+**区块链（blockchain）**：一个分布式的账本或数据库。数据以 区块(block) 为单位产生和存储，按照时间顺序首尾相连形成 链式(chain) 结构，同时通过密码学保证不可篡改、不可伪造及数据传输访问安全的去中心化分布式账本。
 
 区块：链式结构的基本数据单元，聚合了所有交易相关信息，主要包含区块头和区块主体两部分。
 
@@ -439,23 +437,23 @@ DeFi 的应用：交易所、稳定币、存借贷、理财、金融衍生品、
 
 **Web 3 生态**
 
-协议层（Protocol layer）
-基础设施（Infrastructure）
-应用层（Application layer）
-其它领域（Others）
+★ 协议层（Protocol layer）  
+★ 基础设施（Infrastructure）  
+★ 应用层（Application layer）  
+★ 其它领域（Others）
 
-协议层
+**1. 协议层**
 
 -   区块链网络 （Blockchain network）
 -   跨链桥（Blockchain bridges）
 
-基础设施
+**2. 基础设施**
 
 -   节点服务（Node service）
 -   网络存储（Network storage）
 -   数据服务（Data service）
 
-应用层
+**3. 应用层**
 
 -   治理 & DAO （Govern）
 -   钱包（Wallet）
@@ -465,14 +463,14 @@ DeFi 的应用：交易所、稳定币、存借贷、理财、金融衍生品、
 -   社交（Social）
 -   创作&内容（Creator & Content）
 
-其它领域
+**4. 其它领域**
 
 -   智能合约（Smart Contract）审计
 -   应用协议 （Application Protocol）
 -   质押（Staking）
-    a. 单独质押
-    b. 质押即服务
-    c. 联合质押
+    -   单独质押
+    -   质押即服务
+    -   联合质押
 
 ### _个人感想_：
 
@@ -480,7 +478,44 @@ Web 3 生态越繁荣，web 3 从业者的机会才越多，所以 CZ 说的没�
 
 ### 2025.03.21
 
-MyFirstScam
+**MyFirstScam**
+
+➤ 钓鱼攻击（Phishing）  
+➤ 恶意签名攻击（Permit2）  
+➤ 盗取私钥（Telegram Scam）  
+➤ 剪贴板木马  
+➤ 貔貅盘
+
+**1. 钓鱼攻击**
+
+-   Transfer
+-   SafeTransfer (NFT)
+-   Approve Increase Allowance
+-   SetApprovalForAll (NFT)
+
+安全工具：Scam Sniffer，Rabby Wallet
+
+大资金用冷钱包，小资金用热钱包，未知项目用新钱包参与
+
+**2. 恶意签名攻击**：Uniswap Permit2，OpenSea SeaPort
+
+警惕签名，检查是否包含 Spender 字样。
+
+**3. 盗取私钥**
+
+使用两步验证；不在浏览器内保存重要密码；多用扫码登录；安装安全软件；关闭 TG 自动下载；使用冷钱包
+
+**4. 虚假地址转账攻击**
+
+复制时，少复制一位；检查中部；用地址簿；用白名单
+
+**5. 貔貅盘**
+
+使用 dextools 等链上信息网站
+
+### _个人感想_：
+
+Web 3 真的是黑暗森林，到处都是坑，就连我在入圈 4，5 年之后，都曾经上了 Twitter 虚假项目的当。建议所有刚入币圈 / Web 3 或者准备入币圈的新手 / 小白，认真的看一下这几个视频。
 
 ### 2025.03.22
 

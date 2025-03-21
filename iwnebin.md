@@ -5,13 +5,20 @@ timezone: UTC+8
 
 # iwenbin
 
-1. 初始web3
+1. 初识web3
 2. 努力完成第一次残酷共学
-3. telegram@ranmario
+3. telegram：@ranmario
 
 ## Notes
 
 <!-- Content_START -->
+
+
+### 2025.03.21  
+#### 去中心化交易所  DEX
+流动性池本质上是持有两个或更多的代币的储备，这些代币存在于DEX的智能合约中，可供用户随时交易。    
+#### 无常损失  
+
 
 ### 2025.03.20
 #### DeFi 生态系统
