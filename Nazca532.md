@@ -278,6 +278,11 @@ DeFi的收益来源主要有以下几个方向：
 是存在可以叠加的收益与风险的。
 
 接下来就是处理数字钱包和找稳定币。相关文章推荐了大量的软件和网站进行参考。
+### 2025.03.21
+web3.0的结构
+协议层————1.区块链网络    2.跨链桥（Blockchain bridges）
+基础设施（Infrastructure）———————1.节点服务（Node service）  2.网络存储（Network storage） 3.数据服务（Data service）
+应用层（Application layer）——————1.治理2.钱包3.金融  4.游戏  5.NFT  6.社交（Social）7.创作&内容（Creator & Content）
 
 
 <!-- Content_END -->
