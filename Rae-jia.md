@@ -547,4 +547,44 @@ DeFi
    - 私钥保管为第一要务，建议冷存储备份。
    - 抵押率过低（如＜150%）可能触发清算。
    - 交易滑点（Price Impact）过高时需谨慎操作。
+
+### 2025.03.20
+Web3 生态分层架构
+- 协议层（Protocol Layer）
+   - 区块链网络（Blockchain Network）
+   - 跨链桥（Blockchain Bridges）
+- 基础设施层（Infrastructure Layer）
+   - 节点服务（Node Service）
+   - 去中心化存储（Decentralized Storage）
+   - 数据服务（Data Service）
+- 应用层（Application Layer）
+   - 治理 & DAO
+   - 钱包（Wallet）
+   - DeFi（去中心化金融）
+   - GameFi（链游）
+   - NFT
+   - SocialFi（去中心化社交）
+   - 创作 & 内容
+
+### 2025.03.21
+区块链安全问题
+- 钓鱼攻击
+   - 转账 转NFT
+   - 授权额度 授权NFT
+   - 警惕链接
+   - 安全工具
+   - 风险隔离
+- 恶意签名攻击
+- 盗取私钥
+   - 发假网站
+   - 发木马病毒
+   - 盗取KeyStore
+   - 监听键盘输入记录
+   - Chrome内核浏览器的漏洞
+- 虚假地址攻击
+   - 近似地址粉尘转账
+   - 剪贴板木马
+- 貔貅盘
+   - 合约不开源
+   - 逻辑复杂可读性差，起名怪异
 <!-- Content_END -->
