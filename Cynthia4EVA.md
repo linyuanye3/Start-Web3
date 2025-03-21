@@ -304,4 +304,23 @@ MEV 机器人：抢先交易获利，比如你刚要买币，机器人就提前�
 
 
 ### 2025.03.21
+学习资料：https://www.panewslab.com/zh/articledetails/1301r1ibp79c.html
+一.UTXO是什么？
+UTXO（Unspent Transaction Output，未花费交易输出）是比特币等基于UTXO模型的区块链系统中的一种账本记录方式。它代表某个地址（钱包）未花费的交易输出，即仍然可以用来构建新交易的资金。
+UTXO 机制
+1. 交易输入和输出
+    * 在UTXO模型中，每一笔交易的输入来自于之前交易的未花费输出（UTXO）。
+    * 交易执行后，UTXO被消费，并产生新的UTXO，供后续交易使用。
+2. 与账户模型的区别
+    * UTXO模型：比特币等使用，交易通过消耗旧UTXO并生成新UTXO。
+    * 账户模型：以太坊等使用，账户余额直接增减，不涉及UTXO。
+3. UTXO的特性
+    * 不可分割：UTXO必须一次性使用，找零部分会生成新的UTXO。
+    * 并行处理：多个UTXO可以同时被不同交易使用，提高并行性和隐私性。
+示例
+假设 Alice 有 5 BTC 和 3 BTC 两个 UTXO，想支付 6 BTC 给 Bob：
+1. Alice 选择 5 BTC + 3 BTC（总 8 BTC）作为输入。
+2. 交易生成 6 BTC 给 Bob（输出1），剩余 2 BTC 找零给自己（输出2）。
+3. 旧的 UTXO（5 BTC 和 3 BTC）被销毁，生成两个新的 UTXO。
+
 <!-- Content_END -->
