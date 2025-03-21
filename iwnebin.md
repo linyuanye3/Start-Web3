@@ -13,6 +13,11 @@ timezone: UTC+8
 
 <!-- Content_START -->
 
+### 2025.03.20
+#### DeFi 生态系统
+DeFi的锁定总价值（TVL）在2021年4月超过了令人印象深刻的860.5亿美元。TVL是DeFi中最广泛使用的指标之一，因为它代表了每个协议所持有的资产总量。作为一个经验法则，锁定在协议中的价值越多，对协议来说就越好。  
+收益耕作（Yield Farming）、流动性挖矿（Liquidity Mining）、空投（Airdrops）、首次DEX发行(IDO)
+
 
 ### 2025.03.19
 #### GameFi 即链游   

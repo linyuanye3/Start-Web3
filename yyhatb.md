@@ -260,6 +260,7 @@ Layer2是在现有区块链的进行的创新，目的是为了提高效率。
 本次共学主题：  
 　　第三周04：Web3 生态简介   
 本次学习笔记：  
+Web3 生态通过分层设计梳理，包括协议层、基础设施层和应用层。协议层有区块链网络（如 BTC、Ethereum、Solana 等）和跨链桥（如 Across Protocol、Synapse Protocol 等）。基础设施层涵盖节点服务（如 Alchemy、Infura 等）、网络存储（如 IPFS、Arweave 等）和数据服务（如 Dune、theGraph 等）。应用层包括治理（如 Snapshot、Aragon 等）、钱包（如 MetaMask、Coinbase 等）、金融（如 Uniswap、Compound 等）、游戏（如 Alien Worlds 等）、NFT（如 OpenSea 等）、社交（如 Lens Protocol 等）和创作内容（如 Mirror 等）。此外，智能合约是应用层基础，代码库（如 OpenZeppelin）和安全审计至关重要。应用协议（如 Uniswap Protocol 等）和质押（如单独质押、质押即服务等）也是重要组成部分。
 
 ### 2025.03.21
 

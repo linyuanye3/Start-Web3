@@ -410,5 +410,76 @@ NFT 由于其独特性而很容易被炒作。为避免不必要的损失，建�
 - 认为这个 NFT 项目具有什么样的价值？纪念品的价值？作为艺术品的价值？作为乐器的价值？社区的价值？
 - 愿意为此支付多少费用？
 
+### 2025.03.19
+DeFi是Decentralized Financial(去中心化金融)一词的缩写，是指建立在区块链（Ethereum为主）上的数字资产、金融智能合约、协议和去中心化应用（DApps）。  
+DeFi与CeFi（以中心化交易所为代表）的本质不同，在于你所参与的一切都是真实发生的。每一次交易、每一笔借款、流动池里的存币、钱包里的资产，这些都是真实存在于链上，而不是交易所的一条数据库记录。  
+DeFi的主要应用包括交易所、稳定币、存借贷、理财、金融衍生品、支付、期货合约、跨链支付、预言机等业务，更新兴的还有彩票、拍卖、预测等等。  
+DeFi有庞大的产品和服务内容，但你也可能会发现他们过于分散化了，因此也催生了一些聚合类应用，如交易聚合、理财策略代理、资产清单等等。  
+DeFi的收益来源主要有以下几个方向：  
+1、从交易中获取币价波动收益  
+2、抵押资产存借贷获得利息收益  
+3、为DEX提供流动性（Liquidity mining）获取收益  
+4、理财策略（Yield 2arming）收益  
+5、其他意外之财（彩票、拍卖、IDO等）   
+参与DeFi就是要使用生态的各类应用，钱包、交易所、存借贷、挖矿、看数据  
+钱包：  
+imtoken：https://token.im  
+meet.one：https://meet.one  
+mykey：https://mykey.org  
+metamask：https://metamask.io  
+  
+交易：  
+1inch：https://1inch.exchange    
+Uniswap：https://app.uniswap.org/#/swap   
+Curve：https://www.curve.fi  
+ 
+存借贷：  
+Maker：https://oasis.app  
+Compound：https://app.compound.finance  
+Aave：https://app.aave.com/home  
 
+看数据：  
+排名：https://defipulse.com  
+数据分析：https://www.tokenterminal.xyz  
+图标：https://www.duneanalytics.com  
+地址信息：https://etherscan.io  
+市值：https://defimarketcap.io  
+工具：  
+YF信息总览：https://yieldfarming.info  
+YFI：https://ygov.finance  
+zapper.fi：https://www.zapper.fi/invest  
+
+项目：  
+保险：https://nexusmutual.io   
+衍生品：https://synthetix.io  
+创新稳定币：https://www.ampleforth.org  
+  
+LONG BTC, LONG ETH, LONG DEFI!  
+### 2025.03.20
+Web3 生态  
+分层  
+> All problems in computer science can be solved by another level of indirection, except for the problem of too many layers of indirection.计算机科学中的所有问题都可以通过另一个层次的间接来解决，除了间接层过多的问题。
+- 协议层（Protocol layer）
+  - 区块链网络 （Blockchain network）
+    区块链网络也称为链，是构建整个 Web3 生态的基础。一条链可以是一个相对独立的生态，我们比较熟悉的有 BTC、Ethereum、Solana, BNB 等。 基于以太坊生态，对公链进行扩容，出现了一些的 L2 和侧链，比如 Optimism、Arbitrum、Polygon 等。
+  - 跨链桥（Blockchain bridges） 是一种连接不同区块链网络的技术或协议，允许数字资产或数据在这些不同的区块链之间传输和互操作。它们充当了区块链之间的桥梁，以确保跨链资产的互通性和流动性。 across protocol，synapse protocol， stargate
+- 基础设施（Infrastructure）
+  - 节点服务（Node service） 节点服务是连接区块链网络和 DApp 的桥梁，可以为一个提供读和写数据到区块链网络的服务器。 alchemy infura quicknode:
+  - 网络存储（Network storage）是指提供去中心化存储的服务商，有 IPFS、Arweave、Filecoin 等。
+  - 数据服务（Data service） 区块链上有大量的原始数据是无法直接使用的，有一些平台提供将链上数据进行索引、分析、归档等处理，提供开放 API。 Dune、theGraph ；etherscan：提供以太坊区块链信息浏览、数据分析、智能合约交互和验证等服务。
+- 应用层（Application layer） 应用层在整个 Web3 生态占比是最大的，直接面向用户。
+  - 治理 & DAO （Govern）Snapshot、Tally、Boardroom、Aragon
+  - 钱包（Wallet） MetaMask、GnosisSafe、Rainbow、Coinbase、WalletConnect
+  - 金融（Finance） Uniswap、Compound、PancakeSwap
+  - 游戏（Game） Alien Worlds、Splinterlands
+  - NFT OpenSea、Blur
+  - 社交（Social）Lens Protocol、Farcaster
+  - 创作&内容（Creator & Content）Mirror，Sound
+
+其它领域（Others）
+- 智能合约（Smart Contract）
+- 应用协议 （Application Protocol）
+为了满足去中心化、多样化的需求，有不少 DApp 是从核心协议衍生出来的，也是生态繁荣的表现，比如 Uniswap Protocol、Aave Protocol、Compound Protocol、Allo Protocol、Seaport等。
+- 质押（Staking）
+作为区块链节点验证者质押代币，保护区块链安全，从而赚取代币。质押大概有3类，单独质押、质押即服务、联合质押，每一种质押都有大量参与者，其涉及到的领域有电脑硬件、区块链协议、应用层 DeFi 等。
 <!-- Content_END -->

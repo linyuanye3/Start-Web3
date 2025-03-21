@@ -437,15 +437,54 @@ DeFi 的应用：交易所、稳定币、存借贷、理财、金融衍生品、
 
 ### 2025.03.20
 
-Web 3 生态
-黑暗森林手册
+**Web 3 生态**
+
+协议层（Protocol layer）
+基础设施（Infrastructure）
+应用层（Application layer）
+其它领域（Others）
+
+协议层
+
+-   区块链网络 （Blockchain network）
+-   跨链桥（Blockchain bridges）
+
+基础设施
+
+-   节点服务（Node service）
+-   网络存储（Network storage）
+-   数据服务（Data service）
+
+应用层
+
+-   治理 & DAO （Govern）
+-   钱包（Wallet）
+-   金融（Finance）
+-   游戏（Game）
+-   NFT
+-   社交（Social）
+-   创作&内容（Creator & Content）
+
+其它领域
+
+-   智能合约（Smart Contract）审计
+-   应用协议 （Application Protocol）
+-   质押（Staking）
+    a. 单独质押
+    b. 质押即服务
+    c. 联合质押
+
+### _个人感想_：
+
+Web 3 生态越繁荣，web 3 从业者的机会才越多，所以 CZ 说的没错，Let's build。看还有哪些没被注意到的领域，没被满足的需求，创造出大家需要的产品。即使以后被证伪，但在运营的过程中，也许会激发出新的方向，或者影响其他人创造出更成功的产品。
 
 ### 2025.03.21
 
-GameFi
+MyFirstScam
 
 ### 2025.03.22
 
+GameFi
 DeSci
 
 ### 2025.03.23

@@ -469,6 +469,67 @@ https://etherscan.io
 
 今天的文章还有投资的教学, 鉴于发布日期, 未进行尝试.
 
+### 2025.03.19
+
+今天内容比较少,是对 web3 生态的整体介绍
+
+协议层（Protocol layer）
+
+区块链网络 （Blockchain network）
+BTC,Ethereum,BNB,Optimism...
+
+跨链桥:
+是一种连接不同区块链网络的技术或协议，允许数字资产或数据在这些不同的区块链之间传输和互操作。
+它们充当了区块链之间的桥梁，以确保跨链资产的互通性和流动性。
+
+across protocol,synapse protocol..
+
+基础设施（Infrastructure）
+
+节点服务（Node service）
+节点服务是连接区块链网络和 DApp 的桥梁，可以为一个提供读和写数据到区块链网络的服务器。
+
+alchemy,infura
+
+网络存储（Network storage）
+去中心化存储: IPFS、Arweave、Filecoin..
+
+数据服务（Data service）
+区块链上有大量的原始数据是无法直接使用的，有一些平台提供将链上数据进行索引、分析、归档等处理，提供开放 API。
+Dune, theGraph,etherscan
+
+应用层（Application layer）
+
+应用层在整个 Web3 生态占比是最大的，直接面向用户。
+
+治理 & DAO （Govern）
+
+Snapshot、Tally、Boardroom、Aragon
+
+钱包（Wallet）
+MetaMask、GnosisSafe、Rainbow、Coinbase、WalletConnect
+
+金融（Finance）
+Uniswap、Compound、PancakeSwap
+
+游戏（Game）
+Alien Worlds、Splinterlands
+
+NFT
+OpenSea、Blur
+
+社交（Social）
+Lens Protocol、Farcaster
+
+智能合约（Smart Contract）
+OpenZeppelin 是开源的合约代码,经过广泛和长时间的考验, 靠谱程度高的代码
+
+安全：数字资产安全问题一直是大家倍受关注的，有不少公司为此提供服务和解决方案，比如慢雾科技。
+合约审计，也是属于安全类，对区块链上的智能合约进行审查和评估，以确保其安全性、正确性和合规性。
+
+应用协议 （Application Protocol）
+有不少 DApp 是从核心协议衍生出来的，比如 Uniswap Protocol、Aave Protocol、Compound Protocol、Allo Protocol、Seaport
+
 ### 2025.07.11
 
 ### 2025.07.12
