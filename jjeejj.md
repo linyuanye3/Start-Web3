@@ -172,4 +172,10 @@ timezone: UTC+8
    2. 充分利用了 NFT 的唯一性。玩法新颖：Play to earn、Run to earn、Learn to earn
    3.  如果做一块 链游：核心就是玩法，把玩法和经济模型确定好在进行开发
 
+### 2025.03.21
+
+1. Ordinal 铭文
+   1. 比特币的账号模型 UTXO 和传统的账号模型设计理念不一致
+   2. Ordinal 协议 对 BTC 更小的 计量单位 聪 进行 唯一的编号 并且可以追踪其所在的账户 还可以标识稀有度
+
 <!-- Content_END -->
