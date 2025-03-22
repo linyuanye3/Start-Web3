@@ -755,6 +755,94 @@ DeSci 的愿景：
  • 实现科研的真正去中心化、透明化、协作化
  • 让科研回归“为人类创造知识”的初心
 
+ ### 2025.03.22
+
+ GameFi（Game + Finance，链游金融）是指融合了区块链、NFT、代币经济等元素的去中心化游戏生态，玩家不仅娱乐还能“Play to Earn”（边玩边赚）。目前，GameFi 生态发展迅速，形成了一个庞大、分层丰富的产业链。
+
+GameFi 生态组成大致可以分为以下几类：
+
+⸻
+
+1. 游戏项目（GameFi 产品）
+
+核心是各种链游，分为链上完全运行和链下+链上混合运行两类。
+ • Axie Infinity：GameFi 代表作，NFT 宠物对战+Play to Earn 模式。
+ • The Sandbox：去中心化元宇宙+UGC游戏平台，土地、道具、角色皆为 NFT。
+ • Illuvium：链上 RPG + Auto Battler，强调 3A 画质和深度玩法。
+ • Star Atlas：太空探索题材的链游，集成经济、探索、战争等多玩法。
+
+⸻
+
+2. 公链 & Layer 2
+
+GameFi 项目运行的基础设施，大多是高性能、低 gas 的链。
+ • BNB Chain：最活跃的 GameFi 生态之一，支持大量 P2E 项目。
+ • Polygon：以太坊 Layer 2，低成本高扩展性，支持众多链游。
+ • Immutable X：专注 NFT 和 GameFi 的 Layer 2，0 gas，支持大规模链游。
+ • Arbitrum / Optimism：主打高 TPS 和低手续费，链游项目逐渐增多。
+
+⸻
+
+3. GameFi Guilds（游戏公会）
+
+为玩家提供 NFT 资产租赁、代打、社区培训等服务，成为 GameFi 用户的“中介平台”。
+ • YGG（Yield Guild Games）：全球最大的链游公会，支持多个 GameFi 项目。
+ • Merit Circle：支持 Play to Earn 玩家，拥有大量链游合作伙伴。
+ • Avocado DAO：专注东南亚市场的公会，活跃于 Axie、Pegaxy 等游戏。
+
+⸻
+
+4. GameFi Launchpad（链游孵化 & 启动平台）
+
+帮助 GameFi 项目募资、发射、推广的孵化平台。
+ • Seedify.fund
+ • GameFi.org
+ • Enjinstarter
+ • Binance NFT Launchpad
+
+⸻
+
+5. NFT 市场
+
+GameFi 的 NFT 道具、装备、土地等核心资产交易场所。
+ • OpenSea：最大 NFT 市场，支持多链，涵盖大量链游资产。
+ • Magic Eden：Solana 系生态最活跃的 NFT 平台，支持 GameFi 资产。
+ • Fractal：专注 GameFi 的 NFT 市场，由 Twitch 联合创始人创立。
+
+⸻
+
+6. GameFi 基础设施 & 中间件
+
+提供 SDK、API、钱包、NFT 铸造等开发工具，帮助链游开发者搭建产品。
+ • Chainlink VRF：为链游提供去中心化随机数服务。
+ • Moralis：区块链游戏开发的后端服务平台。
+ • Thirdweb：支持快速集成 NFT、代币、链上功能的开发框架。
+ • WalletConnect / MetaMask：主流钱包，支持 GameFi 玩家资产管理。
+
+⸻
+
+7. GameFi 数据平台 & 分析工具
+
+为玩家、投资者提供链游数据、热点监测、收益分析等服务。
+ • DappRadar：链游、NFT、DeFi 数据监测平台。
+ • Footprint Analytics：提供 GameFi 项目数据可视化与分析。
+ • PlayToEarn.net：收录各类 P2E 游戏，提供收益排行、用户数据。
+
+⸻
+
+8. GameFi 投资机构 & 基金
+ • Animoca Brands：全球最知名的 GameFi 投资机构，投了 Sandbox、Illuvium 等项目。
+ • Delphi Digital：关注链游、NFT 的研究与投资机构。
+ • Hashed、Mechanism Capital：深度参与 GameFi 投资的 Web3 基金。
+
+⸻
+
+9. DeFi+GameFi 融合产品（GameFi 2.0方向）
+
+如链游内置 DEX、质押、借贷等 DeFi 模块。
+ • DeFi Kingdoms：集 DEX、NFT、GameFi 为一体的“DeFi 游戏化”产品。
+ • Treasure DAO：打造元宇宙和链游的“去中心化任天堂”。
+
 
 
 笔记内容
