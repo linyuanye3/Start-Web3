@@ -173,9 +173,7 @@ ICO 的全称都错了，这个页面真是够呛。
 
 ### 2025.03.10
 
-**区块链**：一个分布式的账本或数据库。
-
-blockchain：数据以 区块(block) 为单位产生和存储，按照时间顺序首尾相连形成 链式(chain) 结构，同时通过密码学保证不可篡改、不可伪造及数据传输访问安全的去中心化分布式账本。
+**区块链（blockchain）**：一个分布式的账本或数据库。数据以 区块(block) 为单位产生和存储，按照时间顺序首尾相连形成 链式(chain) 结构，同时通过密码学保证不可篡改、不可伪造及数据传输访问安全的去中心化分布式账本。
 
 区块：链式结构的基本数据单元，聚合了所有交易相关信息，主要包含区块头和区块主体两部分。
 
@@ -439,23 +437,23 @@ DeFi 的应用：交易所、稳定币、存借贷、理财、金融衍生品、
 
 **Web 3 生态**
 
-协议层（Protocol layer）
-基础设施（Infrastructure）
-应用层（Application layer）
-其它领域（Others）
+★ 协议层（Protocol layer）  
+★ 基础设施（Infrastructure）  
+★ 应用层（Application layer）  
+★ 其它领域（Others）
 
-协议层
+**1. 协议层**
 
 -   区块链网络 （Blockchain network）
 -   跨链桥（Blockchain bridges）
 
-基础设施
+**2. 基础设施**
 
 -   节点服务（Node service）
 -   网络存储（Network storage）
 -   数据服务（Data service）
 
-应用层
+**3. 应用层**
 
 -   治理 & DAO （Govern）
 -   钱包（Wallet）
@@ -465,14 +463,14 @@ DeFi 的应用：交易所、稳定币、存借贷、理财、金融衍生品、
 -   社交（Social）
 -   创作&内容（Creator & Content）
 
-其它领域
+**4. 其它领域**
 
 -   智能合约（Smart Contract）审计
 -   应用协议 （Application Protocol）
 -   质押（Staking）
-    a. 单独质押
-    b. 质押即服务
-    c. 联合质押
+    -   单独质押
+    -   质押即服务
+    -   联合质押
 
 ### _个人感想_：
 
@@ -480,16 +478,74 @@ Web 3 生态越繁荣，web 3 从业者的机会才越多，所以 CZ 说的没�
 
 ### 2025.03.21
 
-MyFirstScam
+**MyFirstScam**
+
+➤ 钓鱼攻击（Phishing）  
+➤ 恶意签名攻击（Permit2）  
+➤ 盗取私钥（Telegram Scam）  
+➤ 剪贴板木马  
+➤ 貔貅盘
+
+**1. 钓鱼攻击**
+
+-   Transfer
+-   SafeTransfer (NFT)
+-   Approve Increase Allowance
+-   SetApprovalForAll (NFT)
+
+安全工具：Scam Sniffer，Rabby Wallet
+
+大资金用冷钱包，小资金用热钱包，未知项目用新钱包参与
+
+**2. 恶意签名攻击**：Uniswap Permit2，OpenSea SeaPort
+
+警惕签名，检查是否包含 Spender 字样。
+
+**3. 盗取私钥**
+
+使用两步验证；不在浏览器内保存重要密码；多用扫码登录；安装安全软件；关闭 TG 自动下载；使用冷钱包
+
+**4. 虚假地址转账攻击**
+
+复制时，少复制一位；检查中部；用地址簿；用白名单
+
+**5. 貔貅盘**
+
+使用 dextools 等链上信息网站
+
+### _个人感想_：
+
+Web 3 真的是黑暗森林，到处都是坑，就连我在入圈 4，5 年之后，都曾经上了 Twitter 虚假项目的当。建议所有刚入币圈 / Web 3 或者准备入币圈的新手 / 小白，认真的看一下这几个视频。
 
 ### 2025.03.22
 
-GameFi
-DeSci
+**GameFi**：Game（游戏）+ Finance（金融）
+
+始于博彩，Play to earn、Run to earn、Learn to earn
+
+典型：Axie Infinity，BigTime
+
+**DeSci**：Decentralized Science（去中心化科学）
+
+旨在解决几个问题：资金，信息访问，抗审查
+
+**Memecoin**：灵感来自互联网 meme、角色或趋势的加密货币。
+
+例：Dogecoin、Shiba Inu
+
+风险高且波动性大的交易资产。
+
+### _个人感想_：
+
+GameFi：个人看法，区块链的特性，和游戏的特性相悖。区块链是去中心化，拥有权不可侵犯，而游戏需要不断改进，不断加入新元素，区块链根本就不适合用来构建游戏。GameFi 只可能是众多游戏中的一种类型，而且最多只可能是边缘类型，永远不可能成为主流类型。
+
+DeSci：个人看法，区块链的特性，和科学的特性相悖。区块链是大众化，去中心化，而科学是精英化，高门槛，这两者根本就是南辕北辙。DeSci 纯粹是生造名词，是人为希望造一个热点出来炒作，完全不符合事物的客观规律，所以必然失败。
+
+Memecoin：我以前特别不能理解 Memecoin，觉得都是 rubbish，但后来了解了一些区块链前辈的看法，现在完全接受 Memecoin 了。我现在的理解是，Memecoin 其实就是币圈，他是币圈的起始，也是币圈的本质。当然，币圈现在在往股市、往合规化的方向走，但这个转型必然是漫长的，同时，我也认为，币圈永远不可能完全转型为股市类型，Memecoin 必将长期存在。
 
 ### 2025.03.23
 
-memecoin
 铭文
+How to DeFi
 
 <!-- Content_END -->
