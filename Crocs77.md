@@ -108,4 +108,8 @@ web3生态
     前端框架：Next.js + React
     区块链交互：Thirdweb SDK（预集成智能合约）
     部署：一键部署到IPFS或Vercel
+### 2025.03.22
+钓鱼攻击，有克隆网站
+恶意签名攻击，文本签名被盗
+导取私钥
 <!-- Content_END -->
