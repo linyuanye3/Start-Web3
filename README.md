@@ -103,7 +103,7 @@ Web3 生态简介 [web3-general-manual/web3_ecosystem/web3_landscape.md at main 
 
 GameFi 简介 [web3-general-manual/web3_ecosystem/GameFi.md at main · lxdao-official/web3-general-manual · GitHub ](https://github.com/lxdao-official/web3-general-manual/blob/main/web3_ecosystem/GameFi.md)
 
-DeSci 简介 [https://docs.simonliu.life/research/desci ](https://docs.simonliu.life/research/desci)
+DeSci 简介 [https://s.foresightnews.pro/article/detail/75381)
 
 memecoin 简介 [https://www.coinbase.com/zh-cn/learn/crypto-basics/what-is-a-memecoin ](https://www.coinbase.com/zh-cn/learn/crypto-basics/what-is-a-memecoin)
 
