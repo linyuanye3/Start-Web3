@@ -545,7 +545,34 @@ Memecoin：我以前特别不能理解 Memecoin，觉得都是 rubbish，但后�
 
 ### 2025.03.23
 
-铭文
-How to DeFi
+**铭文**
+
+比特币：UTXO 模型
+
+OP_RETURE
+
+隔离见证
+
+Taproot
+
+比特币地址类型
+
+-   Legacy (P2PKH)格式
+    -   P2PKH：Pay To PubKey Hash（付款至公钥哈希）
+    -   范例：1Fh7ajXabJBpZPZw8bjD3QU4CuQ3pRty9u
+-   Nested SegWit (P2SH)格式
+    -   P2SH：Pay To Script Hash（支付至脚本哈希）
+    -   范例：3KF9nXowQ4asSGxRRzeiTpDjMuwM2nypAN
+-   Native SegWit (Bech32)格式
+    -   原生的隔离见证地址
+    -   Bech32：2017 年底在 BIP173 被定义；不区分大小写；地址中只包含 0-9，a-z
+    -   范例：bc1qf3uwcxaz779nxedw0wry89v9cjh9w2xylnmqc3
+-   Taproot 格式(P2TR)
+    -   Bech32m：BIP0350
+    -   解决 Bech32 的缺点：如果地址的最后一个字符是 p，则在紧接着 p 之前的位置插入或者删除任意数量的字符 q 都不会使其 checksum 失效。
+
+### _个人感想_：
+
+铭文：暂时来看，优劣参半，劣势多一些。优势：又有了可以冲的新标的。劣势：这不是 BTC 本身自带的，而是为了创造一个额外的东西，额外添加的部分。由于是非必须、额外添加的，其实对 BTC 网络本身的运行，造成了一定的负面影响。
 
 <!-- Content_END -->

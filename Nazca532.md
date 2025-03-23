@@ -284,5 +284,8 @@ web3.0的结构
 基础设施（Infrastructure）———————1.节点服务（Node service）  2.网络存储（Network storage） 3.数据服务（Data service）
 应用层（Application layer）——————1.治理2.钱包3.金融  4.游戏  5.NFT  6.社交（Social）7.创作&内容（Creator & Content）
 
+### 2025.03.23
+GameFi 是游戏+金融。特殊的是nft，也就是说数据不会被运营商收回的一个模式，这一点其实就把物品的价值全部给予市场去定义了。
+
 
 <!-- Content_END -->
