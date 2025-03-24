@@ -1066,14 +1066,15 @@ How to DeFi [How to DeFi 简介 | How to DeFi: Advanced（中文版） ](https:/
 
 
 
+
 <!-- STATISTICALDATA_START -->
 ## 统计数据
 
-- 总参与人数: 0
-- 完成人数: 0
-- 完成用户: 
-- 全勤用户: 
-- 淘汰人数: 0
-- 淘汰率: 0.00%
-- Fork人数: 0
+- 总参与人数: 72
+- 完成人数: 35
+- 完成用户: ztm0929, Amyazeng1128, JacksonStack, jjeejj, yyhatb, Cynthia4EVA, Rae-jia, NULL707, wuyi5111, amengnew, yihaowang, Ghw2066, hub3r3, Crocs77, Ric-Li-C, ixiejun, debugzhao, asanqi2010, Winkler77, SixLi666, huxlife, Su-u-un, Zisaac52, abelking, Azhan1431, linyuanye3, iwnebin, 007Windy, leticiawu-web3, lupin36079, felix-Hex, Pearl1978, mangossyang, ricarduuu, rowena78778
+- 全勤用户: Amyazeng1128, jjeejj, yyhatb, NULL707, hub3r3, Ric-Li-C, Winkler77, huxlife, Zisaac52, abelking, Azhan1431, linyuanye3, 007Windy, leticiawu-web3, felix-Hex, rowena78778
+- 淘汰人数: 37
+- 淘汰率: 51.39%
+- Fork人数: 90
 <!-- STATISTICALDATA_END -->
