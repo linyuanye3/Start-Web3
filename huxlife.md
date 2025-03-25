@@ -9,6 +9,7 @@ timezone: UTC+8
 
 1. huxlife 一个web3小白，android程序员，现在打算转行。
 2. 这次必然会完成学习任务
+3. 学习学习再学习
 
 
 ## Notes
